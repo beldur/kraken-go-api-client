@@ -10,7 +10,7 @@ package main
 
 import (
 	"fmt"
-	"https://github.com/Beldur/kraken-go-api-client"
+	"github.com/Beldur/kraken-go-api-client"
 )
 
 func main() {
