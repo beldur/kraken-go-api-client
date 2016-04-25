@@ -51,12 +51,6 @@ var privateMethods = []string{
 	"CancelOrder",
 }
 
-// KrakenResponse wraps the Kraken API JSON response
-type KrakenResponse struct {
-	Error  []string    `json:"error"`
-	Result interface{} `json:"result"`
-}
-
 // KrakenApi respresents a Kraken API Client connection
 type KrakenApi struct {
 	key    string
