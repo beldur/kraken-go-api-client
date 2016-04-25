@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	api := NewKrakenApi("KEY", "SECRET")
+	api := krakenapi.New("KEY", "SECRET")
 	result, err := api.Query("Ticker", map[string]string{
 		"pair": "XXBTZEUR",
 	})
