@@ -15,9 +15,12 @@ import (
 )
 
 const (
-	API_URL        = "https://api.kraken.com"
-	API_VERISON    = "0"
-	API_USER_AGENT = "Kraken GO API Agent"
+	// APIURL is the official Kraken API Endpoint
+	APIURL = "https://api.kraken.com"
+	// APIVersion is the official Kraken API Version Number
+	APIVersion = "0"
+	// APIUserAgent identifies this library with the Kraken API
+	APIUserAgent = "Kraken GO API Agent (https://github.com/beldur/kraken-go-api-client)"
 )
 
 // List of valid public methods
@@ -48,25 +51,33 @@ var privateMethods = []string{
 	"CancelOrder",
 }
 
+// KrakenResponse wraps the Kraken API JSON response
 type KrakenResponse struct {
-	Error  []string    `json:error`
-	Result interface{} `json:result`
+	Error  []string    `json:"error"`
+	Result interface{} `json:"result"`
 }
 
+// KrakenApi respresents a Kraken API Client connection
 type KrakenApi struct {
 	key    string
 	secret string
 	client *http.Client
 }
 
-// Create a new Kraken Api struct
+// NewKrakenApi creates a new Kraken API Client
+// @deprecated Use New instead to avoid stutter
 func NewKrakenApi(key, secret string) *KrakenApi {
+	return New(key, secret)
+}
+
+// New creates a new Kraken API client
+func New(key, secret string) *KrakenApi {
 	client := &http.Client{}
 
 	return &KrakenApi{key, secret, client}
 }
 
-// Send a query to Kraken api for given method and parameters
+// Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
 	for key, value := range data {
@@ -85,16 +96,16 @@ func (api *KrakenApi) Query(method string, data map[string]string) (interface{},
 
 // Execute a public method query
 func (api *KrakenApi) queryPublic(method string, values url.Values) (interface{}, error) {
-	url := fmt.Sprintf("%s/%s/public/%s", API_URL, API_VERISON, method)
+	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, method)
 	resp, err := api.doRequest(url, values, nil)
 
 	return resp, err
 }
 
-// Execute a private method query
+// queryPrivate executes a private method query
 func (api *KrakenApi) queryPrivate(method string, values url.Values) (interface{}, error) {
-	urlPath := fmt.Sprintf("/%s/private/%s", API_VERISON, method)
-	reqUrl := fmt.Sprintf("%s%s", API_URL, urlPath)
+	urlPath := fmt.Sprintf("/%s/private/%s", APIVersion, method)
+	reqURL := fmt.Sprintf("%s%s", APIURL, urlPath)
 	secret, _ := base64.StdEncoding.DecodeString(api.secret)
 	values.Set("nonce", fmt.Sprintf("%d", time.Now().UnixNano()))
 
@@ -107,21 +118,21 @@ func (api *KrakenApi) queryPrivate(method string, values url.Values) (interface{
 		"API-Sign": signature,
 	}
 
-	resp, err := api.doRequest(reqUrl, values, headers)
+	resp, err := api.doRequest(reqURL, values, headers)
 
 	return resp, err
 }
 
-// Executes a HTTP Request to the Kraken API and returns the result
-func (api *KrakenApi) doRequest(reqUrl string, values url.Values, headers map[string]string) (interface{}, error) {
+// doRequest executes a HTTP Request to the Kraken API and returns the result
+func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[string]string) (interface{}, error) {
 
 	// Create request
-	req, err := http.NewRequest("POST", reqUrl, strings.NewReader(values.Encode()))
+	req, err := http.NewRequest("POST", reqURL, strings.NewReader(values.Encode()))
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! (%s)", err.Error())
 	}
 
-	req.Header.Add("User-Agent", API_USER_AGENT)
+	req.Header.Add("User-Agent", APIUserAgent)
 	for key, value := range headers {
 		req.Header.Add(key, value)
 	}
@@ -154,7 +165,7 @@ func (api *KrakenApi) doRequest(reqUrl string, values url.Values, headers map[st
 	return jsonData.Result, nil
 }
 
-// Helper function to test if given term is in a list of strings
+// isStringInSlice is a helper function to test if given term is in a list of strings
 func isStringInSlice(term string, list []string) bool {
 	for _, found := range list {
 		if term == found {
@@ -164,14 +175,14 @@ func isStringInSlice(term string, list []string) bool {
 	return false
 }
 
-// Creates a sha256 hash
+// getSha256 creates a sha256 hash for given []byte
 func getSha256(input []byte) []byte {
 	sha := sha256.New()
 	sha.Write(input)
 	return sha.Sum(nil)
 }
 
-// Create a hmac hash with sha512
+// getHMacSha512 creates a hmac hash with sha512
 func getHMacSha512(message, secret []byte) []byte {
 	mac := hmac.New(sha512.New, secret)
 	mac.Write(message)
