@@ -24,6 +24,34 @@ func TestCreateSignature(t *testing.T) {
 	}
 }
 
+func TestTime(t *testing.T) {
+	_, err := publicAPI.Time()
+	if err != nil {
+		t.Errorf("Time() should not return an error, got %s", err)
+	}
+}
+
+func TestAssets(t *testing.T) {
+	_, err := publicAPI.Assets()
+	if err != nil {
+		t.Errorf("Assets() should not return an error, got %s", err)
+	}
+}
+
+func TestAssetPairs(t *testing.T) {
+	_, err := publicAPI.AssetPairs()
+	if err != nil {
+		t.Errorf("AssetPairs() should not return an error, got %s", err)
+	}
+}
+
+func TestTicker(t *testing.T) {
+	_, err := publicAPI.Ticker("XXBTZEUR,XXBTZGBP")
+	if err != nil {
+		t.Errorf("Ticker() should not return an error, got %s", err)
+	}
+}
+
 func TestQueryTime(t *testing.T) {
 	result, err := publicAPI.Query("Time", map[string]string{})
 	resultKind := reflect.TypeOf(result).Kind()

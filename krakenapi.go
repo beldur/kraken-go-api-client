@@ -51,7 +51,7 @@ var privateMethods = []string{
 	"CancelOrder",
 }
 
-// KrakenApi respresents a Kraken API Client connection
+// KrakenApi represents a Kraken API Client connection
 type KrakenApi struct {
 	key    string
 	secret string
@@ -71,6 +71,48 @@ func New(key, secret string) *KrakenApi {
 	return &KrakenApi{key, secret, client}
 }
 
+// Time returns the server's time
+func (api *KrakenApi) Time() (*TimeResponse, error) {
+	resp, err := api.queryPublic("Time", nil, &TimeResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*TimeResponse), nil
+}
+
+// Assets returns the servers available assets
+func (api *KrakenApi) Assets() (*AssetsResponse, error) {
+	resp, err := api.queryPublic("Assets", nil, &AssetsResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*AssetsResponse), nil
+}
+
+// AssetPairs returns the servers available asset pairs
+func (api *KrakenApi) AssetPairs() (*AssetPairsResponse, error) {
+	resp, err := api.queryPublic("AssetPairs", nil, &AssetPairsResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*AssetPairsResponse), nil
+}
+
+// Ticker returns the ticker for given comma seperated pais
+func (api *KrakenApi) Ticker(pairs string) (*TickerResponse, error) {
+	resp, err := api.queryPublic("Ticker", url.Values{
+		"pair": {pairs},
+	}, &TickerResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*TickerResponse), nil
+}
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
@@ -80,24 +122,24 @@ func (api *KrakenApi) Query(method string, data map[string]string) (interface{},
 
 	// Check if method is public or private
 	if isStringInSlice(method, publicMethods) {
-		return api.queryPublic(method, values)
+		return api.queryPublic(method, values, nil)
 	} else if isStringInSlice(method, privateMethods) {
-		return api.queryPrivate(method, values)
+		return api.queryPrivate(method, values, nil)
 	}
 
 	return nil, fmt.Errorf("Method '%s' is not valid!", method)
 }
 
 // Execute a public method query
-func (api *KrakenApi) queryPublic(method string, values url.Values) (interface{}, error) {
+func (api *KrakenApi) queryPublic(method string, values url.Values, typ interface{}) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, method)
-	resp, err := api.doRequest(url, values, nil)
+	resp, err := api.doRequest(url, values, nil, typ)
 
 	return resp, err
 }
 
 // queryPrivate executes a private method query
-func (api *KrakenApi) queryPrivate(method string, values url.Values) (interface{}, error) {
+func (api *KrakenApi) queryPrivate(method string, values url.Values, typ interface{}) (interface{}, error) {
 	urlPath := fmt.Sprintf("/%s/private/%s", APIVersion, method)
 	reqURL := fmt.Sprintf("%s%s", APIURL, urlPath)
 	secret, _ := base64.StdEncoding.DecodeString(api.secret)
@@ -112,13 +154,13 @@ func (api *KrakenApi) queryPrivate(method string, values url.Values) (interface{
 		"API-Sign": signature,
 	}
 
-	resp, err := api.doRequest(reqURL, values, headers)
+	resp, err := api.doRequest(reqURL, values, headers, typ)
 
 	return resp, err
 }
 
 // doRequest executes a HTTP Request to the Kraken API and returns the result
-func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[string]string) (interface{}, error) {
+func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[string]string, typ interface{}) (interface{}, error) {
 
 	// Create request
 	req, err := http.NewRequest("POST", reqURL, strings.NewReader(values.Encode()))
@@ -146,6 +188,13 @@ func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[st
 
 	// Parse request
 	var jsonData KrakenResponse
+
+	// Set the KrakenResoinse.Result to typ so `json.Unmarshal` will
+	// unmarshal it into given typ instead of `interface{}`.
+	if typ != nil {
+		jsonData.Result = typ
+	}
+
 	err = json.Unmarshal(body, &jsonData)
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! (%s)", err.Error())
