@@ -134,7 +134,7 @@ type PairTickerInfo struct {
 	// Bid array(<price>, <whole lot volume>, <lot volume>)
 	Bid []string `json:"b"`
 	// Last trade closed array(<price>, <lot volume>)
-	LastTradeClosed []string `json:"c"`
+	Close []string `json:"c"`
 	// Volume array(<today>, <last 24 hours>)
 	Volume []string `json:"v"`
 	// Volume weighted average price array(<today>, <last 24 hours>)
