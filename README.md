@@ -10,6 +10,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/Beldur/kraken-go-api-client"
 )
 
@@ -20,11 +22,18 @@ func main() {
 	})
 
 	if err != nil {
-		fmt.Println("Error:", err.Error())
-		return
+		log.Fatal(err)
 	}
 
 	fmt.Printf("Result: %+v\n", result)
+
+	// There also some strongly typed methods available
+	ticker, err := api.Ticker(krakenapi.XXBTZEUR)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(ticker.XXBTZEUR.OpeningPrice)
 }
 ```
 

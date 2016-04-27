@@ -25,9 +25,13 @@ func TestCreateSignature(t *testing.T) {
 }
 
 func TestTime(t *testing.T) {
-	_, err := publicAPI.Time()
+	resp, err := publicAPI.Time()
 	if err != nil {
 		t.Errorf("Time() should not return an error, got %s", err)
+	}
+
+	if resp.Unixtime <= 0 {
+		t.Errorf("Time() should return valid Unixtime, got %d", resp.Unixtime)
 	}
 }
 
@@ -39,16 +43,24 @@ func TestAssets(t *testing.T) {
 }
 
 func TestAssetPairs(t *testing.T) {
-	_, err := publicAPI.AssetPairs()
+	resp, err := publicAPI.AssetPairs()
 	if err != nil {
 		t.Errorf("AssetPairs() should not return an error, got %s", err)
+	}
+
+	if resp.XXBTZEUR.Base+resp.XXBTZEUR.Quote != XXBTZEUR {
+		t.Errorf("AssetPairs() should return valid response, got %+v", resp.XXBTZEUR)
 	}
 }
 
 func TestTicker(t *testing.T) {
-	_, err := publicAPI.Ticker("XXBTZEUR,XXBTZGBP")
+	resp, err := publicAPI.Ticker(XXBTZGBP, XXBTZEUR)
 	if err != nil {
 		t.Errorf("Ticker() should not return an error, got %s", err)
+	}
+
+	if resp.XXBTZEUR.OpeningPrice == 0 {
+		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp.XXBTZEUR.OpeningPrice)
 	}
 }
 

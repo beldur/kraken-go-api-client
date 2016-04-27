@@ -1,5 +1,27 @@
 package krakenapi
 
+const (
+	XETHXXBT = "XETHXXBT"
+	XETHZCAD = "XETHZCAD"
+	XETHZEUR = "XETHZEUR"
+	XETHZGBP = "XETHZGBP"
+	XETHZJPY = "XETHZJPY"
+	XETHZUSD = "XETHZUSD"
+	XLTCZCAD = "XLTCZCAD"
+	XLTCZEUR = "XLTCZEUR"
+	XLTCZUSD = "XLTCZUSD"
+	XXBTXLTC = "XXBTXLTC"
+	XXBTXNMC = "XXBTXNMC"
+	XXBTXXDG = "XXBTXXDG"
+	XXBTXXLM = "XXBTXXLM"
+	XXBTXXRP = "XXBTXXRP"
+	XXBTZCAD = "XXBTZCAD"
+	XXBTZEUR = "XXBTZEUR"
+	XXBTZGBP = "XXBTZGBP"
+	XXBTZJPY = "XXBTZJPY"
+	XXBTZUSD = "XXBTZUSD"
+)
+
 // KrakenResponse wraps the Kraken API JSON response
 type KrakenResponse struct {
 	Error  []string    `json:"error"`
@@ -130,7 +152,7 @@ type TickerResponse struct {
 // PairTickerInfo represents ticker information for a pair
 type PairTickerInfo struct {
 	// Ask array(<price>, <whole lot volume>, <lot volume>)
-	A []string `json:"a"`
+	Ask []string `json:"a"`
 	// Bid array(<price>, <whole lot volume>, <lot volume>)
 	Bid []string `json:"b"`
 	// Last trade closed array(<price>, <lot volume>)

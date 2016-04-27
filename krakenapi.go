@@ -102,9 +102,9 @@ func (api *KrakenApi) AssetPairs() (*AssetPairsResponse, error) {
 }
 
 // Ticker returns the ticker for given comma seperated pais
-func (api *KrakenApi) Ticker(pairs string) (*TickerResponse, error) {
+func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 	resp, err := api.queryPublic("Ticker", url.Values{
-		"pair": {pairs},
+		"pair": {strings.Join(pairs, ",")},
 	}, &TickerResponse{})
 	if err != nil {
 		return nil, err
