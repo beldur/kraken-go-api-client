@@ -20,6 +20,9 @@ const (
 	XXBTZGBP = "XXBTZGBP"
 	XXBTZJPY = "XXBTZJPY"
 	XXBTZUSD = "XXBTZUSD"
+	XXMRZUSD = "XXMRZUSD"
+	XXMRZEUR = "XXMRZEUR"
+	XXMRXXBT = "XXMRXXBT"
 )
 
 // KrakenResponse wraps the Kraken API JSON response
@@ -57,6 +60,9 @@ type AssetPairsResponse struct {
 	XXBTZGBP AssetPairInfo
 	XXBTZJPY AssetPairInfo
 	XXBTZUSD AssetPairInfo
+	XXMRZUSD AssetPairInfo
+	XXMRZEUR AssetPairInfo
+	XXMRZXBT AssetPairInfo
 }
 
 // AssetPairInfo represents asset pair information
@@ -106,6 +112,7 @@ type AssetsResponse struct {
 	XXLM AssetInfo
 	XXRP AssetInfo
 	XXVN AssetInfo
+	XXMR AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
 	ZGBP AssetInfo
@@ -147,6 +154,9 @@ type TickerResponse struct {
 	XXBTZGBP PairTickerInfo
 	XXBTZJPY PairTickerInfo
 	XXBTZUSD PairTickerInfo
+	XXMRZUSD PairTickerInfo
+	XXMRZEUR PairTickerInfo
+	XXMRXXBT PairTickerInfo
 }
 
 // PairTickerInfo represents ticker information for a pair
