@@ -1,5 +1,7 @@
-Kraken GO API Client
+Kraken GO API Client 
 ====================
+
+[![build status](https://img.shields.io/travis/beldur/kraken-go-api-client/master.svg)](https://travis-ci.org/beldur/kraken-go-api-client)
 
 A simple API Client for the [Kraken](https://www.kraken.com/ "Kraken") Trading platform.
 
