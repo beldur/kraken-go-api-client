@@ -58,12 +58,6 @@ type KrakenApi struct {
 	client *http.Client
 }
 
-// NewKrakenApi creates a new Kraken API Client
-// @deprecated Use New instead to avoid stutter
-func NewKrakenApi(key, secret string) *KrakenApi {
-	return New(key, secret)
-}
-
 // New creates a new Kraken API client
 func New(key, secret string) *KrakenApi {
 	client := &http.Client{}
