@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -107,6 +108,47 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 	return resp.(*TickerResponse), nil
 }
 
+// Trades returns the recent trades for given pair
+func (api *KrakenApi) Trades(pair string) (*TradesResponse, error) {
+	resp, err := api.queryPublic("Trades", url.Values{
+		"pair": {pair},
+	}, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	v := resp.(map[string]interface{})
+
+	last, err := strconv.ParseInt(v["last"].(string), 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &TradesResponse{
+		Last:   last,
+		Trades: make([]TradeInfo, 0),
+	}
+
+	trades := v[pair].([]interface{})
+	for _, v := range trades {
+		trade := v.([]interface{})
+		price, _ := strconv.ParseFloat(trade[0].(string), 64)
+		volume, _ := strconv.ParseFloat(trade[1].(string), 64)
+
+		tradeInfo := TradeInfo{
+			Price:   price,
+			Volume:  volume,
+			Time:    trade[2].(float64),
+			BuySell: trade[3].(string),
+			Type:    trade[4].(string),
+		}
+
+		result.Trades = append(result.Trades, tradeInfo)
+	}
+
+	return result, nil
+}
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
@@ -121,7 +163,7 @@ func (api *KrakenApi) Query(method string, data map[string]string) (interface{},
 		return api.queryPrivate(method, values, nil)
 	}
 
-	return nil, fmt.Errorf("Method '%s' is not valid!", method)
+	return nil, fmt.Errorf("Method '%s' is not valid", method)
 }
 
 // Execute a public method query

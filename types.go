@@ -25,6 +25,13 @@ const (
 	XXMRXXBT = "XXMRXXBT"
 )
 
+const (
+	BUY    = "b"
+	SELL   = "s"
+	MARKET = "m"
+	LIMIT  = "l"
+)
+
 // KrakenResponse wraps the Kraken API JSON response
 type KrakenResponse struct {
 	Error  []string    `json:"error"`
@@ -179,4 +186,19 @@ type PairTickerInfo struct {
 	High []string `json:"h"`
 	// Today's opening price
 	OpeningPrice float32 `json:"o,string"`
+}
+
+// TradesResponse represents a list of the last trades
+type TradesResponse struct {
+	Last   int64
+	Trades []TradeInfo
+}
+
+// TradeInfo represents a trades information
+type TradeInfo struct {
+	Price   float64
+	Volume  float64
+	Time    float64
+	BuySell string
+	Type    string
 }
