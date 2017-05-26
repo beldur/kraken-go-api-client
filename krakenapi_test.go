@@ -92,21 +92,20 @@ func TestQueryTicker(t *testing.T) {
 }
 
 func TestQueryTrades(t *testing.T) {
-	result, err := publicAPI.Trades(XXBTZEUR)
+	result, err := publicAPI.Trades(XXBTZEUR, 1495777604391411290)
 
 	if err != nil {
 		t.Errorf("Trades should not return an error, got %s", err)
 	}
 
 	if len(result.Trades) > 0 {
-		buyOrSell := result.Trades[0].BuySell
-		if buyOrSell != BUY && buyOrSell != SELL {
-			t.Errorf("Trade should be buy or sell, was: %s", buyOrSell)
-		}
-
-		tradeType := result.Trades[0].Type
-		if tradeType != MARKET && tradeType != LIMIT {
-			t.Errorf("Trade type should be market or limit, was: %s", tradeType)
+		for _, trade := range result.Trades {
+			if trade.Buy == trade.Sell {
+				t.Errorf("Trade should be buy or sell")
+			}
+			if trade.Market == trade.Limit {
+				t.Errorf("Trade type should be market or limit")
+			}
 		}
 	}
 }
