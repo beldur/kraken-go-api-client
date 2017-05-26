@@ -98,6 +98,10 @@ func TestQueryTrades(t *testing.T) {
 		t.Errorf("Trades should not return an error, got %s", err)
 	}
 
+	if result.Last == 0 {
+		t.Errorf("Returned parameter `last` should always have a value...")
+	}
+
 	if len(result.Trades) > 0 {
 		for _, trade := range result.Trades {
 			if trade.Buy == trade.Sell {
