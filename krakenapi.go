@@ -109,10 +109,12 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 // Trades returns the recent trades for given pair
-func (api *KrakenApi) Trades(pair string) (*TradesResponse, error) {
-	resp, err := api.queryPublic("Trades", url.Values{
-		"pair": {pair},
-	}, nil)
+func (api *KrakenApi) Trades(pair string, since int) (*TradesResponse, error) {
+	values := url.Values{"pair": {pair}}
+	if since > 0 {
+		values.Set("since", strconv.Itoa(since))
+	}
+	resp, err := api.queryPublic("Trades", values, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -136,11 +138,14 @@ func (api *KrakenApi) Trades(pair string) (*TradesResponse, error) {
 		volume, _ := strconv.ParseFloat(trade[1].(string), 64)
 
 		tradeInfo := TradeInfo{
-			Price:   price,
-			Volume:  volume,
-			Time:    trade[2].(float64),
-			BuySell: trade[3].(string),
-			Type:    trade[4].(string),
+			Price:         price,
+			Volume:        volume,
+			Time:          trade[2].(float64),
+			Buy:           trade[3].(string) == BUY,
+			Sell:          trade[3].(string) == SELL,
+			Market:        trade[4].(string) == MARKET,
+			Limit:         trade[4].(string) == LIMIT,
+			Miscellaneous: trade[5].(string),
 		}
 
 		result.Trades = append(result.Trades, tradeInfo)
