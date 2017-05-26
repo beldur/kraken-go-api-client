@@ -109,10 +109,10 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 // Trades returns the recent trades for given pair
-func (api *KrakenApi) Trades(pair string, since int) (*TradesResponse, error) {
+func (api *KrakenApi) Trades(pair string, since int64) (*TradesResponse, error) {
 	values := url.Values{"pair": {pair}}
 	if since > 0 {
-		values.Set("since", strconv.Itoa(since))
+		values.Set("since", strconv.FormatInt(since, 10))
 	}
 	resp, err := api.queryPublic("Trades", values, nil)
 	if err != nil {
