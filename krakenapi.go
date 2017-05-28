@@ -134,11 +134,16 @@ func (api *KrakenApi) Trades(pair string, since int64) (*TradesResponse, error) 
 	trades := v[pair].([]interface{})
 	for _, v := range trades {
 		trade := v.([]interface{})
-		price, _ := strconv.ParseFloat(trade[0].(string), 64)
+		priceString := trade[0].(string)
+		price, _ := strconv.ParseFloat(priceString, 64)
 		volume, _ := strconv.ParseFloat(trade[1].(string), 64)
+		priceParts := strings.Split(priceString, ".")
+		priceInt, _ := strconv.ParseInt(priceParts[0]+priceParts[1], 10, 64)
 
 		tradeInfo := TradeInfo{
-			Price:         price,
+			Price:         trade[0].(string),
+			PriceFloat:    price,
+			PriceInt:      priceInt,
 			Volume:        volume,
 			Time:          trade[2].(float64),
 			Buy:           trade[3].(string) == BUY,

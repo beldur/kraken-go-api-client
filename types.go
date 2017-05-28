@@ -196,7 +196,9 @@ type TradesResponse struct {
 
 // TradeInfo represents a trades information
 type TradeInfo struct {
-	Price         float64
+	Price         string
+	PriceFloat    float64
+	PriceInt      int64
 	Volume        float64
 	Time          float64
 	Buy           bool
