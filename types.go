@@ -23,6 +23,9 @@ const (
 	XXMRZUSD = "XXMRZUSD"
 	XXMRZEUR = "XXMRZEUR"
 	XXMRXXBT = "XXMRXXBT"
+	XZECZUSD = "XZECZUSD"
+	XZECZEUR = "XZECZEUR"
+	XZECXXBT = "XZECXXBT"
 )
 
 const (
@@ -70,6 +73,9 @@ type AssetPairsResponse struct {
 	XXMRZUSD AssetPairInfo
 	XXMRZEUR AssetPairInfo
 	XXMRZXBT AssetPairInfo
+	XZECZUSD AssetPairInfo
+	XZECZEUR AssetPairInfo
+	XZECZXBT AssetPairInfo
 }
 
 // AssetPairInfo represents asset pair information
@@ -120,6 +126,7 @@ type AssetsResponse struct {
 	XXRP AssetInfo
 	XXVN AssetInfo
 	XXMR AssetInfo
+	XZEC AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
 	ZGBP AssetInfo
@@ -164,6 +171,9 @@ type TickerResponse struct {
 	XXMRZUSD PairTickerInfo
 	XXMRZEUR PairTickerInfo
 	XXMRXXBT PairTickerInfo
+	XZECZUSD PairTickerInfo
+	XZECZEUR PairTickerInfo
+	XZECXXBT PairTickerInfo
 }
 
 // PairTickerInfo represents ticker information for a pair
