@@ -90,3 +90,26 @@ func TestQueryTicker(t *testing.T) {
 		t.Errorf("Query `Ticker` should return a Map, got: %s", resultKind)
 	}
 }
+
+func TestQueryTrades(t *testing.T) {
+	result, err := publicAPI.Trades(XXBTZEUR, 1495777604391411290)
+
+	if err != nil {
+		t.Errorf("Trades should not return an error, got %s", err)
+	}
+
+	if result.Last == 0 {
+		t.Errorf("Returned parameter `last` should always have a value...")
+	}
+
+	if len(result.Trades) > 0 {
+		for _, trade := range result.Trades {
+			if trade.Buy == trade.Sell {
+				t.Errorf("Trade should be buy or sell")
+			}
+			if trade.Market == trade.Limit {
+				t.Errorf("Trade type should be market or limit")
+			}
+		}
+	}
+}

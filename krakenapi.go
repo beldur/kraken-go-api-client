@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -56,12 +57,6 @@ type KrakenApi struct {
 	key    string
 	secret string
 	client *http.Client
-}
-
-// NewKrakenApi creates a new Kraken API Client
-// @deprecated Use New instead to avoid stutter
-func NewKrakenApi(key, secret string) *KrakenApi {
-	return New(key, secret)
 }
 
 // New creates a new Kraken API client
@@ -113,6 +108,57 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 	return resp.(*TickerResponse), nil
 }
 
+// Trades returns the recent trades for given pair
+func (api *KrakenApi) Trades(pair string, since int64) (*TradesResponse, error) {
+	values := url.Values{"pair": {pair}}
+	if since > 0 {
+		values.Set("since", strconv.FormatInt(since, 10))
+	}
+	resp, err := api.queryPublic("Trades", values, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	v := resp.(map[string]interface{})
+
+	last, err := strconv.ParseInt(v["last"].(string), 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &TradesResponse{
+		Last:   last,
+		Trades: make([]TradeInfo, 0),
+	}
+
+	trades := v[pair].([]interface{})
+	for _, v := range trades {
+		trade := v.([]interface{})
+		priceString := trade[0].(string)
+		price, _ := strconv.ParseFloat(priceString, 64)
+		volume, _ := strconv.ParseFloat(trade[1].(string), 64)
+		priceParts := strings.Split(priceString, ".")
+		priceInt, _ := strconv.ParseInt(priceParts[0]+priceParts[1], 10, 64)
+
+		tradeInfo := TradeInfo{
+			Price:         trade[0].(string),
+			PriceFloat:    price,
+			PriceInt:      priceInt,
+			Volume:        volume,
+			Time:          trade[2].(float64),
+			Buy:           trade[3].(string) == BUY,
+			Sell:          trade[3].(string) == SELL,
+			Market:        trade[4].(string) == MARKET,
+			Limit:         trade[4].(string) == LIMIT,
+			Miscellaneous: trade[5].(string),
+		}
+
+		result.Trades = append(result.Trades, tradeInfo)
+	}
+
+	return result, nil
+}
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
@@ -127,7 +173,7 @@ func (api *KrakenApi) Query(method string, data map[string]string) (interface{},
 		return api.queryPrivate(method, values, nil)
 	}
 
-	return nil, fmt.Errorf("Method '%s' is not valid!", method)
+	return nil, fmt.Errorf("Method '%s' is not valid", method)
 }
 
 // Execute a public method query
