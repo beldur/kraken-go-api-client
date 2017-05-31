@@ -1,9 +1,13 @@
 package krakenapi
 
 const (
-	DASHUSD = "DASHUSD"
 	DASHEUR = "DASHEUR"
+	DASHUSD = "DASHUSD"
 	DASHXBT = "DASHXBT"
+	GNOETH = "GNOETH"
+	GNOEUR = "GNOEUR"
+	GNOUSD = "GNOUSD"
+	GNOXBT = "GNOXBT"
 	XETHXXBT = "XETHXXBT"
 	XETHZCAD = "XETHZCAD"
 	XETHZEUR = "XETHZEUR"
@@ -57,9 +61,13 @@ type TimeResponse struct {
 
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
-	DASHUSD AssetPairInfo
 	DASHEUR AssetPairInfo
+	DASHUSD AssetPairInfo
 	DASHXBT AssetPairInfo
+	GNOETH AssetPairInfo
+	GNOEUR AssetPairInfo
+	GNOUSD AssetPairInfo
+	GNOXBT AssetPairInfo
 	XETHXXBT AssetPairInfo
 	XETHZCAD AssetPairInfo
 	XETHZEUR AssetPairInfo
@@ -169,9 +177,13 @@ type AssetInfo struct {
 
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
-	DASHUSD PairTickerInfo
 	DASHEUR PairTickerInfo
+	DASHUSD PairTickerInfo
 	DASHXBT PairTickerInfo
+	GNOETH PairTickerInfo
+	GNOEUR PairTickerInfo
+	GNOUSD PairTickerInfo
+	GNOXBT PairTickerInfo
 	XETHXXBT PairTickerInfo
 	XETHZCAD PairTickerInfo
 	XETHZEUR PairTickerInfo
