@@ -131,7 +131,6 @@ type AssetsResponse struct {
 	XXLM AssetInfo
 	XXRP AssetInfo
 	XXVN AssetInfo
-	XXLM AssetInfo
 	XXMR AssetInfo
 	XZEC AssetInfo
 	ZCAD AssetInfo
