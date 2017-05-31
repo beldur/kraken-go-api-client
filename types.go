@@ -20,6 +20,9 @@ const (
 	XXBTZGBP = "XXBTZGBP"
 	XXBTZJPY = "XXBTZJPY"
 	XXBTZUSD = "XXBTZUSD"
+	XXLMZUSD = "XXLMZUSD"
+	XXLMZEUR = "XXLMZEUR"
+	XXLMXXBT = "XXLMXXBT"
 	XXMRZUSD = "XXMRZUSD"
 	XXMRZEUR = "XXMRZEUR"
 	XXMRXXBT = "XXMRXXBT"
@@ -70,6 +73,9 @@ type AssetPairsResponse struct {
 	XXBTZGBP AssetPairInfo
 	XXBTZJPY AssetPairInfo
 	XXBTZUSD AssetPairInfo
+	XXLMZUSD AssetPairInfo
+	XXLMZEUR AssetPairInfo
+	XXLMZXBT AssetPairInfo
 	XXMRZUSD AssetPairInfo
 	XXMRZEUR AssetPairInfo
 	XXMRZXBT AssetPairInfo
@@ -125,6 +131,7 @@ type AssetsResponse struct {
 	XXLM AssetInfo
 	XXRP AssetInfo
 	XXVN AssetInfo
+	XXLM AssetInfo
 	XXMR AssetInfo
 	XZEC AssetInfo
 	ZCAD AssetInfo
@@ -168,6 +175,9 @@ type TickerResponse struct {
 	XXBTZGBP PairTickerInfo
 	XXBTZJPY PairTickerInfo
 	XXBTZUSD PairTickerInfo
+	XXLMZUSD PairTickerInfo
+	XXLMZEUR PairTickerInfo
+	XXLMXXBT PairTickerInfo
 	XXMRZUSD PairTickerInfo
 	XXMRZEUR PairTickerInfo
 	XXMRXXBT PairTickerInfo
