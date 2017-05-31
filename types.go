@@ -128,17 +128,24 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
-	KFEE AssetInfo
 	DASH AssetInfo
+	GNO AssetInfo
+	KFEE AssetInfo
+	USDT AssetInfo
+	XDAO AssetInfo
+	XETC AssetInfo
 	XETH AssetInfo
+	XICN AssetInfo
 	XLTC AssetInfo
+	XMLN AssetInfo
 	XNMC AssetInfo
+	XREP AssetInfo
 	XXBT AssetInfo
 	XXDG AssetInfo
 	XXLM AssetInfo
+	XXMR AssetInfo
 	XXRP AssetInfo
 	XXVN AssetInfo
-	XXMR AssetInfo
 	XZEC AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
