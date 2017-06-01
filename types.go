@@ -1,29 +1,56 @@
 package krakenapi
 
 const (
+	DASHEUR = "DASHEUR"
+	DASHUSD = "DASHUSD"
+	DASHXBT = "DASHXBT"
+	GNOETH = "GNOETH"
+	GNOEUR = "GNOEUR"
+	GNOUSD = "GNOUSD"
+	GNOXBT = "GNOXBT"
+	USDTZUSD = "USDTZUSD"
+	XETCXETH = "XETCXETH"
+	XETCXXBT = "XETCXXBT"
+	XETCXEUR = "XETCXEUR"
+	XETCXUSD = "XETCXUSD"
 	XETHXXBT = "XETHXXBT"
 	XETHZCAD = "XETHZCAD"
 	XETHZEUR = "XETHZEUR"
 	XETHZGBP = "XETHZGBP"
 	XETHZJPY = "XETHZJPY"
 	XETHZUSD = "XETHZUSD"
-	XLTCZCAD = "XLTCZCAD"
+	XICNXETH = "XICNXETH"
+	XICNXXBT = "XICNXXBT"
+	XLTCXXBT = "XLTCXXBT"
 	XLTCZEUR = "XLTCZEUR"
 	XLTCZUSD = "XLTCZUSD"
-	XXBTXLTC = "XXBTXLTC"
-	XXBTXNMC = "XXBTXNMC"
-	XXBTXXDG = "XXBTXXDG"
-	XXBTXXLM = "XXBTXXLM"
-	XXBTXXRP = "XXBTXXRP"
+	XMLNXETH = "XMLNXETH"
+	XMLNXXBT = "XMLNXXBT"
+	XREPXETH = "XREPXETH"
+	XREPXXBT = "XREPXXBT"
+	XREPZEUR = "XREPZEUR"
+	XREPZUSD = "XREPZUSD"
 	XXBTZCAD = "XXBTZCAD"
 	XXBTZEUR = "XXBTZEUR"
 	XXBTZGBP = "XXBTZGBP"
 	XXBTZJPY = "XXBTZJPY"
 	XXBTZUSD = "XXBTZUSD"
-	XXMRZUSD = "XXMRZUSD"
-	XXMRZEUR = "XXMRZEUR"
+	XXDGXXBT = "XXDGXXBT"
+	XXLMXXBT = "XXLMXXBT"
+	XXLMZEUR = "XXLMZEUR"
+	XXLMZUSD = "XXLMZUSD"
 	XXMRXXBT = "XXMRXXBT"
-)
+	XXMRZEUR = "XXMRZEUR"
+	XXMRZUSD = "XXMRZUSD"
+	XXRPXXBT = "XXRPXXBT"
+	XXRPZCAD = "XXRPZCAD"
+	XXRPZEUR = "XXRPZEUR"
+	XXRPZJPY = "XXRPZJPY"
+	XXRPZUSD = "XXRPZUSD"
+	XZECXXBT = "XZECXXBT"
+	XZECZEUR = "XZECZEUR"
+	XZECZUSD = "XZECZUSD"
+	)
 
 const (
 	BUY    = "b"
@@ -48,28 +75,55 @@ type TimeResponse struct {
 
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
+	DASHEUR AssetPairInfo
+	DASHUSD AssetPairInfo
+	DASHXBT AssetPairInfo
+	GNOETH AssetPairInfo
+	GNOEUR AssetPairInfo
+	GNOUSD AssetPairInfo
+	GNOXBT AssetPairInfo
+	USDTZUSD AssetPairInfo
+	XETCXETH AssetPairInfo
+	XETCXXBT AssetPairInfo
+	XETCXEUR AssetPairInfo
+	XETCXUSD AssetPairInfo
 	XETHXXBT AssetPairInfo
 	XETHZCAD AssetPairInfo
 	XETHZEUR AssetPairInfo
 	XETHZGBP AssetPairInfo
 	XETHZJPY AssetPairInfo
 	XETHZUSD AssetPairInfo
-	XLTCZCAD AssetPairInfo
+	XICNXETH AssetPairInfo
+	XICNXXBT AssetPairInfo
+	XLTCXXBT AssetPairInfo
 	XLTCZEUR AssetPairInfo
 	XLTCZUSD AssetPairInfo
-	XXBTXLTC AssetPairInfo
-	XXBTXNMC AssetPairInfo
-	XXBTXXDG AssetPairInfo
-	XXBTXXLM AssetPairInfo
-	XXBTXXRP AssetPairInfo
+	XMLNXETH AssetPairInfo
+	XMLNXXBT AssetPairInfo
+	XREPXETH AssetPairInfo
+	XREPXXBT AssetPairInfo
+	XREPZEUR AssetPairInfo
+	XREPZUSD AssetPairInfo
 	XXBTZCAD AssetPairInfo
 	XXBTZEUR AssetPairInfo
 	XXBTZGBP AssetPairInfo
 	XXBTZJPY AssetPairInfo
 	XXBTZUSD AssetPairInfo
-	XXMRZUSD AssetPairInfo
+	XXDGXXBT AssetPairInfo
+	XXLMXXBT AssetPairInfo
+	XXLMZEUR AssetPairInfo
+	XXLMZUSD AssetPairInfo
+	XXMRXXBT AssetPairInfo
 	XXMRZEUR AssetPairInfo
-	XXMRZXBT AssetPairInfo
+	XXMRZUSD AssetPairInfo
+	XXRPXXBT AssetPairInfo
+	XXRPZCAD AssetPairInfo
+	XXRPZEUR AssetPairInfo
+	XXRPZJPY AssetPairInfo
+	XXRPZUSD AssetPairInfo
+	XZECXXBT AssetPairInfo
+	XZECZEUR AssetPairInfo
+	XZECZUSD AssetPairInfo
 }
 
 // AssetPairInfo represents asset pair information
@@ -110,16 +164,25 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
+	DASH AssetInfo
+	GNO AssetInfo
 	KFEE AssetInfo
+	USDT AssetInfo
+	XDAO AssetInfo
+	XETC AssetInfo
 	XETH AssetInfo
+	XICN AssetInfo
 	XLTC AssetInfo
+	XMLN AssetInfo
 	XNMC AssetInfo
+	XREP AssetInfo
 	XXBT AssetInfo
 	XXDG AssetInfo
 	XXLM AssetInfo
+	XXMR AssetInfo
 	XXRP AssetInfo
 	XXVN AssetInfo
-	XXMR AssetInfo
+	XZEC AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
 	ZGBP AssetInfo
@@ -142,28 +205,55 @@ type AssetInfo struct {
 
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
+	DASHEUR PairTickerInfo
+	DASHUSD PairTickerInfo
+	DASHXBT PairTickerInfo
+	GNOETH PairTickerInfo
+	GNOEUR PairTickerInfo
+	GNOUSD PairTickerInfo
+	GNOXBT PairTickerInfo
+	USDTZUSD PairTickerInfo
+	XETCXETH PairTickerInfo
+	XETCXXBT PairTickerInfo
+	XETCXEUR PairTickerInfo
+	XETCXUSD PairTickerInfo
 	XETHXXBT PairTickerInfo
 	XETHZCAD PairTickerInfo
 	XETHZEUR PairTickerInfo
 	XETHZGBP PairTickerInfo
 	XETHZJPY PairTickerInfo
 	XETHZUSD PairTickerInfo
-	XLTCZCAD PairTickerInfo
+	XICNXETH PairTickerInfo
+	XICNXXBT PairTickerInfo
+	XLTCXXBT PairTickerInfo
 	XLTCZEUR PairTickerInfo
 	XLTCZUSD PairTickerInfo
-	XXBTXLTC PairTickerInfo
-	XXBTXNMC PairTickerInfo
-	XXBTXXDG PairTickerInfo
-	XXBTXXLM PairTickerInfo
-	XXBTXXRP PairTickerInfo
+	XMLNXETH PairTickerInfo
+	XMLNXXBT PairTickerInfo
+	XREPXETH PairTickerInfo
+	XREPXXBT PairTickerInfo
+	XREPZEUR PairTickerInfo
+	XREPZUSD PairTickerInfo
 	XXBTZCAD PairTickerInfo
 	XXBTZEUR PairTickerInfo
 	XXBTZGBP PairTickerInfo
 	XXBTZJPY PairTickerInfo
 	XXBTZUSD PairTickerInfo
-	XXMRZUSD PairTickerInfo
-	XXMRZEUR PairTickerInfo
+	XXDGXXBT PairTickerInfo
+	XXLMXXBT PairTickerInfo
+	XXLMZEUR PairTickerInfo
+	XXLMZUSD PairTickerInfo
 	XXMRXXBT PairTickerInfo
+	XXMRZEUR PairTickerInfo
+	XXMRZUSD PairTickerInfo
+	XXRPXXBT PairTickerInfo
+	XXRPZCAD PairTickerInfo
+	XXRPZEUR PairTickerInfo
+	XXRPZJPY PairTickerInfo
+	XXRPZUSD PairTickerInfo
+	XZECXXBT PairTickerInfo
+	XZECZEUR PairTickerInfo
+	XZECZUSD PairTickerInfo
 }
 
 // PairTickerInfo represents ticker information for a pair
