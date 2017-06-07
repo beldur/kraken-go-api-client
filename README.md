@@ -29,7 +29,7 @@ func main() {
 
 	fmt.Printf("Result: %+v\n", result)
 
-	// There also some strongly typed methods available
+	// There are also some strongly typed methods available
 	ticker, err := api.Ticker(krakenapi.XXBTZEUR)
 	if err != nil {
 		log.Fatal(err)
@@ -39,6 +39,8 @@ func main() {
 }
 ```
 
-If you find this useful, you can send me a fraction of a bitcoin!
-
-1Q3P96LcTkbS9VwZkV5ndQa6t4EcR4GzSL
+## Contributers
+ - Piega
+ - Glavic
+ - MarinX
+ - bjorand
