@@ -96,7 +96,7 @@ func (api *KrakenApi) AssetPairs() (*AssetPairsResponse, error) {
 	return resp.(*AssetPairsResponse), nil
 }
 
-// Ticker returns the ticker for given comma seperated pais
+// Ticker returns the ticker for given comma separated pairs
 func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 	resp, err := api.queryPublic("Ticker", url.Values{
 		"pair": {strings.Join(pairs, ",")},
@@ -157,6 +157,16 @@ func (api *KrakenApi) Trades(pair string, since int64) (*TradesResponse, error) 
 	}
 
 	return result, nil
+}
+
+// Balance returns all account asset balances
+func (api *KrakenApi) Balance() (*BalanceResponse, error) {
+	resp, err := api.queryPrivate("Balance", url.Values{}, &BalanceResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*BalanceResponse), nil
 }
 
 // Query sends a query to Kraken api for given method and parameters
