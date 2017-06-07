@@ -60,15 +60,12 @@ type KrakenApi struct {
 }
 
 // New creates a new Kraken API client
-func New(key, secret string, httpClient ...*http.Client) *KrakenApi {
-	var client *http.Client
-	if len(httpClient) > 0 {
-		client = httpClient[0]
-	} else {
-		client = http.DefaultClient
-	}
+func New(key, secret string) *KrakenApi {
+	return NewWithClient(key, secret, http.DefaultClient)
+}
 
-	return &KrakenApi{key, secret, client}
+func NewWithClient(key, secret string, httpClient *http.Client) *KrakenApi {
+	return &KrakenApi{key, secret, httpClient}
 }
 
 // Time returns the server's time
