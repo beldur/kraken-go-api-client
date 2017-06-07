@@ -1,4 +1,4 @@
-Kraken GO API Client 
+Kraken GO API Client
 ====================
 
 [![build status](https://img.shields.io/travis/beldur/kraken-go-api-client/master.svg)](https://travis-ci.org/beldur/kraken-go-api-client)
@@ -44,3 +44,5 @@ func main() {
  - Glavic
  - MarinX
  - bjorand
+ - [khezen](https://github.com/khezen)
+ 
