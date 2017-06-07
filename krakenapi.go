@@ -60,8 +60,13 @@ type KrakenApi struct {
 }
 
 // New creates a new Kraken API client
-func New(key, secret string) *KrakenApi {
-	client := &http.Client{}
+func New(key, secret string, optionalClient ...*http.Client) *KrakenApi {
+	var client *http.Client
+	if len(optionalClient) > 0 {
+		client = optionalClient[0]
+	} else {
+		client = http.DefaultClient
+	}
 
 	return &KrakenApi{key, secret, client}
 }
