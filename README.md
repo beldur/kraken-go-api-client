@@ -39,7 +39,7 @@ func main() {
 }
 ```
 
-## Contributers
+## Contributors
  - Piega
  - Glavic
  - MarinX
