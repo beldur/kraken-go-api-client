@@ -11,7 +11,7 @@ const (
 	USDTZUSD = "USDTZUSD"
 	XETCXETH = "XETCXETH"
 	XETCXXBT = "XETCXXBT"
-	XETCXEUR = "XETCXEUR"
+	XETCZEUR = "XETCZEUR"
 	XETCXUSD = "XETCXUSD"
 	XETHXXBT = "XETHXXBT"
 	XETHZCAD = "XETHZCAD"
@@ -85,7 +85,7 @@ type AssetPairsResponse struct {
 	USDTZUSD AssetPairInfo
 	XETCXETH AssetPairInfo
 	XETCXXBT AssetPairInfo
-	XETCXEUR AssetPairInfo
+	XETCZEUR AssetPairInfo
 	XETCXUSD AssetPairInfo
 	XETHXXBT AssetPairInfo
 	XETHZCAD AssetPairInfo
@@ -243,7 +243,7 @@ type TickerResponse struct {
 	USDTZUSD PairTickerInfo
 	XETCXETH PairTickerInfo
 	XETCXXBT PairTickerInfo
-	XETCXEUR PairTickerInfo
+	XETCZEUR PairTickerInfo
 	XETCXUSD PairTickerInfo
 	XETHXXBT PairTickerInfo
 	XETHZCAD PairTickerInfo
