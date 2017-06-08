@@ -203,6 +203,34 @@ type AssetInfo struct {
 	DisplayDecimals int `json:"display_decimals"`
 }
 
+type BalanceResponse struct {
+	DASH float32 `json:"DASH,string"`
+	GNO  float32 `json:"GNO,string"`
+	KFEE float32 `json:"KFEE,string"`
+	USDT float32 `json:"USDT,string"`
+	XDAO float32 `json:"XDAO,string"`
+	XETC float32 `json:"XETC,string"`
+	XETH float32 `json:"XETH,string"`
+	XICN float32 `json:"XICN,string"`
+	XLTC float32 `json:"XLTC,string"`
+	XMLN float32 `json:"XMLN,string"`
+	XNMC float32 `json:"XNMC,string"`
+	XREP float32 `json:"XREP,string"`
+	XXBT float32 `json:"XXBT,string"`
+	XXDG float32 `json:"XXDG,string"`
+	XXLM float32 `json:"XXLM,string"`
+	XXMR float32 `json:"XXMR,string"`
+	XXRP float32 `json:"XXRP,string"`
+	XXVN float32 `json:"XXVN,string"`
+	XZEC float32 `json:"XZEC,string"`
+	ZCAD float32 `json:"ZCAD,string"`
+	ZEUR float32 `json:"ZEUR,string"`
+	ZGBP float32 `json:"ZGBP,string"`
+	ZJPY float32 `json:"ZJPY,string"`
+	ZKRW float32 `json:"ZKRW,string"`
+	ZUSD float32 `json:"ZUSD,string"`
+}
+
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
 	DASHEUR PairTickerInfo
