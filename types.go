@@ -325,3 +325,43 @@ type TradeInfo struct {
 	Limit         bool
 	Miscellaneous string
 }
+
+// OrderDescription represents an orders description
+type OrderDescription struct {
+	AssetPair      string  `json:"pair"`
+	Close          string  `json:"close"`
+	Leverage       string  `json:"leverage"`
+	Order          string  `json:"order"`
+	OrderType      string  `json:"ordertype"`
+	PrimaryPrice   float64 `json:"price,string"`
+	SecondaryPrice float64 `json:"price2,string"`
+	Type           string  `json:"type"`
+}
+
+// Order represents a single order
+type Order struct {
+	ReferenceID    string           `json:"refid"`
+	UserRef        string           `json:"userref"`
+	Status         string           `json:"status"`
+	OpenTime       float64          `json:"opentm"`
+	StartTime      float64          `json:"starttm"`
+	ExpireTime     float64          `json:"expiretm"`
+	Description    OrderDescription `json:"descr"`
+	Volume         string           `json:"vol1"`
+	VolumeExecuted float64          `json:"vol_exec,string"`
+	Cost           float64          `json:"cost,string"`
+	Fee            string           `json:"fee"`
+	Price          float64          `json:"price,string"`
+	StopPrice      float64          `json:"stopprice"`
+	LimitPrice     float64          `json:"limitprice"`
+	Misc           string           `json:"misc"`
+	OrderFlags     string           `json:"oflags"`
+	CloseTime      float64          `json:"closetm"`
+	Reason         string           `json:"reason"`
+}
+
+// ClosedOrdersResponse represents a list of closed orders, indexed by id
+type ClosedOrdersResponse struct {
+	Closed map[string]Order `json:"closed"`
+	Count  int              `json:"count"`
+}
