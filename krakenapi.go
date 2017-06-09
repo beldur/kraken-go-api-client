@@ -30,6 +30,7 @@ var publicMethods = []string{
 	"Assets",
 	"AssetPairs",
 	"Ticker",
+	"OHLC",
 	"Depth",
 	"Trades",
 	"Spread",

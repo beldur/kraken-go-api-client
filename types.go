@@ -196,7 +196,7 @@ type AssetInfo struct {
 	// Alternate name
 	Altname string
 	// Asset class
-	AssetClass string
+	AssetClass string `json:"aclass"`
 	// Scaling decimal places for record keeping
 	Decimals int
 	// Scaling decimal places for output display
