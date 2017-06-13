@@ -112,6 +112,27 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 	return resp.(*TickerResponse), nil
 }
 
+// OHLC returns a OHLCResponse struct based on the given pair
+func (api *KrakenAPI) OHLC(pair string) (OHLCResponse, error) {
+	obj := newOHLCResponse(pair)
+
+	urlValue := url.Values{}
+	urlValue.Add("pair", pair)
+
+	_, err := api.queryPublic("OHLC", urlValue, obj)
+	if err != nil {
+		return nil, err
+	}
+
+	// if ret, ok := elems.([]*OHLC); ok {
+	// 	return ret, nil
+	// }
+
+	// return nil, fmt.Errorf("interface can't be convert to []*OHLC")
+
+	return obj, nil
+}
+
 // Trades returns the recent trades for given pair
 func (api *KrakenAPI) Trades(pair string, since int64) (*TradesResponse, error) {
 	values := url.Values{"pair": {pair}}

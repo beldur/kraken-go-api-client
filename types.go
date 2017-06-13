@@ -1,5 +1,10 @@
 package krakenapi
 
+import (
+	"fmt"
+	"time"
+)
+
 // Those constants are used to define the Kraken pairs
 const (
 	DASHEUR  = "DASHEUR"
@@ -367,4 +372,381 @@ type Order struct {
 type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
 	Count  int              `json:"count"`
+}
+
+func NewOHLC(input []interface{}) (*OHLC, error) {
+	if len(input) != 8 {
+		return nil, fmt.Errorf("the length is not 8 but %d", len(input))
+	}
+
+	tmp := new(OHLC)
+
+	tmp.Time = time.Unix(input[0].(int64), 0)
+	tmp.Open = input[1].(float64)
+	tmp.High = input[2].(float64)
+	tmp.Low = input[3].(float64)
+	tmp.Close = input[4].(float64)
+	tmp.Vwap = input[5].(float64)
+	tmp.Volume = input[6].(float64)
+	tmp.Count = input[7].(int)
+
+	return tmp, nil
+}
+
+// OHLC represents the "Open-high-low-close chart"
+type OHLC struct {
+	Time   time.Time `json:"time"`
+	Open   float64   `json:"open"`
+	High   float64   `json:"high"`
+	Low    float64   `json:"low"`
+	Close  float64   `json:"close"`
+	Vwap   float64   `json:"vwap"`
+	Volume float64   `json:"volume"`
+	Count  int       `json:"count"`
+}
+
+func newOHLCResponse(pair string) OHLCResponse {
+	switch pair {
+	case DASHEUR:
+		return new(OHLCResponseDASHEUR)
+	case DASHUSD:
+		return new(OHLCResponseDASHUSD)
+	case DASHXBT:
+		return new(OHLCResponseDASHXBT)
+	case GNOETH:
+		return new(OHLCResponseGNOETH)
+	case GNOEUR:
+		return new(OHLCResponseGNOEUR)
+	case GNOUSD:
+		return new(OHLCResponseGNOUSD)
+	case GNOXBT:
+		return new(OHLCResponseGNOXBT)
+	case USDTZUSD:
+		return new(OHLCResponseUSDTZUSD)
+	case XETCXETH:
+		return new(OHLCResponseXETCXETH)
+	case XETCXXBT:
+		return new(OHLCResponseXETCXXBT)
+	case XETCZEUR:
+		return new(OHLCResponseXETCZEUR)
+	case XETCXUSD:
+		return new(OHLCResponseXETCXUSD)
+	case XETHXXBT:
+		return new(OHLCResponseXETHXXBT)
+	case XETHZCAD:
+		return new(OHLCResponseXETHZCAD)
+	case XETHZEUR:
+		return new(OHLCResponseXETHZEUR)
+	case XETHZGBP:
+		return new(OHLCResponseXETHZGBP)
+	case XETHZJPY:
+		return new(OHLCResponseXETHZJPY)
+	case XETHZUSD:
+		return new(OHLCResponseXETHZUSD)
+	case XICNXETH:
+		return new(OHLCResponseXICNXETH)
+	case XICNXXBT:
+		return new(OHLCResponseXICNXXBT)
+	case XLTCXXBT:
+		return new(OHLCResponseXLTCXXBT)
+	case XLTCZEUR:
+		return new(OHLCResponseXLTCZEUR)
+	case XLTCZUSD:
+		return new(OHLCResponseXLTCZUSD)
+	case XMLNXETH:
+		return new(OHLCResponseXMLNXETH)
+	case XMLNXXBT:
+		return new(OHLCResponseXMLNXXBT)
+	case XREPXETH:
+		return new(OHLCResponseXREPXETH)
+	case XREPXXBT:
+		return new(OHLCResponseXREPXXBT)
+	case XREPZEUR:
+		return new(OHLCResponseXREPZEUR)
+	case XREPZUSD:
+		return new(OHLCResponseXREPZUSD)
+	case XXBTZCAD:
+		return new(OHLCResponseXXBTZCAD)
+	case XXBTZEUR:
+		return new(OHLCResponseXXBTZEUR)
+	case XXBTZGBP:
+		return new(OHLCResponseXXBTZGBP)
+	case XXBTZJPY:
+		return new(OHLCResponseXXBTZJPY)
+	case XXBTZUSD:
+		return new(OHLCResponseXXBTZUSD)
+	case XXDGXXBT:
+		return new(OHLCResponseXXDGXXBT)
+	case XXLMXXBT:
+		return new(OHLCResponseXXLMXXBT)
+	case XXLMZEUR:
+		return new(OHLCResponseXXLMZEUR)
+	case XXLMZUSD:
+		return new(OHLCResponseXXLMZUSD)
+	case XXMRXXBT:
+		return new(OHLCResponseXXMRXXBT)
+	case XXMRZEUR:
+		return new(OHLCResponseXXMRZEUR)
+	case XXMRZUSD:
+		return new(OHLCResponseXXMRZUSD)
+	case XXRPXXBT:
+		return new(OHLCResponseXXRPXXBT)
+	case XXRPZCAD:
+		return new(OHLCResponseXXRPZCAD)
+	case XXRPZEUR:
+		return new(OHLCResponseXXRPZEUR)
+	case XXRPZJPY:
+		return new(OHLCResponseXXRPZJPY)
+	case XXRPZUSD:
+		return new(OHLCResponseXXRPZUSD)
+	case XZECXXBT:
+		return new(OHLCResponseXZECXXBT)
+	case XZECZEUR:
+		return new(OHLCResponseXZECZEUR)
+	case XZECZUSD:
+		return new(OHLCResponseXZECZUSD)
+	}
+	return nil
+}
+
+type OHLCResponse interface {
+	GetPair() string
+	GetOHLC() []*OHLC
+	GetLast() float64
+}
+
+type OHLCResponseBase struct {
+	Pair      string
+	OHLCArray [][]interface{}
+	OHLC      []*OHLC
+	Last      float64
+}
+
+func (o *OHLCResponseBase) GetPair() string {
+	return o.Pair
+}
+func (o *OHLCResponseBase) GetOHLC() []*OHLC {
+	if o.OHLC == nil {
+		err := o.setOHLC()
+		if err != nil {
+			return nil
+		}
+	}
+	return o.OHLC
+}
+func (o *OHLCResponseBase) GetLast() float64 {
+	return o.Last
+}
+func (o *OHLCResponseBase) setOHLC() error {
+	if o.OHLCArray == nil {
+		return fmt.Errorf("the OHLCResponseBase.OHLCArray is nil and can't populate OHLCResponseBase.OHLC field")
+	}
+
+	for _, tmpOHLCArray := range o.OHLCArray {
+		tmpOHLC, buildErr := NewOHLC(tmpOHLCArray)
+		if buildErr != nil {
+			continue
+		}
+
+		o.OHLC = append(o.OHLC, tmpOHLC)
+	}
+
+	return nil
+}
+
+type OHLCResponseDASHEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"DASHEUR"`
+}
+type OHLCResponseDASHUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"DASHUSD"`
+}
+type OHLCResponseDASHXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"DASHXBT"`
+}
+type OHLCResponseGNOETH struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"GNOETH"`
+}
+type OHLCResponseGNOEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"GNOEUR"`
+}
+type OHLCResponseGNOUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"GNOUSD"`
+}
+type OHLCResponseGNOXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"GNOXBT"`
+}
+type OHLCResponseUSDTZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"USDTZUSD"`
+}
+type OHLCResponseXETCXETH struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETCXETH"`
+}
+type OHLCResponseXETCXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETCXXBT"`
+}
+type OHLCResponseXETCZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETCZEUR"`
+}
+type OHLCResponseXETCXUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETCXUSD"`
+}
+type OHLCResponseXETHXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHXXBT"`
+}
+type OHLCResponseXETHZCAD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHZCAD"`
+}
+type OHLCResponseXETHZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHZEUR"`
+}
+type OHLCResponseXETHZGBP struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHZGBP"`
+}
+type OHLCResponseXETHZJPY struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHZJPY"`
+}
+type OHLCResponseXETHZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XETHZUSD"`
+}
+type OHLCResponseXICNXETH struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XICNXETH"`
+}
+type OHLCResponseXICNXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XICNXXBT"`
+}
+type OHLCResponseXLTCXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XLTCXXBT"`
+}
+type OHLCResponseXLTCZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XLTCZEUR"`
+}
+type OHLCResponseXLTCZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XLTCZUSD"`
+}
+type OHLCResponseXMLNXETH struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XMLNXETH"`
+}
+type OHLCResponseXMLNXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XMLNXXBT"`
+}
+type OHLCResponseXREPXETH struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XREPXETH"`
+}
+type OHLCResponseXREPXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XREPXXBT"`
+}
+type OHLCResponseXREPZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XREPZEUR"`
+}
+type OHLCResponseXREPZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XREPZUSD"`
+}
+type OHLCResponseXXBTZCAD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXBTZCAD"`
+}
+type OHLCResponseXXBTZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXBTZEUR"`
+}
+type OHLCResponseXXBTZGBP struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXBTZGBP"`
+}
+type OHLCResponseXXBTZJPY struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXBTZJPY"`
+}
+type OHLCResponseXXBTZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXBTZUSD"`
+}
+type OHLCResponseXXDGXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXDGXXBT"`
+}
+type OHLCResponseXXLMXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXLMXXBT"`
+}
+type OHLCResponseXXLMZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXLMZEUR"`
+}
+type OHLCResponseXXLMZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXLMZUSD"`
+}
+type OHLCResponseXXMRXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXMRXXBT"`
+}
+type OHLCResponseXXMRZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXMRZEUR"`
+}
+type OHLCResponseXXMRZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXMRZUSD"`
+}
+type OHLCResponseXXRPXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXRPXXBT"`
+}
+type OHLCResponseXXRPZCAD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXRPZCAD"`
+}
+type OHLCResponseXXRPZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXRPZEUR"`
+}
+type OHLCResponseXXRPZJPY struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXRPZJPY"`
+}
+type OHLCResponseXXRPZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XXRPZUSD"`
+}
+type OHLCResponseXZECXXBT struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XZECXXBT"`
+}
+type OHLCResponseXZECZEUR struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XZECZEUR"`
+}
+type OHLCResponseXZECZUSD struct {
+	*OHLCResponseBase
+	OHLCArray []interface{} `json:"XZECZUSD"`
 }
