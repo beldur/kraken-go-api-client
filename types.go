@@ -350,7 +350,7 @@ type Order struct {
 	Volume         string           `json:"vol1"`
 	VolumeExecuted float64          `json:"vol_exec,string"`
 	Cost           float64          `json:"cost,string"`
-	Fee            string           `json:"fee"`
+	Fee            float64          `json:"fee,string"`
 	Price          float64          `json:"price,string"`
 	StopPrice      float64          `json:"stopprice"`
 	LimitPrice     float64          `json:"limitprice"`
@@ -364,4 +364,8 @@ type Order struct {
 type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
 	Count  int              `json:"count"`
+}
+type OpenOrdersResponse struct {
+	Open  map[string]Order `json:"open"`
+	Count int              `json:"count"`
 }
