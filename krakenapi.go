@@ -113,24 +113,35 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 // OHLC returns a OHLCResponse struct based on the given pair
-func (api *KrakenAPI) OHLC(pair string) (OHLCResponse, error) {
-	obj := newOHLCResponse(pair)
-
+func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
 	urlValue := url.Values{}
 	urlValue.Add("pair", pair)
 
-	_, err := api.queryPublic("OHLC", urlValue, obj)
+	// Returns a map[string]interface{} as an interface{}
+	interfaceResponse, err := api.queryPublic("OHLC", urlValue, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	// if ret, ok := elems.([]*OHLC); ok {
-	// 	return ret, nil
-	// }
+	// Converts the interface into map[string]interface{}
+	mapResponse := interfaceResponse.(map[string]interface{})
+	// Extracts the list of OHLC from the map to build a slice of interfaces
+	OHLCsUnstructured := mapResponse[pair].([]interface{})
 
-	// return nil, fmt.Errorf("interface can't be convert to []*OHLC")
+	ret := new(OHLCResponse)
+	for _, OHLCInterfaceSlice := range OHLCsUnstructured {
+		OHLCObj, OHLCErr := NewOHLC(OHLCInterfaceSlice.([]interface{}))
+		if OHLCErr != nil {
+			return nil, OHLCErr
+		}
 
-	return obj, nil
+		ret.OHLC = append(ret.OHLC, OHLCObj)
+	}
+
+	ret.Pair = pair
+	ret.Last = mapResponse["last"].(float64)
+
+	return ret, nil
 }
 
 // Trades returns the recent trades for given pair
