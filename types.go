@@ -365,3 +365,8 @@ type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
 	Count  int              `json:"count"`
 }
+
+// OpenOrdersResponse represents a list of closed orders, indexed by id
+type OpenOrdersResponse struct {
+	Open  map[string]Order `json:"open"`
+}

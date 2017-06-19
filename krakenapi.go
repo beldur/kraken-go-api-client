@@ -172,6 +172,24 @@ func (api *KrakenApi) Balance() (*BalanceResponse, error) {
 	return resp.(*BalanceResponse), nil
 }
 
+// OpenOrders returns all open orders
+func (api* KrakenApi) OpenOrders(args map[string]string) (*OpenOrdersResponse, error) {
+	params := url.Values{}
+	if value, ok := args["trades"]; ok {
+		params.Add("trades", value)
+	}
+	if value, ok := args["userref"]; ok {
+		params.Add("userref", value)
+	}
+	resp, err := api.queryPrivate("OpenOrders", params, &OpenOrdersResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*OpenOrdersResponse), nil
+}
+
 // ClosedOrders returns all closed orders
 func (api *KrakenApi) ClosedOrders(args map[string]string) (*ClosedOrdersResponse, error) {
 	params := url.Values{}
