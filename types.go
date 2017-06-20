@@ -326,6 +326,22 @@ type TradeInfo struct {
 	Miscellaneous string
 }
 
+// OrderTypes for AddOrder
+const (
+	OTMarket              = "market"
+	OTLimit               = "limit"                  // (price = limit price)
+	OTStopLoss            = "stop-loss"              // (price = stop loss price)
+	OTTakeProfi           = "take-profit"            // (price = take profit price)
+	OTStopLossProfit      = "stop-loss-profit"       // (price = stop loss price, price2 = take profit price)
+	OTStopLossProfitLimit = "stop-loss-profit-limit" // (price = stop loss price, price2 = take profit price)
+	OTStopLossLimit       = "stop-loss-limit"        // (price = stop loss trigger price, price2 = triggered limit price)
+	OTTakeProfitLimit     = "take-profit-limit"      // (price = take profit trigger price, price2 = triggered limit price)
+	OTTrailingStop        = "trailing-stop"          // (price = trailing stop offset)
+	OTTrailingStopLimit   = "trailing-stop-limit"    // (price = trailing stop offset, price2 = triggered limit offset)
+	OTStopLossAndLimit    = "stop-loss-and-limit"    // (price = stop loss price, price2 = limit price)
+	OTSettlePosition      = "settle-position"
+)
+
 // OrderDescription represents an orders description
 type OrderDescription struct {
 	AssetPair      string  `json:"pair"`
@@ -340,6 +356,7 @@ type OrderDescription struct {
 
 // Order represents a single order
 type Order struct {
+	TransactionID  string           `json:"-"`
 	ReferenceID    string           `json:"refid"`
 	UserRef        string           `json:"userref"`
 	Status         string           `json:"status"`
@@ -368,4 +385,14 @@ type ClosedOrdersResponse struct {
 type OpenOrdersResponse struct {
 	Open  map[string]Order `json:"open"`
 	Count int              `json:"count"`
+}
+
+type AddOrderResponse struct {
+	Description    OrderDescription `json:"descr"`
+	TransactionIds []string         `json:"txid"`
+}
+
+type CancelOrderResponse struct {
+	Count   int  `json:"count"`
+	Pending bool `json:"pending"`
 }

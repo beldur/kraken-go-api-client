@@ -222,6 +222,72 @@ func (api *KrakenApi) ClosedOrders(args map[string]string) (*ClosedOrdersRespons
 	return resp.(*ClosedOrdersResponse), nil
 }
 
+// CancelOrder cancels order
+func (api *KrakenApi) CancelOrder(args map[string]string) (*CancelOrderResponse, error) {
+	params := url.Values{}
+	if value, ok := args["txid"]; ok {
+		params.Add("txid", value)
+	}
+	resp, err := api.queryPrivate("CancelOrder", params, &CancelOrderResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*CancelOrderResponse), nil
+}
+
+// AddOrder adds new order
+func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, volume string, args map[string]string) (*AddOrderResponse, error) {
+	params := url.Values{
+		"pair":      {pair},
+		"type":      {direction},
+		"ordertype": {orderType},
+		"volume":    {volume},
+	}
+
+	if value, ok := args["price"]; ok {
+		params.Add("price", value)
+	}
+	if value, ok := args["price2"]; ok {
+		params.Add("price2", value)
+	}
+	if value, ok := args["leverage"]; ok {
+		params.Add("leverage", value)
+	}
+	if value, ok := args["oflags"]; ok {
+		params.Add("oflags", value)
+	}
+	if value, ok := args["starttm"]; ok {
+		params.Add("starttm", value)
+	}
+	if value, ok := args["expiretm"]; ok {
+		params.Add("expiretm", value)
+	}
+	if value, ok := args["validate"]; ok {
+		params.Add("validate", value)
+	}
+	if value, ok := args["close_order_type"]; ok {
+		params.Add("close[ordertype]", value)
+	}
+	if value, ok := args["close_price"]; ok {
+		params.Add("close[price]", value)
+	}
+	if value, ok := args["close_price2"]; ok {
+		params.Add("close[price2]", value)
+	}
+	if value, ok := args["trading_agreement"]; ok {
+		params.Add("trading_agreement", value)
+	}
+	resp, err := api.queryPrivate("AddOrder", params, &AddOrderResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*AddOrderResponse), nil
+}
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
