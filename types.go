@@ -4,6 +4,10 @@ const (
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
+	EOSETH   = "EOSETH"
+	EOSEUR   = "EOSEUR"
+	EOSUSD   = "EOSUSD"
+	EOSXBT   = "EOSXBT"
 	GNOETH   = "GNOETH"
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
@@ -78,6 +82,10 @@ type AssetPairsResponse struct {
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
+	EOSETH   AssetPairInfo
+	EOSEUR   AssetPairInfo
+	EOSUSD   AssetPairInfo
+	EOSXBT   AssetPairInfo
 	GNOETH   AssetPairInfo
 	GNOEUR   AssetPairInfo
 	GNOUSD   AssetPairInfo
@@ -165,6 +173,7 @@ type AssetPairInfo struct {
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
 	DASH AssetInfo
+	EOS  AssetInfo
 	GNO  AssetInfo
 	KFEE AssetInfo
 	USDT AssetInfo
@@ -205,6 +214,7 @@ type AssetInfo struct {
 
 type BalanceResponse struct {
 	DASH float32 `json:"DASH,string"`
+	EOS  float32 `json:"EOS,string"`
 	GNO  float32 `json:"GNO,string"`
 	KFEE float32 `json:"KFEE,string"`
 	USDT float32 `json:"USDT,string"`
@@ -236,6 +246,10 @@ type TickerResponse struct {
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
+	EOSETH   PairTickerInfo
+	EOSEUR   PairTickerInfo
+	EOSUSD   PairTickerInfo
+	EOSXBT   PairTickerInfo
 	GNOETH   PairTickerInfo
 	GNOEUR   PairTickerInfo
 	GNOUSD   PairTickerInfo
