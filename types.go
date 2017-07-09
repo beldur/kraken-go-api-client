@@ -344,14 +344,14 @@ const (
 
 // OrderDescription represents an orders description
 type OrderDescription struct {
-	AssetPair      string  `json:"pair"`
-	Close          string  `json:"close"`
-	Leverage       string  `json:"leverage"`
-	Order          string  `json:"order"`
-	OrderType      string  `json:"ordertype"`
-	PrimaryPrice   float64 `json:"price,string"`
-	SecondaryPrice float64 `json:"price2,string"`
-	Type           string  `json:"type"`
+	AssetPair      string `json:"pair"`
+	Close          string `json:"close"`
+	Leverage       string `json:"leverage"`
+	Order          string `json:"order"`
+	OrderType      string `json:"ordertype"`
+	PrimaryPrice   string `json:"price"`
+	SecondaryPrice string `json:"price2"`
+	Type           string `json:"type"`
 }
 
 // Order represents a single order
@@ -369,8 +369,8 @@ type Order struct {
 	Cost           float64          `json:"cost,string"`
 	Fee            float64          `json:"fee,string"`
 	Price          float64          `json:"price,string"`
-	StopPrice      float64          `json:"stopprice"`
-	LimitPrice     float64          `json:"limitprice"`
+	StopPrice      float64          `json:"stopprice.string"`
+	LimitPrice     float64          `json:"limitprice,string"`
 	Misc           string           `json:"misc"`
 	OrderFlags     string           `json:"oflags"`
 	CloseTime      float64          `json:"closetm"`
