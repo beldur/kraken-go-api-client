@@ -396,3 +396,5 @@ type CancelOrderResponse struct {
 	Count   int  `json:"count"`
 	Pending bool `json:"pending"`
 }
+
+type QueryOrdersResponse map[string]Order

@@ -237,6 +237,24 @@ func (api *KrakenApi) CancelOrder(args map[string]string) (*CancelOrderResponse,
 	return resp.(*CancelOrderResponse), nil
 }
 
+// QueryOrders shows order
+func (api *KrakenApi) QueryOrders(txids string, args map[string]string) (*QueryOrdersResponse, error) {
+	params := url.Values{"txid": {txids}}
+	if value, ok := args["trades"]; ok {
+		params.Add("trades", value)
+	}
+	if value, ok := args["userref"]; ok {
+		params.Add("userref", value)
+	}
+	resp, err := api.queryPrivate("QueryOrders", params, &QueryOrdersResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*QueryOrdersResponse), nil
+}
+
 // AddOrder adds new order
 func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, volume string, args map[string]string) (*AddOrderResponse, error) {
 	params := url.Values{
