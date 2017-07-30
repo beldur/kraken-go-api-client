@@ -1,5 +1,9 @@
 package krakenapi
 
+import(
+    "encoding/json"
+)
+
 const (
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
@@ -378,4 +382,26 @@ type Order struct {
 type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
 	Count  int              `json:"count"`
+}
+
+// OrderBookItem is a piece of information about an order.
+type OrderBookItem struct {
+	Price  string
+	Amount string
+	Ts     int64
+}
+
+// UnmarshalJSON takes a json array from kraken and converts it into an OrderBookItem.
+func (o *OrderBookItem) UnmarshalJSON(data []byte) error {
+	arr := []interface{}{&o.Price, &o.Amount, &o.Ts}
+	return json.Unmarshal(data, &arr)
+}
+
+// DepthResponse is a response from kraken to Depth request.
+type DepthResponse map[string]OrderBook
+
+// OrderBook contains top asks and bids.
+type OrderBook struct {
+	Asks []OrderBookItem
+	Bids []OrderBookItem
 }
