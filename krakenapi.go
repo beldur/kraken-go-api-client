@@ -223,11 +223,9 @@ func (api *KrakenApi) ClosedOrders(args map[string]string) (*ClosedOrdersRespons
 }
 
 // CancelOrder cancels order
-func (api *KrakenApi) CancelOrder(args map[string]string) (*CancelOrderResponse, error) {
+func (api *KrakenApi) CancelOrder(txid string) (*CancelOrderResponse, error) {
 	params := url.Values{}
-	if value, ok := args["txid"]; ok {
-		params.Add("txid", value)
-	}
+	params.Add("txid", txid)
 	resp, err := api.queryPrivate("CancelOrder", params, &CancelOrderResponse{})
 
 	if err != nil {
