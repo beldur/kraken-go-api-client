@@ -1,6 +1,7 @@
 package krakenapi
 
 const (
+	BCHEUR   = "BCHEUR"
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
@@ -79,6 +80,7 @@ type TimeResponse struct {
 
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
+	BCHEUR   AssetPairInfo
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
@@ -172,6 +174,7 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
+	BCH  AssetInfo
 	DASH AssetInfo
 	EOS  AssetInfo
 	GNO  AssetInfo
@@ -213,6 +216,7 @@ type AssetInfo struct {
 }
 
 type BalanceResponse struct {
+	BCH  float32 `json:"BCH,string"`
 	DASH float32 `json:"DASH,string"`
 	EOS  float32 `json:"EOS,string"`
 	GNO  float32 `json:"GNO,string"`
@@ -243,6 +247,7 @@ type BalanceResponse struct {
 
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
+	BCHEUR   PairTickerInfo
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
