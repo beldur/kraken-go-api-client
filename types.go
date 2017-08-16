@@ -1,7 +1,8 @@
 package krakenapi
 
-import(
-    "encoding/json"
+import (
+	"encoding/json"
+	"strconv"
 )
 
 const (
@@ -386,15 +387,34 @@ type ClosedOrdersResponse struct {
 
 // OrderBookItem is a piece of information about an order.
 type OrderBookItem struct {
-	Price  string
-	Amount string
+	Price  float64
+	Amount float64
 	Ts     int64
 }
 
 // UnmarshalJSON takes a json array from kraken and converts it into an OrderBookItem.
 func (o *OrderBookItem) UnmarshalJSON(data []byte) error {
-	arr := []interface{}{&o.Price, &o.Amount, &o.Ts}
-	return json.Unmarshal(data, &arr)
+	tmp_struct := struct {
+		price  string
+		amount string
+		ts     int64
+	}{}
+	tmp_arr := []interface{}{&tmp_struct.price, &tmp_struct.amount, &tmp_struct.ts}
+	err := json.Unmarshal(data, &tmp_arr)
+	if err != nil {
+		return err
+	}
+
+	o.Price, err = strconv.ParseFloat(tmp_struct.price, 64)
+	if err != nil {
+		return err
+	}
+	o.Amount, err = strconv.ParseFloat(tmp_struct.amount, 64)
+	if err != nil {
+		return err
+	}
+	o.Ts = tmp_struct.ts
+	return nil
 }
 
 // DepthResponse is a response from kraken to Depth request.
