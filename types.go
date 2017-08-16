@@ -6,6 +6,7 @@ import (
 )
 
 const (
+	BCHEUR   = "BCHEUR"
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
@@ -84,6 +85,7 @@ type TimeResponse struct {
 
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
+	BCHEUR   AssetPairInfo
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
@@ -177,6 +179,7 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
+	BCH  AssetInfo
 	DASH AssetInfo
 	EOS  AssetInfo
 	GNO  AssetInfo
@@ -218,6 +221,7 @@ type AssetInfo struct {
 }
 
 type BalanceResponse struct {
+	BCH  float32 `json:"BCH,string"`
 	DASH float32 `json:"DASH,string"`
 	EOS  float32 `json:"EOS,string"`
 	GNO  float32 `json:"GNO,string"`
@@ -248,6 +252,7 @@ type BalanceResponse struct {
 
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
+	BCHEUR   PairTickerInfo
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
@@ -345,20 +350,37 @@ type TradeInfo struct {
 	Miscellaneous string
 }
 
+// OrderTypes for AddOrder
+const (
+	OTMarket              = "market"
+	OTLimit               = "limit"                  // (price = limit price)
+	OTStopLoss            = "stop-loss"              // (price = stop loss price)
+	OTTakeProfi           = "take-profit"            // (price = take profit price)
+	OTStopLossProfit      = "stop-loss-profit"       // (price = stop loss price, price2 = take profit price)
+	OTStopLossProfitLimit = "stop-loss-profit-limit" // (price = stop loss price, price2 = take profit price)
+	OTStopLossLimit       = "stop-loss-limit"        // (price = stop loss trigger price, price2 = triggered limit price)
+	OTTakeProfitLimit     = "take-profit-limit"      // (price = take profit trigger price, price2 = triggered limit price)
+	OTTrailingStop        = "trailing-stop"          // (price = trailing stop offset)
+	OTTrailingStopLimit   = "trailing-stop-limit"    // (price = trailing stop offset, price2 = triggered limit offset)
+	OTStopLossAndLimit    = "stop-loss-and-limit"    // (price = stop loss price, price2 = limit price)
+	OTSettlePosition      = "settle-position"
+)
+
 // OrderDescription represents an orders description
 type OrderDescription struct {
-	AssetPair      string  `json:"pair"`
-	Close          string  `json:"close"`
-	Leverage       string  `json:"leverage"`
-	Order          string  `json:"order"`
-	OrderType      string  `json:"ordertype"`
-	PrimaryPrice   float64 `json:"price,string"`
-	SecondaryPrice float64 `json:"price2,string"`
-	Type           string  `json:"type"`
+	AssetPair      string `json:"pair"`
+	Close          string `json:"close"`
+	Leverage       string `json:"leverage"`
+	Order          string `json:"order"`
+	OrderType      string `json:"ordertype"`
+	PrimaryPrice   string `json:"price"`
+	SecondaryPrice string `json:"price2"`
+	Type           string `json:"type"`
 }
 
 // Order represents a single order
 type Order struct {
+	TransactionID  string           `json:"-"`
 	ReferenceID    string           `json:"refid"`
 	UserRef        string           `json:"userref"`
 	Status         string           `json:"status"`
@@ -369,10 +391,10 @@ type Order struct {
 	Volume         string           `json:"vol1"`
 	VolumeExecuted float64          `json:"vol_exec,string"`
 	Cost           float64          `json:"cost,string"`
-	Fee            string           `json:"fee"`
+	Fee            float64          `json:"fee,string"`
 	Price          float64          `json:"price,string"`
-	StopPrice      float64          `json:"stopprice"`
-	LimitPrice     float64          `json:"limitprice"`
+	StopPrice      float64          `json:"stopprice.string"`
+	LimitPrice     float64          `json:"limitprice,string"`
 	Misc           string           `json:"misc"`
 	OrderFlags     string           `json:"oflags"`
 	CloseTime      float64          `json:"closetm"`
@@ -425,3 +447,20 @@ type OrderBook struct {
 	Asks []OrderBookItem
 	Bids []OrderBookItem
 }
+
+type OpenOrdersResponse struct {
+	Open  map[string]Order `json:"open"`
+	Count int              `json:"count"`
+}
+
+type AddOrderResponse struct {
+	Description    OrderDescription `json:"descr"`
+	TransactionIds []string         `json:"txid"`
+}
+
+type CancelOrderResponse struct {
+	Count   int  `json:"count"`
+	Pending bool `json:"pending"`
+}
+
+type QueryOrdersResponse map[string]Order
