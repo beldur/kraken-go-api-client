@@ -13,6 +13,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+    "errors"
 )
 
 const (
@@ -220,6 +221,24 @@ func (api *KrakenApi) ClosedOrders(args map[string]string) (*ClosedOrdersRespons
 	}
 
 	return resp.(*ClosedOrdersResponse), nil
+}
+
+// Depth returns the order book for given pair and orders count.
+func (api *KrakenApi) Depth(pair string, count int) (*OrderBook, error) {
+	dr := DepthResponse{}
+	_, err := api.queryPublic("Depth", url.Values{
+		"pair": {pair}, "count": {strconv.Itoa(count)},
+	}, &dr)
+	
+	if err != nil {
+		return nil, err
+	}
+	
+	if book, found := dr[pair]; found {
+		return &book, nil
+	}
+	
+	return nil, errors.New("invalid response")
 }
 
 // CancelOrder cancels order

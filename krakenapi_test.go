@@ -113,3 +113,26 @@ func TestQueryTrades(t *testing.T) {
 		}
 	}
 }
+
+func TestQueryDepth(t *testing.T) {
+	pair := "XETHZEUR"
+	count := 10
+	result, err := publicAPI.Depth(pair, count)
+	if err != nil {
+		t.Errorf("Depth should not return an error, got %s", err)
+	}
+
+	resultType := reflect.TypeOf(result)
+
+	if resultType != reflect.TypeOf(&OrderBook{}) {
+		t.Errorf("Depth should return an OrderBook, got %s", resultType)
+	}
+
+	if len(result.Asks) > count {
+		t.Errorf("Asks length must be less than count , got %s > %s", len(result.Asks), count)
+	}
+
+	if len(result.Bids) > count {
+		t.Errorf("Bids length must be less than count , got %s > %s", len(result.Bids), count)
+	}
+}
