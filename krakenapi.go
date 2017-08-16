@@ -229,13 +229,17 @@ func (api *KrakenApi) Depth(pair string, count int) (*OrderBook, error) {
 	_, err := api.queryPublic("Depth", url.Values{
 		"pair": {pair}, "count": {strconv.Itoa(count)},
 	}, &dr)
+	
 	if err != nil {
 		return nil, err
 	}
+	
 	if book, found := dr[pair]; found {
 		return &book, nil
 	}
+	
 	return nil, errors.New("invalid response")
+}
 
 // CancelOrder cancels order
 func (api *KrakenApi) CancelOrder(txid string) (*CancelOrderResponse, error) {
