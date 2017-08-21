@@ -8,7 +8,7 @@ import (
 const (
 	BCHEUR   = "BCHEUR"
 	BCHUSD   = "BCHUSD"
-	BCHXBT   = "BCHXBT
+	BCHXBT   = "BCHXBT"
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
