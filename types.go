@@ -7,6 +7,8 @@ import (
 
 const (
 	BCHEUR   = "BCHEUR"
+	BCHUSD   = "BCHUSD"
+	BCHXBT   = "BCHXBT
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
@@ -86,6 +88,8 @@ type TimeResponse struct {
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
 	BCHEUR   AssetPairInfo
+	BCHUSD   AssetPairInfo
+	BCHXBT   AssetPairInfo
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
@@ -253,6 +257,8 @@ type BalanceResponse struct {
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
 	BCHEUR   PairTickerInfo
+	BCHUSD   PairTickerInfo
+	BCHXBT   PairTickerInfo
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
