@@ -6,6 +6,7 @@ import (
 	"crypto/sha512"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -13,7 +14,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-    "errors"
 )
 
 const (
@@ -52,6 +52,13 @@ var privateMethods = []string{
 	"TradeVolume",
 	"AddOrder",
 	"CancelOrder",
+	"DepositMethods",
+	"DepositAddresses",
+	"DepositStatus",
+	"WithdrawInfo",
+	"Withdraw",
+	"WithdrawStatus",
+	"WithdrawCancel",
 }
 
 // KrakenApi represents a Kraken API Client connection
@@ -229,15 +236,15 @@ func (api *KrakenApi) Depth(pair string, count int) (*OrderBook, error) {
 	_, err := api.queryPublic("Depth", url.Values{
 		"pair": {pair}, "count": {strconv.Itoa(count)},
 	}, &dr)
-	
+
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if book, found := dr[pair]; found {
 		return &book, nil
 	}
-	
+
 	return nil, errors.New("invalid response")
 }
 
