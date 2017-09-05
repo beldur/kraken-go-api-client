@@ -54,7 +54,7 @@ func TestAssetPairs(t *testing.T) {
 }
 
 func TestTicker(t *testing.T) {
-	resp, err := publicAPI.Ticker(XXBTZGBP, XXBTZEUR)
+	resp, err := publicAPI.Ticker(XXBTZEUR, XXRPZEUR)
 	if err != nil {
 		t.Errorf("Ticker() should not return an error, got %s", err)
 	}
