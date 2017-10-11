@@ -65,10 +65,10 @@ const (
 )
 
 const (
-	BUY    = "b"
-	SELL   = "s"
-	MARKET = "m"
-	LIMIT  = "l"
+	BUY    = "buy"
+	SELL   = "sell"
+	MARKET = "market"
+	LIMIT  = "limit"
 )
 
 // KrakenResponse wraps the Kraken API JSON response
