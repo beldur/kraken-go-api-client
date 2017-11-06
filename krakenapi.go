@@ -62,6 +62,28 @@ var privateMethods = []string{
 	"WithdrawCancel",
 }
 
+// These represent the minimum order sizes for the respective coins
+// Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
+const (
+	MinimumREP  = 0.3
+	MinimumXBT  = 0.002
+	MinimumBCH  = 0.002
+	MinimumDASH = 0.03
+	MinimumDOGE = 3000.0
+	MinimumEOS  = 3.0
+	MinimumETH  = 0.02
+	MinimumETC  = 0.3
+	MinimumGNO  = 0.03
+	MinimumICN  = 2.0
+	MinimumLTC  = 0.1
+	MinimumMLN  = 0.1
+	MinimumXMR  = 0.1
+	MinimumXRP  = 30.0
+	MinimumXLM  = 300.0
+	MinimumZEC  = 0.02
+	MinimumUSDT = 5.0
+)
+
 // KrakenApi represents a Kraken API Client connection
 type KrakenApi struct {
 	key    string
