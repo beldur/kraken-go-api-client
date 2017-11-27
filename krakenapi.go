@@ -438,8 +438,8 @@ func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[st
 	// Parse request
 	var jsonData KrakenResponse
 
-	// Set the KrakenResoinse.Result to typ so `json.Unmarshal` will
-	// unmarshal it into given typ instead of `interface{}`.
+	// Set the KrakenResponse.Result to typ so `json.Unmarshal` will
+	// unmarshal it into given type, instead of `interface{}`.
 	if typ != nil {
 		jsonData.Result = typ
 	}
