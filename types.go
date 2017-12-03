@@ -2,6 +2,7 @@ package krakenapi
 
 import (
 	"encoding/json"
+	"reflect"
 	"strconv"
 )
 
@@ -312,6 +313,14 @@ type TickerResponse struct {
 	XZECXXBT PairTickerInfo
 	XZECZEUR PairTickerInfo
 	XZECZUSD PairTickerInfo
+}
+
+// GetPairTickerInfo is a helper method that returns given `pair`'s `PairTickerInfo`
+func (v *TickerResponse) GetPairTickerInfo(pair string) PairTickerInfo {
+	r := reflect.ValueOf(v)
+	f := reflect.Indirect(r).FieldByName(pair)
+
+	return f.Interface().(PairTickerInfo)
 }
 
 // PairTickerInfo represents ticker information for a pair
