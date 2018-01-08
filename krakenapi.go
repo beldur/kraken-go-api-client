@@ -84,6 +84,11 @@ const (
 	MinimumUSDT = 5.0
 )
 
+const (
+	RetryAmount = 5
+	RetrySleep  = time.Second * 2
+)
+
 // KrakenApi represents a Kraken API Client connection
 type KrakenApi struct {
 	key    string
@@ -93,7 +98,7 @@ type KrakenApi struct {
 
 // New creates a new Kraken API client
 func New(key, secret string) *KrakenApi {
-	return NewWithClient(key, secret, http.DefaultClient)
+	return NewWithClient(key, secret, &http.Client{Timeout: 60 * time.Second})
 }
 
 func NewWithClient(key, secret string, httpClient *http.Client) *KrakenApi {
@@ -344,6 +349,10 @@ func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, 
 	if value, ok := args["trading_agreement"]; ok {
 		params.Add("trading_agreement", value)
 	}
+	if value, ok := args["userref"]; ok {
+		params.Add("userref", value)
+	}
+
 	resp, err := api.queryPrivate("AddOrder", params, &AddOrderResponse{})
 
 	if err != nil {
@@ -373,7 +382,12 @@ func (api *KrakenApi) Query(method string, data map[string]string) (interface{},
 // Execute a public method query
 func (api *KrakenApi) queryPublic(method string, values url.Values, typ interface{}) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, method)
-	resp, err := api.doRequest(url, values, nil, typ)
+
+	var resp interface{}
+	err := retry(RetryAmount, RetrySleep, func() (err error) {
+		resp, err = api.doRequest(url, values, nil, typ)
+		return
+	})
 
 	return resp, err
 }
@@ -394,7 +408,11 @@ func (api *KrakenApi) queryPrivate(method string, values url.Values, typ interfa
 		"API-Sign": signature,
 	}
 
-	resp, err := api.doRequest(reqURL, values, headers, typ)
+	var resp interface{}
+	err := retry(RetryAmount, RetrySleep, func() (err error) {
+		resp, err = api.doRequest(reqURL, values, headers, typ)
+		return
+	})
 
 	return resp, err
 }
@@ -415,8 +433,13 @@ func (api *KrakenApi) doRequest(reqURL string, values url.Values, headers map[st
 
 	// Execute request
 	resp, err := api.client.Do(req)
+
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! #2 (%s)", err.Error())
+	}
+
+	if resp.StatusCode >= 500 {
+		return nil, fmt.Errorf("Could not execute request! #6 (%s)", fmt.Sprintf("Response status is an error %d.", resp.StatusCode))
 	}
 	defer resp.Body.Close()
 
