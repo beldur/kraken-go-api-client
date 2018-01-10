@@ -18,7 +18,7 @@ func retry(attempts int, sleep time.Duration, callback func() error) (err error)
 		}
 
 		time.Sleep(sleep)
-		log.Println("Retrying #%d after error:", i, err)
+		log.Printf("Retry #%d after error: %s\n", i+1, err)
 	}
 	return err
 }
