@@ -167,9 +167,9 @@ type AssetPairInfo struct {
 	// Amount to multiply lot volume by to get currency volume
 	LotMultiplier int `json:"lot_multiplier"`
 	// Array of leverage amounts available when buying
-	LeverageBuy []float32 `json:"leverage_buy"`
+	LeverageBuy []float64 `json:"leverage_buy"`
 	// Array of leverage amounts available when selling
-	LeverageSell []float32 `json:"leverage_sell"`
+	LeverageSell []float64 `json:"leverage_sell"`
 	// Fee schedule array in [volume, percent fee] tuples
 	Fees [][]float64 `json:"fees"`
 	// // Maker fee schedule array in [volume, percent fee] tuples (if on maker/taker)
@@ -226,33 +226,33 @@ type AssetInfo struct {
 }
 
 type BalanceResponse struct {
-	BCH  float32 `json:"BCH,string"`
-	DASH float32 `json:"DASH,string"`
-	EOS  float32 `json:"EOS,string"`
-	GNO  float32 `json:"GNO,string"`
-	KFEE float32 `json:"KFEE,string"`
-	USDT float32 `json:"USDT,string"`
-	XDAO float32 `json:"XDAO,string"`
-	XETC float32 `json:"XETC,string"`
-	XETH float32 `json:"XETH,string"`
-	XICN float32 `json:"XICN,string"`
-	XLTC float32 `json:"XLTC,string"`
-	XMLN float32 `json:"XMLN,string"`
-	XNMC float32 `json:"XNMC,string"`
-	XREP float32 `json:"XREP,string"`
-	XXBT float32 `json:"XXBT,string"`
-	XXDG float32 `json:"XXDG,string"`
-	XXLM float32 `json:"XXLM,string"`
-	XXMR float32 `json:"XXMR,string"`
-	XXRP float32 `json:"XXRP,string"`
-	XXVN float32 `json:"XXVN,string"`
-	XZEC float32 `json:"XZEC,string"`
-	ZCAD float32 `json:"ZCAD,string"`
-	ZEUR float32 `json:"ZEUR,string"`
-	ZGBP float32 `json:"ZGBP,string"`
-	ZJPY float32 `json:"ZJPY,string"`
-	ZKRW float32 `json:"ZKRW,string"`
-	ZUSD float32 `json:"ZUSD,string"`
+	BCH  float64 `json:"BCH,string"`
+	DASH float64 `json:"DASH,string"`
+	EOS  float64 `json:"EOS,string"`
+	GNO  float64 `json:"GNO,string"`
+	KFEE float64 `json:"KFEE,string"`
+	USDT float64 `json:"USDT,string"`
+	XDAO float64 `json:"XDAO,string"`
+	XETC float64 `json:"XETC,string"`
+	XETH float64 `json:"XETH,string"`
+	XICN float64 `json:"XICN,string"`
+	XLTC float64 `json:"XLTC,string"`
+	XMLN float64 `json:"XMLN,string"`
+	XNMC float64 `json:"XNMC,string"`
+	XREP float64 `json:"XREP,string"`
+	XXBT float64 `json:"XXBT,string"`
+	XXDG float64 `json:"XXDG,string"`
+	XXLM float64 `json:"XXLM,string"`
+	XXMR float64 `json:"XXMR,string"`
+	XXRP float64 `json:"XXRP,string"`
+	XXVN float64 `json:"XXVN,string"`
+	XZEC float64 `json:"XZEC,string"`
+	ZCAD float64 `json:"ZCAD,string"`
+	ZEUR float64 `json:"ZEUR,string"`
+	ZGBP float64 `json:"ZGBP,string"`
+	ZJPY float64 `json:"ZJPY,string"`
+	ZKRW float64 `json:"ZKRW,string"`
+	ZUSD float64 `json:"ZUSD,string"`
 }
 
 // TickerResponse includes the requested ticker pairs
@@ -342,7 +342,7 @@ type PairTickerInfo struct {
 	// High array(<today>, <last 24 hours>)
 	High []string `json:"h"`
 	// Today's opening price
-	OpeningPrice float32 `json:"o,string"`
+	OpeningPrice float64 `json:"o,string"`
 }
 
 // TradesResponse represents a list of the last trades
