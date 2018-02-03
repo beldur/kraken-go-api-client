@@ -384,7 +384,7 @@ func (api *KrakenApi) queryPublic(method string, values url.Values, typ interfac
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, method)
 
 	var resp interface{}
-	err := retry(RetryAmount, RetrySleep, func() (err error) {
+	err := retry(RetryAmount, RetrySleep, method, func() (err error) {
 		resp, err = api.doRequest(url, values, nil, typ)
 		return
 	})
@@ -409,7 +409,7 @@ func (api *KrakenApi) queryPrivate(method string, values url.Values, typ interfa
 	}
 
 	var resp interface{}
-	err := retry(RetryAmount, RetrySleep, func() (err error) {
+	err := retry(RetryAmount, RetrySleep, method, func() (err error) {
 		resp, err = api.doRequest(reqURL, values, headers, typ)
 		return
 	})

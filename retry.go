@@ -7,11 +7,15 @@ import (
 	"time"
 )
 
-func retry(attempts int, sleep time.Duration, callback func() error) (err error) {
+func retry(attempts int, sleep time.Duration, method string, callback func() error) (err error) {
 	for i := 0; ; i++ {
 		err = callback()
 		if err == nil {
 			return
+		}
+		// Never retry if method is AddOrder
+		if method == "AddOrder" {
+			break
 		}
 		if !isRetryable(err) || i >= (attempts-1) {
 			break
@@ -31,7 +35,7 @@ func isRetryable(err error) bool {
 	}
 	// That error happens when the service is overloaded.
 	if strings.Contains(fmt.Sprintf("%v", err), "EService:Unavailable") {
-		return true
+		return false
 	}
 	// That error happens when the server response with anything >= 500.
 	if strings.Contains(fmt.Sprintf("%v", err), "Response status is an error") {
