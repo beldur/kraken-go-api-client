@@ -142,6 +142,33 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 	return resp.(*TickerResponse), nil
 }
 
+func (api *KrakenApi) TradesHistory(start int64, end int64, args map[string]string) (*TradesHistoryResponse, error) {
+	params := url.Values{}
+	if start > 0 {
+		params.Add("start", strconv.FormatInt(start, 10))
+	}
+	if end > 0 {
+		params.Add("end", strconv.FormatInt(end, 10))
+	}
+	if value, ok := args["type"]; ok {
+		params.Add("type", value)
+	}
+	if value, ok := args["trades"]; ok {
+		params.Add("trades", value)
+	}
+	if value, ok := args["ofs"]; ok {
+		params.Add("ofs", value)
+	}
+
+	resp, err := api.queryPrivate("TradesHistory", params, &TradesHistoryResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*TradesHistoryResponse), nil
+}
+
 // Trades returns the recent trades for given pair
 func (api *KrakenApi) Trades(pair string, since int64) (*TradesResponse, error) {
 	values := url.Values{"pair": {pair}}
