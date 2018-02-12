@@ -351,6 +351,27 @@ type TradesResponse struct {
 	Trades []TradeInfo
 }
 
+// TradesHistoryResponse represents a list executed trade
+type TradesHistoryResponse struct {
+	Trades map[string]TradeHistoryInfo `json:"trades"`
+	Count  int                         `json:"count"`
+}
+
+type TradeHistoryInfo struct {
+	TransactionId string  `json:"ordertxid"`
+	PostxId       string  `json:"postxid"`
+	AssetPair     string  `json:"pair"`
+	Time          float64 `json:"time"`
+	Type          string  `json:"type"`
+	OrderType     string  `json:"ordertype"`
+	Price         float64 `json:"price,string"`
+	Cost          float64 `json:"cost,string"`
+	Fee           float64 `json:"fee,string"`
+	Volume        float64 `json:"vol,string"`
+	Margin        float64 `json:"margin,string"`
+	Misc          string  `json:"misc"`
+}
+
 // TradeInfo represents a trades information
 type TradeInfo struct {
 	Price         string
