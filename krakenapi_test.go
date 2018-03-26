@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"net/url"
 	"reflect"
+	"strconv"
 	"testing"
 )
 
@@ -36,14 +37,14 @@ func TestTime(t *testing.T) {
 }
 
 func TestAssets(t *testing.T) {
-	_, err := publicAPI.Assets()
+	_, err := publicAPI.Assets(map[string]string{})
 	if err != nil {
 		t.Errorf("Assets() should not return an error, got %s", err)
 	}
 }
 
 func TestAssetPairs(t *testing.T) {
-	resp, err := publicAPI.AssetPairs()
+	resp, err := publicAPI.AssetPairs(map[string]string{})
 	if err != nil {
 		t.Errorf("AssetPairs() should not return an error, got %s", err)
 	}
@@ -54,13 +55,41 @@ func TestAssetPairs(t *testing.T) {
 }
 
 func TestTicker(t *testing.T) {
-	resp, err := publicAPI.Ticker(XXBTZEUR, XXRPZEUR)
+	resp, err := publicAPI.Ticker(map[string]string{})
+	if err == nil {
+		t.Error("Ticker() should throw an error that parameter 'pair' is mandatory")
+	}
+
+	resp, err = publicAPI.Ticker(map[string]string{"pair": XXBTZGBP + "," + XXBTZEUR})
 	if err != nil {
 		t.Errorf("Ticker() should not return an error, got %s", err)
 	}
 
 	if resp.XXBTZEUR.OpeningPrice == 0 {
 		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp.XXBTZEUR.OpeningPrice)
+	}
+}
+
+func TestTrades(t *testing.T) {
+	result, err := publicAPI.Trades(map[string]string{"pair": XXBTZEUR, "since": "1495777604391411290"})
+
+	if err != nil {
+		t.Errorf("Trades should not return an error, got %s", err)
+	}
+
+	if result.Last == 0 {
+		t.Errorf("Returned parameter `last` should always have a value...")
+	}
+
+	if len(result.Trades) > 0 {
+		for _, trade := range result.Trades {
+			if trade.Buy == trade.Sell {
+				t.Errorf("Trade should be buy or sell")
+			}
+			if trade.Market == trade.Limit {
+				t.Errorf("Trade type should be market or limit")
+			}
+		}
 	}
 }
 
@@ -92,7 +121,10 @@ func TestQueryTicker(t *testing.T) {
 }
 
 func TestQueryTrades(t *testing.T) {
-	result, err := publicAPI.Trades(XXBTZEUR, 1495777604391411290)
+	result, err := publicAPI.Trades(map[string]string{
+		"pair":  XXBTZEUR,
+		"since": "1495777604391411290",
+	})
 
 	if err != nil {
 		t.Errorf("Trades should not return an error, got %s", err)
@@ -115,9 +147,11 @@ func TestQueryTrades(t *testing.T) {
 }
 
 func TestQueryDepth(t *testing.T) {
-	pair := "XETHZEUR"
 	count := 10
-	result, err := publicAPI.Depth(pair, count)
+	result, err := publicAPI.Depth(map[string]string{
+		"pair":  XETHZEUR,
+		"count": strconv.Itoa(count),
+	})
 	if err != nil {
 		t.Errorf("Depth should not return an error, got %s", err)
 	}
