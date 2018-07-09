@@ -2,6 +2,7 @@ package krakenapi
 
 import (
 	"encoding/json"
+	"math/big"
 	"reflect"
 	"strconv"
 )
@@ -320,6 +321,14 @@ type DepositAddressesResponse []struct {
 	Address  string `json:"address"`
 	Expiretm string `json:"expiretm"`
 	New      bool   `json:"new,omitempty"`
+}
+
+// WithdrawInfoResponse is the response type showing withdrawal information for a selected withdrawal method.
+type WithdrawInfoResponse struct {
+	Method string    `json:"method"`
+	Limit  big.Float `json:"limit"`
+	Amount big.Float `json:"amount"`
+	Fee    big.Float `json:"fee"`
 }
 
 // GetPairTickerInfo is a helper method that returns given `pair`'s `PairTickerInfo`

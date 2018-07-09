@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"math/big"
 	"mime"
 	"net/http"
 	"net/url"
@@ -363,6 +364,19 @@ func (api *KrakenApi) DepositAddresses(asset string, method string) (*DepositAdd
 		return nil, err
 	}
 	return resp.(*DepositAddressesResponse), nil
+}
+
+// WithdrawInfo returns withdrawal information
+func (api *KrakenApi) WithdrawInfo(asset string, key string, amount *big.Float) (*WithdrawInfoResponse, error) {
+	resp, err := api.queryPrivate("WithdrawInfo", url.Values{
+		"asset":  {asset},
+		"key":    {key},
+		"amount": {amount.String()},
+	}, &WithdrawInfoResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*WithdrawInfoResponse), nil
 }
 
 // Query sends a query to Kraken api for given method and parameters
