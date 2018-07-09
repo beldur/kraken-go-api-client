@@ -315,6 +315,13 @@ type TickerResponse struct {
 	XZECZUSD PairTickerInfo
 }
 
+// DepositAddressesResponse is the response type of a DepositAddresses query to the Kraken API.
+type DepositAddressesResponse []struct {
+	Address  string `json:"address"`
+	Expiretm string `json:"expiretm"`
+	New      bool   `json:"new,omitempty"`
+}
+
 // GetPairTickerInfo is a helper method that returns given `pair`'s `PairTickerInfo`
 func (v *TickerResponse) GetPairTickerInfo(pair string) PairTickerInfo {
 	r := reflect.ValueOf(v)

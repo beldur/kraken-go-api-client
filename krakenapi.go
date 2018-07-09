@@ -353,6 +353,18 @@ func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, 
 	return resp.(*AddOrderResponse), nil
 }
 
+// DepositAddresses returns deposit addresses
+func (api *KrakenApi) DepositAddresses(asset string, method string) (*DepositAddressesResponse, error) {
+	resp, err := api.queryPrivate("DepositAddresses", url.Values{
+		"asset":  {asset},
+		"method": {method},
+	}, &DepositAddressesResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*DepositAddressesResponse), nil
+}
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
