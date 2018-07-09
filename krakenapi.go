@@ -366,6 +366,19 @@ func (api *KrakenApi) DepositAddresses(asset string, method string) (*DepositAdd
 	return resp.(*DepositAddressesResponse), nil
 }
 
+// Withdraw executes a withdrawal, returning a reference ID
+func (api *KrakenApi) Withdraw(asset string, key string, amount *big.Float) (*WithdrawResponse, error) {
+	resp, err := api.queryPrivate("Withdraw", url.Values{
+		"asset":  {asset},
+		"key":    {key},
+		"amount": {amount.String()},
+	}, &WithdrawResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*WithdrawResponse), nil
+}
+
 // WithdrawInfo returns withdrawal information
 func (api *KrakenApi) WithdrawInfo(asset string, key string, amount *big.Float) (*WithdrawInfoResponse, error) {
 	resp, err := api.queryPrivate("WithdrawInfo", url.Values{

@@ -323,6 +323,11 @@ type DepositAddressesResponse []struct {
 	New      bool   `json:"new,omitempty"`
 }
 
+// WithdrawResponse is the response type of a Withdraw query to the Kraken API.
+type WithdrawResponse struct {
+	RefID int `json:"refid"`
+}
+
 // WithdrawInfoResponse is the response type showing withdrawal information for a selected withdrawal method.
 type WithdrawInfoResponse struct {
 	Method string    `json:"method"`
