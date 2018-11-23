@@ -344,6 +344,9 @@ func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, 
 	if value, ok := args["trading_agreement"]; ok {
 		params.Add("trading_agreement", value)
 	}
+	if value, ok := args["userref"]; ok {
+		params.Add("userref", value)
+	}
 	resp, err := api.queryPrivate("AddOrder", params, &AddOrderResponse{})
 
 	if err != nil {
