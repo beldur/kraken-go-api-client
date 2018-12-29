@@ -7,6 +7,11 @@ import (
 )
 
 const (
+	ADACAD   = "ADACAD"
+	ADAETH   = "ADAETH"
+	ADAEUR   = "ADAEUR"
+	ADAUSD   = "ADAUSD"
+	ADAXBT   = "ADAXBT"
 	BCHEUR   = "BCHEUR"
 	BCHUSD   = "BCHUSD"
 	BCHXBT   = "BCHXBT"
@@ -21,11 +26,16 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
+	QTUMCAD  = "QTUMCAD"
+	QTUMETH  = "QTUMETH"
+	QTUMEUR  = "QTUMEUR"
+	QTUMUSD  = "QTUMUSD"
+	QTUMXBT  = "QTUMXBT"
 	USDTZUSD = "USDTZUSD"
 	XETCXETH = "XETCXETH"
 	XETCXXBT = "XETCXXBT"
 	XETCZEUR = "XETCZEUR"
-	XETCXUSD = "XETCXUSD"
+	XETCZUSD = "XETCZUSD"
 	XETHXXBT = "XETHXXBT"
 	XETHZCAD = "XETHZCAD"
 	XETHZEUR = "XETHZEUR"
@@ -43,6 +53,11 @@ const (
 	XREPXXBT = "XREPXXBT"
 	XREPZEUR = "XREPZEUR"
 	XREPZUSD = "XREPZUSD"
+	XTZCAD   = "XTZCAD"
+	XTZETH   = "XTZETH"
+	XTZEUR   = "XTZEUR"
+	XTZUSD   = "XTZUSD"
+	XTZXBT   = "XTZXBT"
 	XXBTZCAD = "XXBTZCAD"
 	XXBTZEUR = "XXBTZEUR"
 	XXBTZGBP = "XXBTZGBP"
@@ -88,6 +103,11 @@ type TimeResponse struct {
 
 // AssetPairsResponse includes asset pair informations
 type AssetPairsResponse struct {
+	ADACAD   AssetPairInfo
+	ADAETH   AssetPairInfo
+	ADAEUR   AssetPairInfo
+	ADAUSD   AssetPairInfo
+	ADAXBT   AssetPairInfo
 	BCHEUR   AssetPairInfo
 	BCHUSD   AssetPairInfo
 	BCHXBT   AssetPairInfo
@@ -102,11 +122,16 @@ type AssetPairsResponse struct {
 	GNOEUR   AssetPairInfo
 	GNOUSD   AssetPairInfo
 	GNOXBT   AssetPairInfo
+	QTUMCAD  AssetPairInfo
+	QTUMETH  AssetPairInfo
+	QTUMEUR  AssetPairInfo
+	QTUMUSD  AssetPairInfo
+	QTUMXBT  AssetPairInfo
 	USDTZUSD AssetPairInfo
 	XETCXETH AssetPairInfo
 	XETCXXBT AssetPairInfo
 	XETCZEUR AssetPairInfo
-	XETCXUSD AssetPairInfo
+	XETCZUSD AssetPairInfo
 	XETHXXBT AssetPairInfo
 	XETHZCAD AssetPairInfo
 	XETHZEUR AssetPairInfo
@@ -124,6 +149,11 @@ type AssetPairsResponse struct {
 	XREPXXBT AssetPairInfo
 	XREPZEUR AssetPairInfo
 	XREPZUSD AssetPairInfo
+	XTZCAD   AssetPairInfo
+	XTZETH   AssetPairInfo
+	XTZEUR   AssetPairInfo
+	XTZUSD   AssetPairInfo
+	XTZXBT   AssetPairInfo
 	XXBTZCAD AssetPairInfo
 	XXBTZEUR AssetPairInfo
 	XXBTZGBP AssetPairInfo
@@ -184,11 +214,13 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
+	ADA  AssetInfo
 	BCH  AssetInfo
 	DASH AssetInfo
 	EOS  AssetInfo
 	GNO  AssetInfo
 	KFEE AssetInfo
+	QTUM AssetInfo
 	USDT AssetInfo
 	XDAO AssetInfo
 	XETC AssetInfo
@@ -203,6 +235,7 @@ type AssetsResponse struct {
 	XXLM AssetInfo
 	XXMR AssetInfo
 	XXRP AssetInfo
+	XTZ  AssetInfo
 	XXVN AssetInfo
 	XZEC AssetInfo
 	ZCAD AssetInfo
@@ -226,10 +259,12 @@ type AssetInfo struct {
 }
 
 type BalanceResponse struct {
+	ADA  float64 `json:"ADA,string"`
 	BCH  float64 `json:"BCH,string"`
 	DASH float64 `json:"DASH,string"`
 	EOS  float64 `json:"EOS,string"`
 	GNO  float64 `json:"GNO,string"`
+	QTUM float64 `json:"QTUM,string"`
 	KFEE float64 `json:"KFEE,string"`
 	USDT float64 `json:"USDT,string"`
 	XDAO float64 `json:"XDAO,string"`
@@ -245,6 +280,7 @@ type BalanceResponse struct {
 	XXLM float64 `json:"XXLM,string"`
 	XXMR float64 `json:"XXMR,string"`
 	XXRP float64 `json:"XXRP,string"`
+	XTZ  float64 `json:"XTZ,string"`
 	XXVN float64 `json:"XXVN,string"`
 	XZEC float64 `json:"XZEC,string"`
 	ZCAD float64 `json:"ZCAD,string"`
@@ -257,6 +293,11 @@ type BalanceResponse struct {
 
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
+	ADACAD   PairTickerInfo
+	ADAETH   PairTickerInfo
+	ADAEUR   PairTickerInfo
+	ADAUSD   PairTickerInfo
+	ADAXBT   PairTickerInfo
 	BCHEUR   PairTickerInfo
 	BCHUSD   PairTickerInfo
 	BCHXBT   PairTickerInfo
@@ -271,11 +312,16 @@ type TickerResponse struct {
 	GNOEUR   PairTickerInfo
 	GNOUSD   PairTickerInfo
 	GNOXBT   PairTickerInfo
+	QTUMCAD  PairTickerInfo
+	QTUMETH  PairTickerInfo
+	QTUMEUR  PairTickerInfo
+	QTUMUSD  PairTickerInfo
+	QTUMXBT  PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XETCXETH PairTickerInfo
 	XETCXXBT PairTickerInfo
 	XETCZEUR PairTickerInfo
-	XETCXUSD PairTickerInfo
+	XETCZUSD PairTickerInfo
 	XETHXXBT PairTickerInfo
 	XETHZCAD PairTickerInfo
 	XETHZEUR PairTickerInfo
@@ -310,6 +356,11 @@ type TickerResponse struct {
 	XXRPZEUR PairTickerInfo
 	XXRPZJPY PairTickerInfo
 	XXRPZUSD PairTickerInfo
+	XTZCAD   PairTickerInfo
+	XTZETH   PairTickerInfo
+	XTZEUR   PairTickerInfo
+	XTZUSD   PairTickerInfo
+	XTZXBT   PairTickerInfo
 	XZECXXBT PairTickerInfo
 	XZECZEUR PairTickerInfo
 	XZECZUSD PairTickerInfo
