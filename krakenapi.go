@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"math/big"
 	"mime"
 	"net/http"
 	"net/url"
@@ -381,6 +382,44 @@ func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, 
 	}
 
 	return resp.(*AddOrderResponse), nil
+}
+
+// DepositAddresses returns deposit addresses
+func (api *KrakenApi) DepositAddresses(asset string, method string) (*DepositAddressesResponse, error) {
+	resp, err := api.queryPrivate("DepositAddresses", url.Values{
+		"asset":  {asset},
+		"method": {method},
+	}, &DepositAddressesResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*DepositAddressesResponse), nil
+}
+
+// Withdraw executes a withdrawal, returning a reference ID
+func (api *KrakenApi) Withdraw(asset string, key string, amount *big.Float) (*WithdrawResponse, error) {
+	resp, err := api.queryPrivate("Withdraw", url.Values{
+		"asset":  {asset},
+		"key":    {key},
+		"amount": {amount.String()},
+	}, &WithdrawResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*WithdrawResponse), nil
+}
+
+// WithdrawInfo returns withdrawal information
+func (api *KrakenApi) WithdrawInfo(asset string, key string, amount *big.Float) (*WithdrawInfoResponse, error) {
+	resp, err := api.queryPrivate("WithdrawInfo", url.Values{
+		"asset":  {asset},
+		"key":    {key},
+		"amount": {amount.String()},
+	}, &WithdrawInfoResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return resp.(*WithdrawInfoResponse), nil
 }
 
 // Query sends a query to Kraken api for given method and parameters
