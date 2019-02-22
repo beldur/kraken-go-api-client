@@ -292,6 +292,18 @@ type BalanceResponse struct {
 	ZUSD float64 `json:"ZUSD,string"`
 }
 
+type TradeBalanceResponse struct {
+	EquivalentBalance         float64 `json:"eb,string"`
+	TradeBalance              float64 `json:"tb,string"`
+	MarginOP                  float64 `json:"m,string"`
+	UnrealizedNetProfitLossOP float64 `json:"n,string"`
+	CostBasisOP               float64 `json:"c,string"`
+	CurrentValuationOP        float64 `json:"v,string"`
+	Equity                    float64 `json:"e,string"`
+	FreeMargin                float64 `json:"mf,string"`
+	MarginLevel               float64 `json:"ml,string"`
+}
+
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
 	ADACAD   PairTickerInfo

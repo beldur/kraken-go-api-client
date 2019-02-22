@@ -232,6 +232,23 @@ func (api *KrakenApi) Balance() (*BalanceResponse, error) {
 	return resp.(*BalanceResponse), nil
 }
 
+// TradeBalance returns trade balance info
+func (api *KrakenApi) TradeBalance(args map[string]string) (*TradeBalanceResponse, error) {
+	params := url.Values{}
+	if value, ok := args["aclass"]; ok {
+		params.Add("aclass", value)
+	}
+	if value, ok := args["asset"]; ok {
+		params.Add("asset", value)
+	}
+	resp, err := api.queryPrivate("TradeBalance", url.Values{}, &TradeBalanceResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*TradeBalanceResponse), nil
+}
+
 // OpenOrders returns all open orders
 func (api *KrakenApi) OpenOrders(args map[string]string) (*OpenOrdersResponse, error) {
 	params := url.Values{}
