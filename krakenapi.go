@@ -241,7 +241,7 @@ func (api *KrakenApi) TradeBalance(args map[string]string) (*TradeBalanceRespons
 	if value, ok := args["asset"]; ok {
 		params.Add("asset", value)
 	}
-	resp, err := api.queryPrivate("TradeBalance", url.Values{}, &TradeBalanceResponse{})
+	resp, err := api.queryPrivate("TradeBalance", params, &TradeBalanceResponse{})
 	if err != nil {
 		return nil, err
 	}
