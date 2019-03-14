@@ -401,6 +401,35 @@ func (api *KrakenApi) AddOrder(pair string, direction string, orderType string, 
 	return resp.(*AddOrderResponse), nil
 }
 
+// Ledgers returns ledgers informations
+func (api *KrakenApi) Ledgers(args map[string]string) (*LedgersResponse, error) {
+	params := url.Values{}
+	if value, ok := args["aclass"]; ok {
+		params.Add("aclass", value)
+	}
+	if value, ok := args["asset"]; ok {
+		params.Add("asset", value)
+	}
+	if value, ok := args["type"]; ok {
+		params.Add("type", value)
+	}
+	if value, ok := args["start"]; ok {
+		params.Add("start", value)
+	}
+	if value, ok := args["end"]; ok {
+		params.Add("end", value)
+	}
+	if value, ok := args["ofs"]; ok {
+		params.Add("ofs", value)
+	}
+	resp, err := api.queryPrivate("Ledgers", params, &LedgersResponse{})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*LedgersResponse), nil
+}
+
 // DepositAddresses returns deposit addresses
 func (api *KrakenApi) DepositAddresses(asset string, method string) (*DepositAddressesResponse, error) {
 	resp, err := api.queryPrivate("DepositAddresses", url.Values{
