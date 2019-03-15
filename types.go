@@ -470,6 +470,22 @@ type TradeInfo struct {
 	Miscellaneous string
 }
 
+// LedgersResponse represents an associative array of ledgers infos
+type LedgersResponse struct {
+	Ledger map[string]LedgerInfo `json:"ledger"`
+}
+
+type LedgerInfo struct {
+	RefID   string    `json:"refid"`
+	Time    float64   `json:"time"`
+	Type    string    `json:"type"`
+	Aclass  string    `json:"aclass"`
+	Asset   string    `json:"asset"`
+	Amount  big.Float `json:"amount"`
+	Fee     big.Float `json:"fee"`
+	Balance big.Float `json:"balance"`
+}
+
 // OrderTypes for AddOrder
 const (
 	OTMarket              = "market"
