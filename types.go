@@ -535,6 +535,7 @@ type Order struct {
 	OrderFlags     string           `json:"oflags"`
 	CloseTime      float64          `json:"closetm"`
 	Reason         string           `json:"reason"`
+	TradesID       []string         `json:"trades"`
 }
 
 // ClosedOrdersResponse represents a list of closed orders, indexed by id
