@@ -529,7 +529,7 @@ type Order struct {
 	Cost           float64          `json:"cost,string"`
 	Fee            float64          `json:"fee,string"`
 	Price          float64          `json:"price,string"`
-	StopPrice      float64          `json:"stopprice.string"`
+	StopPrice      float64          `json:"stopprice,string"`
 	LimitPrice     float64          `json:"limitprice,string"`
 	Misc           string           `json:"misc"`
 	OrderFlags     string           `json:"oflags"`
