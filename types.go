@@ -304,6 +304,95 @@ type TradeBalanceResponse struct {
 	MarginLevel               float64 `json:"ml,string"`
 }
 
+type Fees struct {
+	ADACAD   FeeInfo
+	ADAETH   FeeInfo
+	ADAEUR   FeeInfo
+	ADAUSD   FeeInfo
+	ADAXBT   FeeInfo
+	BCHEUR   FeeInfo
+	BCHUSD   FeeInfo
+	BCHXBT   FeeInfo
+	DASHEUR  FeeInfo
+	DASHUSD  FeeInfo
+	DASHXBT  FeeInfo
+	EOSETH   FeeInfo
+	EOSEUR   FeeInfo
+	EOSUSD   FeeInfo
+	EOSXBT   FeeInfo
+	GNOETH   FeeInfo
+	GNOEUR   FeeInfo
+	GNOUSD   FeeInfo
+	GNOXBT   FeeInfo
+	QTUMCAD  FeeInfo
+	QTUMETH  FeeInfo
+	QTUMEUR  FeeInfo
+	QTUMUSD  FeeInfo
+	QTUMXBT  FeeInfo
+	USDTZUSD FeeInfo
+	XETCXETH FeeInfo
+	XETCXXBT FeeInfo
+	XETCZEUR FeeInfo
+	XETCZUSD FeeInfo
+	XETHXXBT FeeInfo
+	XETHZCAD FeeInfo
+	XETHZEUR FeeInfo
+	XETHZGBP FeeInfo
+	XETHZJPY FeeInfo
+	XETHZUSD FeeInfo
+	XICNXETH FeeInfo
+	XICNXXBT FeeInfo
+	XLTCXXBT FeeInfo
+	XLTCZEUR FeeInfo
+	XLTCZUSD FeeInfo
+	XMLNXETH FeeInfo
+	XMLNXXBT FeeInfo
+	XREPXETH FeeInfo
+	XREPXXBT FeeInfo
+	XREPZEUR FeeInfo
+	XREPZUSD FeeInfo
+	XTZCAD   FeeInfo
+	XTZETH   FeeInfo
+	XTZEUR   FeeInfo
+	XTZUSD   FeeInfo
+	XTZXBT   FeeInfo
+	XXBTZCAD FeeInfo
+	XXBTZEUR FeeInfo
+	XXBTZGBP FeeInfo
+	XXBTZJPY FeeInfo
+	XXBTZUSD FeeInfo
+	XXDGXXBT FeeInfo
+	XXLMXXBT FeeInfo
+	XXLMZEUR FeeInfo
+	XXLMZUSD FeeInfo
+	XXMRXXBT FeeInfo
+	XXMRZEUR FeeInfo
+	XXMRZUSD FeeInfo
+	XXRPXXBT FeeInfo
+	XXRPZCAD FeeInfo
+	XXRPZEUR FeeInfo
+	XXRPZJPY FeeInfo
+	XXRPZUSD FeeInfo
+	XZECXXBT FeeInfo
+	XZECZEUR FeeInfo
+	XZECZUSD FeeInfo
+}
+
+type FeeInfo struct {
+	Fee        float64 `json:"fee,string"`
+	MinFee     float64 `json:"minfee,string"`
+	MaxFee     float64 `json:"maxfee,string"`
+	NextFee    float64 `json:"nextfee,string"`
+	NextVolume float64 `json:"nextvolume,string"`
+	TierVolume float64 `json:"tiervolume,string"`
+}
+type TradeVolumeResponse struct {
+	Volume    float64 `json:"volume,string"`
+	Currency  string  `json:"currency"`
+	Fees      Fees    `json:"fees"`
+	FeesMaker Fees    `json:"fees_maker"`
+}
+
 // TickerResponse includes the requested ticker pairs
 type TickerResponse struct {
 	ADACAD   PairTickerInfo
