@@ -155,7 +155,7 @@ func TestKrakenApi_TradeVolume(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name: "test A",
+			name: "test_response",
 			fields: fields{
 				key:    "my_key",
 				secret: "my_secret",
@@ -191,6 +191,21 @@ func TestKrakenApi_TradeVolume(t *testing.T) {
 				},
 			},
 			wantErr: false,
+		},
+		{
+			name: "test_error",
+			fields: fields{
+				key:    "my_key",
+				secret: "my_secret",
+				client: http.DefaultClient,
+			},
+			args: args{
+				"pair":     XXBTZEUR,
+				"fee-info": "",
+			},
+			response: `{"error":["my_error"]}`,
+			want:     nil,
+			wantErr:  true,
 		},
 	}
 	for _, tt := range tests {
