@@ -304,6 +304,7 @@ type TradeBalanceResponse struct {
 	MarginLevel               float64 `json:"ml,string"`
 }
 
+// Fees includes fees information for different currencies
 type Fees struct {
 	ADACAD   FeeInfo
 	ADAETH   FeeInfo
@@ -378,6 +379,7 @@ type Fees struct {
 	XZECZUSD FeeInfo
 }
 
+// FeeInfo represents a fee information
 type FeeInfo struct {
 	Fee        float64 `json:"fee,string"`
 	MinFee     float64 `json:"minfee,string"`
@@ -386,6 +388,8 @@ type FeeInfo struct {
 	NextVolume float64 `json:"nextvolume,string"`
 	TierVolume float64 `json:"tiervolume,string"`
 }
+
+// TradeVolumeResponse represents the response for trade volume
 type TradeVolumeResponse struct {
 	Volume    float64 `json:"volume,string"`
 	Currency  string  `json:"currency"`
