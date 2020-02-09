@@ -61,6 +61,7 @@ var privateMethods = []string{
 	"Withdraw",
 	"WithdrawStatus",
 	"WithdrawCancel",
+	"GetWebSocketsToken",
 }
 
 // These represent the minimum order sizes for the respective coins
