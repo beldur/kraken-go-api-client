@@ -41,6 +41,7 @@ var publicMethods = []string{
 
 // List of valid private methods
 var privateMethods = []string{
+	"AddExport",
 	"AddOrder",
 	"Balance",
 	"CancelOrder",
@@ -48,6 +49,7 @@ var privateMethods = []string{
 	"DepositAddresses",
 	"DepositMethods",
 	"DepositStatus",
+	"ExportStatus",
 	"GetWebSocketsToken",
 	"Ledgers",
 	"OpenOrders",
@@ -55,9 +57,12 @@ var privateMethods = []string{
 	"QueryLedgers",
 	"QueryOrders",
 	"QueryTrades",
+	"RemoveExport",
+	"RetrieveExport",
 	"TradeBalance",
 	"TradesHistory",
 	"TradeVolume",
+	"WalletTransfer",
 	"Withdraw",
 	"WithdrawCancel",
 	"WithdrawInfo",
