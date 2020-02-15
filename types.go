@@ -2,11 +2,14 @@ package krakenapi
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/big"
 	"reflect"
 	"strconv"
+	"time"
 )
 
+// trade pairs constants
 const (
 	ADACAD   = "ADACAD"
 	ADAETH   = "ADAETH"
@@ -81,6 +84,7 @@ const (
 	XZECZUSD = "XZECZUSD"
 )
 
+// actions constants
 const (
 	BUY    = "b"
 	SELL   = "s"
@@ -259,6 +263,7 @@ type AssetInfo struct {
 	DisplayDecimals int `json:"display_decimals"`
 }
 
+// BalanceResponse represents the account's balances (list of currencies)
 type BalanceResponse struct {
 	ADA  float64 `json:"ADA,string"`
 	BCH  float64 `json:"BCH,string"`
@@ -292,6 +297,7 @@ type BalanceResponse struct {
 	ZUSD float64 `json:"ZUSD,string"`
 }
 
+// TradeBalanceResponse struct used as the response for the TradeBalance method
 type TradeBalanceResponse struct {
 	EquivalentBalance         float64 `json:"eb,string"`
 	TradeBalance              float64 `json:"tb,string"`
@@ -528,15 +534,16 @@ type TradesResponse struct {
 	Trades []TradeInfo
 }
 
-// TradesHistoryResponse represents a list executed trade
+// TradesHistoryResponse represents a list of executed trade
 type TradesHistoryResponse struct {
 	Trades map[string]TradeHistoryInfo `json:"trades"`
 	Count  int                         `json:"count"`
 }
 
+// TradeHistoryInfo represents a transaction
 type TradeHistoryInfo struct {
-	TransactionId string  `json:"ordertxid"`
-	PostxId       string  `json:"postxid"`
+	TransactionID string  `json:"ordertxid"`
+	PostxID       string  `json:"postxid"`
 	AssetPair     string  `json:"pair"`
 	Time          float64 `json:"time"`
 	Type          string  `json:"type"`
@@ -568,6 +575,7 @@ type LedgersResponse struct {
 	Ledger map[string]LedgerInfo `json:"ledger"`
 }
 
+// LedgerInfo Represents the ledger informations
 type LedgerInfo struct {
 	RefID   string    `json:"refid"`
 	Time    float64   `json:"time"`
@@ -645,26 +653,26 @@ type OrderBookItem struct {
 
 // UnmarshalJSON takes a json array from kraken and converts it into an OrderBookItem.
 func (o *OrderBookItem) UnmarshalJSON(data []byte) error {
-	tmp_struct := struct {
+	tmpStruct := struct {
 		price  string
 		amount string
 		ts     int64
 	}{}
-	tmp_arr := []interface{}{&tmp_struct.price, &tmp_struct.amount, &tmp_struct.ts}
-	err := json.Unmarshal(data, &tmp_arr)
+	tmpArray := []interface{}{&tmpStruct.price, &tmpStruct.amount, &tmpStruct.ts}
+	err := json.Unmarshal(data, &tmpArray)
 	if err != nil {
 		return err
 	}
 
-	o.Price, err = strconv.ParseFloat(tmp_struct.price, 64)
+	o.Price, err = strconv.ParseFloat(tmpStruct.price, 64)
 	if err != nil {
 		return err
 	}
-	o.Amount, err = strconv.ParseFloat(tmp_struct.amount, 64)
+	o.Amount, err = strconv.ParseFloat(tmpStruct.amount, 64)
 	if err != nil {
 		return err
 	}
-	o.Ts = tmp_struct.ts
+	o.Ts = tmpStruct.ts
 	return nil
 }
 
@@ -677,19 +685,61 @@ type OrderBook struct {
 	Bids []OrderBookItem
 }
 
+// OpenOrdersResponse response when opening an order
 type OpenOrdersResponse struct {
 	Open  map[string]Order `json:"open"`
 	Count int              `json:"count"`
 }
 
+// AddOrderResponse response when adding an order
 type AddOrderResponse struct {
 	Description    OrderDescription `json:"descr"`
 	TransactionIds []string         `json:"txid"`
 }
 
+// CancelOrderResponse response when cancelling and order
 type CancelOrderResponse struct {
 	Count   int  `json:"count"`
 	Pending bool `json:"pending"`
 }
 
+// QueryOrdersResponse response when checking all orders
 type QueryOrdersResponse map[string]Order
+
+// NewOHLC constructor for OHLC
+func NewOHLC(input []interface{}) (*OHLC, error) {
+	if len(input) != 8 {
+		return nil, fmt.Errorf("the length is not 8 but %d", len(input))
+	}
+
+	tmp := new(OHLC)
+	tmp.Time = time.Unix(int64(input[0].(float64)), 0)
+	tmp.Open, _ = strconv.ParseFloat(input[1].(string), 64)
+	tmp.High, _ = strconv.ParseFloat(input[2].(string), 64)
+	tmp.Low, _ = strconv.ParseFloat(input[3].(string), 64)
+	tmp.Close, _ = strconv.ParseFloat(input[4].(string), 64)
+	tmp.Vwap, _ = strconv.ParseFloat(input[5].(string), 64)
+	tmp.Volume, _ = strconv.ParseFloat(input[6].(string), 64)
+	tmp.Count = int(input[7].(float64))
+
+	return tmp, nil
+}
+
+// OHLC represents the "Open-high-low-close chart"
+type OHLC struct {
+	Time   time.Time `json:"time"`
+	Open   float64   `json:"open"`
+	High   float64   `json:"high"`
+	Low    float64   `json:"low"`
+	Close  float64   `json:"close"`
+	Vwap   float64   `json:"vwap"`
+	Volume float64   `json:"volume"`
+	Count  int       `json:"count"`
+}
+
+// OHLCResponse represents the OHLC's response
+type OHLCResponse struct {
+	Pair string  `json:"pair"`
+	OHLC []*OHLC `json:"OHLC"`
+	Last float64 `json:"last"`
+}

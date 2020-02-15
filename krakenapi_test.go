@@ -64,6 +64,17 @@ func TestTicker(t *testing.T) {
 	}
 }
 
+func TestOHLC(t *testing.T) {
+	resp, err := publicAPI.OHLC(XXBTZEUR)
+	if err != nil {
+		t.Errorf("OHLC() should not return an error, got %s", err)
+	}
+
+	if resp.Pair == "" {
+		t.Errorf("OHLC() should return valid Pair, got %+v", resp.Pair)
+	}
+}
+
 func TestQueryTime(t *testing.T) {
 	result, err := publicAPI.Query("Time", map[string]string{})
 	resultKind := reflect.TypeOf(result).Kind()
