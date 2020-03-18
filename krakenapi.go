@@ -91,6 +91,9 @@ const (
 	MinimumUSDT = 5.0
 )
 
+// KrakenApi represents a Kraken API Client connection
+type KrakenApi = KrakenAPI
+
 // KrakenAPI represents a Kraken API Client connection
 type KrakenAPI struct {
 	key    string
@@ -106,6 +109,12 @@ func New(key, secret string) *KrakenAPI {
 		client: http.DefaultClient,
 	}
 	return &krakenAPI
+}
+
+// NewWithClient creates a new Kraken API client with custom http client
+func NewWithClient(key, secret string, httpClient *http.Client) *KrakenAPI {
+	kraken := New(key, secret)
+	return kraken.WithClient(httpClient)
 }
 
 // WithClient adds an HTTP client into the KrakenAPI

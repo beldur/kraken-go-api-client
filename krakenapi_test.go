@@ -9,6 +9,18 @@ import (
 
 var publicAPI = New("", "")
 
+func TestKrakenApi(t *testing.T) {
+	var kk interface{} = KrakenApi{
+		key:    "key",
+		secret: "secret",
+	}
+
+	name := reflect.TypeOf(kk).Name()
+	if name != "KrakenAPI" {
+		t.Errorf("Unexpected struct, got %s want %s", name, "KrakenAPI")
+	}
+}
+
 func TestCreateSignature(t *testing.T) {
 	expectedSig := "Uog0MyIKZmXZ4/VFOh0g1u2U+A0ohuK8oCh0HFUiHLE2Csm23CuPCDaPquh/hpnAg/pSQLeXyBELpJejgOftCQ=="
 	urlPath := "/0/private/"
