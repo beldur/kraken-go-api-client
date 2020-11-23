@@ -36,6 +36,7 @@ const (
 	QTUMUSD  = "QTUMUSD"
 	QTUMXBT  = "QTUMXBT"
 	USDTZUSD = "USDTZUSD"
+	XBTUSDT  = "XBTUSDT"
 	XETCXETH = "XETCXETH"
 	XETCXXBT = "XETCXXBT"
 	XETCZEUR = "XETCZEUR"
@@ -295,6 +296,7 @@ type BalanceResponse struct {
 	ZJPY float64 `json:"ZJPY,string"`
 	ZKRW float64 `json:"ZKRW,string"`
 	ZUSD float64 `json:"ZUSD,string"`
+	TRX  float64 `json:"TRX,string"`
 }
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
@@ -430,6 +432,7 @@ type TickerResponse struct {
 	QTUMUSD  PairTickerInfo
 	QTUMXBT  PairTickerInfo
 	USDTZUSD PairTickerInfo
+	XBTUSDT  PairTickerInfo
 	XETCXETH PairTickerInfo
 	XETCXXBT PairTickerInfo
 	XETCZEUR PairTickerInfo
