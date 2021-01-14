@@ -72,6 +72,7 @@ var privateMethods = []string{
 // These represent the minimum order sizes for the respective coins
 // Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 const (
+	MinimumAAVE = 0.1
 	MinimumREP  = 0.3
 	MinimumXBT  = 0.002
 	MinimumBCH  = 0.002
