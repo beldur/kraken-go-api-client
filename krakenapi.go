@@ -341,6 +341,31 @@ func (api *KrakenAPI) OpenOrders(args map[string]string) (*OpenOrdersResponse, e
 	return resp.(*OpenOrdersResponse), nil
 }
 
+// OpenPositions returns all open orders
+func (api *KrakenAPI) OpenPositions(args map[string]string) (*OpenPositionsResponse, error) {
+	params := url.Values{}
+	if value, ok := args["txid"]; ok {
+		params.Add("txid", value)
+	}
+	if value, ok := args["docalcs"]; ok {
+		params.Add("docalcs", value)
+	}
+	if value, ok := args["consolidation"]; ok {
+		params.Add("consolidation", value)
+	}
+	if value, ok := args["market"]; ok {
+		params.Add("market", value)
+	}
+
+	resp, err := api.queryPrivate("OpenPositions", params, &OpenPositionsResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*OpenPositionsResponse), nil
+}
+
 // ClosedOrders returns all closed orders
 func (api *KrakenAPI) ClosedOrders(args map[string]string) (*ClosedOrdersResponse, error) {
 	params := url.Values{}

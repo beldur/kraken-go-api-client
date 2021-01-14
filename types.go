@@ -647,6 +647,25 @@ type Order struct {
 	Reason         string           `json:"reason"`
 }
 
+// Position - Represents a single position
+type Position struct {
+	TransactionID      string  `json:"-"`
+	OrderTransactionID string  `json:"ordertxid"`
+	Pair               string  `json:"pair"`
+	TradeTime          float64 `json:"time"`
+	PositionType       string  `json:"type"`
+	OrderType          string  `json:"ordertype"`
+	Cost               float64 `json:"cost"`
+	Fee                float64 `json:"fee"`
+	Volume             string  `json:"vol"`
+	VolumeClosed       string  `json:"vol_closed,string"`
+	Margin             float64 `json:"margin"`
+	Value              float64 `json:"value"`
+	Net                float64 `json:"net"`
+	Misc               string  `json:"misc"`
+	OrderFlags         string  `json:"oflags"`
+}
+
 // ClosedOrdersResponse represents a list of closed orders, indexed by id
 type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
@@ -699,6 +718,9 @@ type OpenOrdersResponse struct {
 	Open  map[string]Order `json:"open"`
 	Count int              `json:"count"`
 }
+
+// OpenPositionsResponse response when querying the open positions https://www.kraken.com/features/api#get-open-positions
+type OpenPositionsResponse map[string]Position
 
 // AddOrderResponse response when adding an order
 type AddOrderResponse struct {
