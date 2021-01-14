@@ -658,7 +658,7 @@ type Position struct {
 	Cost               float64 `json:"cost"`
 	Fee                float64 `json:"fee"`
 	Volume             string  `json:"vol"`
-	VolumeClosed       string  `json:"vol_closed,string"`
+	VolumeClosed       string  `json:"vol_closed"`
 	Margin             float64 `json:"margin"`
 	Value              float64 `json:"value"`
 	Net                float64 `json:"net"`
