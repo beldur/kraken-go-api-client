@@ -166,9 +166,14 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 // OHLC returns a OHLCResponse struct based on the given pair
-func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
+func (api *KrakenAPI) OHLC(pair string, interval string) (*OHLCResponse, error) {
 	urlValue := url.Values{}
 	urlValue.Add("pair", pair)
+	if interval == "" {
+		urlValue.Add("interval", "1")
+	} else {
+		urlValue.Add("interval", interval)
+	}
 
 	// Returns a map[string]interface{} as an interface{}
 	interfaceResponse, err := api.queryPublic("OHLC", urlValue, nil)
