@@ -76,6 +76,17 @@ func TestTicker(t *testing.T) {
 	}
 }
 
+func TestOHLCWithInterval(t *testing.T) {
+	resp, err := publicAPI.OHLCWithInterval(XXBTZEUR, "15")
+	if err != nil {
+		t.Errorf("OHLCWithInterval() should not return an error, got %s", err)
+	}
+
+	if resp.Pair == "" {
+		t.Errorf("OHLCWithInterval() should return valid Pair, got %+v", resp.Pair)
+	}
+}
+
 func TestOHLC(t *testing.T) {
 	resp, err := publicAPI.OHLC(XXBTZEUR)
 	if err != nil {

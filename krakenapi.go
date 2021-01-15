@@ -33,6 +33,7 @@ var publicMethods = []string{
 	"AssetPairs",
 	"Depth",
 	"OHLC",
+	"OHLCWithInterval",
 	"Spread",
 	"Ticker",
 	"Time",
@@ -165,10 +166,22 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 	return resp.(*TickerResponse), nil
 }
 
-// OHLC returns a OHLCResponse struct based on the given pair
-func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
+// OHLCWithInterval returns a OHLCResponse struct based on the given pair
+func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCResponse, error) {
 	urlValue := url.Values{}
 	urlValue.Add("pair", pair)
+
+	if interval == "" {
+		urlValue.Add("interval", "1")
+	} else {
+		switch interval {
+		// supported values https://www.kraken.com/features/api#get-ohlc-data
+		case "1", "5", "15", "30", "60", "240", "1440", "10080", "21600":
+			urlValue.Add("interval", interval)
+		default:
+			return nil, fmt.Errorf("Unsupported value for Interval: " + interval)
+		}
+	}
 
 	// Returns a map[string]interface{} as an interface{}
 	interfaceResponse, err := api.queryPublic("OHLC", urlValue, nil)
@@ -195,6 +208,14 @@ func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
 	ret.Last = mapResponse["last"].(float64)
 
 	return ret, nil
+}
+
+// OHLC returns a OHLCResponse struct based on the given pair
+// Backward compatible with previous version
+func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
+	ret, err := api.OHLCWithInterval(pair, "1")
+
+	return ret, err
 }
 
 // TradesHistory returns the Trades History within a specified time frame (start to end).
