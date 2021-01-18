@@ -23,6 +23,7 @@ const (
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
+	DOTUSD   = "DOTUSD"
 	EOSETH   = "EOSETH"
 	EOSEUR   = "EOSEUR"
 	EOSUSD   = "EOSUSD"
@@ -123,6 +124,7 @@ type AssetPairsResponse struct {
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
+	DOTUSD   AssetPairInfo
 	EOSETH   AssetPairInfo
 	EOSEUR   AssetPairInfo
 	EOSUSD   AssetPairInfo
@@ -228,6 +230,7 @@ type AssetsResponse struct {
 	AAVE AssetInfo
 	BCH  AssetInfo
 	DASH AssetInfo
+	DOT  AssetInfo
 	EOS  AssetInfo
 	GNO  AssetInfo
 	KFEE AssetInfo
@@ -276,6 +279,7 @@ type BalanceResponse struct {
 	AAVE float64 `json:"AAVE,string"`
 	BCH  float64 `json:"BCH,string"`
 	DASH float64 `json:"DASH,string"`
+	DOT  float64 `json:"DOT,string"`
 	EOS  float64 `json:"EOS,string"`
 	GNO  float64 `json:"GNO,string"`
 	QTUM float64 `json:"QTUM,string"`
@@ -334,6 +338,7 @@ type Fees struct {
 	DASHEUR  FeeInfo
 	DASHUSD  FeeInfo
 	DASHXBT  FeeInfo
+	DOTUSD   FeeInfo
 	EOSETH   FeeInfo
 	EOSEUR   FeeInfo
 	EOSUSD   FeeInfo
@@ -429,6 +434,7 @@ type TickerResponse struct {
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
+	DOTUSD   PairTickerInfo
 	EOSETH   PairTickerInfo
 	EOSEUR   PairTickerInfo
 	EOSUSD   PairTickerInfo
