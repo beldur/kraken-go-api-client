@@ -420,11 +420,11 @@ func (api *KrakenAPI) QueryOrders(txids string, args map[string]string) (*QueryO
 }
 
 // AddOrder adds new order
-func (api *KrakenAPI) AddOrder(pair string, direction string, orderType string, volume string, args map[string]string) (*AddOrderResponse, error) {
+func (api *KrakenAPI) AddOrder(pair string, direction Direction, orderType OrderType, volume string, args map[string]string) (*AddOrderResponse, error) {
 	params := url.Values{
 		"pair":      {pair},
-		"type":      {direction},
-		"ordertype": {orderType},
+		"type":      {string(direction)},
+		"ordertype": {string(orderType)},
 		"volume":    {volume},
 	}
 
