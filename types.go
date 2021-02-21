@@ -218,6 +218,8 @@ type AssetPairInfo struct {
 	MarginCall int `json:"margin_call"`
 	// Stop-out/Liquidation margin level
 	MarginStop int `json:"margin_stop"`
+	// Order minimum
+	OrderMin float64 `json:"ordermin"`
 }
 
 // AssetsResponse includes asset informations
