@@ -451,9 +451,9 @@ type TickerResponse struct {
 	QTUMEUR  PairTickerInfo
 	QTUMUSD  PairTickerInfo
 	QTUMXBT  PairTickerInfo
-	REPV2    PairTickerInfo
-	TRX      PairTickerInfo
-	UNI      PairTickerInfo
+	REPV2USD PairTickerInfo
+	TRXUSD   PairTickerInfo
+	UNIUSD   PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XBTUSDT  PairTickerInfo
 	XETCXETH PairTickerInfo
