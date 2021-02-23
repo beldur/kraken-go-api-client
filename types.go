@@ -36,6 +36,9 @@ const (
 	QTUMEUR  = "QTUMEUR"
 	QTUMUSD  = "QTUMUSD"
 	QTUMXBT  = "QTUMXBT"
+	REPV2USD = "REPV2USD"
+	TRXUSD   = "TRXUSD"
+	UNIUSD   = "UNIUSD"
 	USDTZUSD = "USDTZUSD"
 	XBTUSDT  = "XBTUSDT"
 	XETCXETH = "XETCXETH"
@@ -135,6 +138,9 @@ type AssetPairsResponse struct {
 	QTUMEUR  AssetPairInfo
 	QTUMUSD  AssetPairInfo
 	QTUMXBT  AssetPairInfo
+	REPV2USD AssetPairInfo
+	TRXUSD   AssetPairInfo
+	UNIUSD   AssetPairInfo
 	USDTZUSD AssetPairInfo
 	XETCXETH AssetPairInfo
 	XETCXXBT AssetPairInfo
@@ -222,37 +228,40 @@ type AssetPairInfo struct {
 
 // AssetsResponse includes asset informations
 type AssetsResponse struct {
-	ADA  AssetInfo
-	AAVE AssetInfo
-	BCH  AssetInfo
-	DASH AssetInfo
-	EOS  AssetInfo
-	GNO  AssetInfo
-	KFEE AssetInfo
-	QTUM AssetInfo
-	USDT AssetInfo
-	XDAO AssetInfo
-	XETC AssetInfo
-	XETH AssetInfo
-	XICN AssetInfo
-	XLTC AssetInfo
-	XMLN AssetInfo
-	XNMC AssetInfo
-	XREP AssetInfo
-	XXBT AssetInfo
-	XXDG AssetInfo
-	XXLM AssetInfo
-	XXMR AssetInfo
-	XXRP AssetInfo
-	XTZ  AssetInfo
-	XXVN AssetInfo
-	XZEC AssetInfo
-	ZCAD AssetInfo
-	ZEUR AssetInfo
-	ZGBP AssetInfo
-	ZJPY AssetInfo
-	ZKRW AssetInfo
-	ZUSD AssetInfo
+	ADA   AssetInfo
+	AAVE  AssetInfo
+	BCH   AssetInfo
+	DASH  AssetInfo
+	EOS   AssetInfo
+	GNO   AssetInfo
+	KFEE  AssetInfo
+	QTUM  AssetInfo
+	REPV2 AssetInfo
+	TRX   AssetInfo
+	UNI   AssetInfo
+	USDT  AssetInfo
+	XDAO  AssetInfo
+	XETC  AssetInfo
+	XETH  AssetInfo
+	XICN  AssetInfo
+	XLTC  AssetInfo
+	XMLN  AssetInfo
+	XNMC  AssetInfo
+	XREP  AssetInfo
+	XXBT  AssetInfo
+	XXDG  AssetInfo
+	XXLM  AssetInfo
+	XXMR  AssetInfo
+	XXRP  AssetInfo
+	XTZ   AssetInfo
+	XXVN  AssetInfo
+	XZEC  AssetInfo
+	ZCAD  AssetInfo
+	ZEUR  AssetInfo
+	ZGBP  AssetInfo
+	ZJPY  AssetInfo
+	ZKRW  AssetInfo
+	ZUSD  AssetInfo
 }
 
 // AssetInfo represents an asset information
@@ -269,38 +278,40 @@ type AssetInfo struct {
 
 // BalanceResponse represents the account's balances (list of currencies)
 type BalanceResponse struct {
-	ADA  float64 `json:"ADA,string"`
-	AAVE float64 `json:"AAVE,string"`
-	BCH  float64 `json:"BCH,string"`
-	DASH float64 `json:"DASH,string"`
-	EOS  float64 `json:"EOS,string"`
-	GNO  float64 `json:"GNO,string"`
-	QTUM float64 `json:"QTUM,string"`
-	KFEE float64 `json:"KFEE,string"`
-	USDT float64 `json:"USDT,string"`
-	XDAO float64 `json:"XDAO,string"`
-	XETC float64 `json:"XETC,string"`
-	XETH float64 `json:"XETH,string"`
-	XICN float64 `json:"XICN,string"`
-	XLTC float64 `json:"XLTC,string"`
-	XMLN float64 `json:"XMLN,string"`
-	XNMC float64 `json:"XNMC,string"`
-	XREP float64 `json:"XREP,string"`
-	XXBT float64 `json:"XXBT,string"`
-	XXDG float64 `json:"XXDG,string"`
-	XXLM float64 `json:"XXLM,string"`
-	XXMR float64 `json:"XXMR,string"`
-	XXRP float64 `json:"XXRP,string"`
-	XTZ  float64 `json:"XTZ,string"`
-	XXVN float64 `json:"XXVN,string"`
-	XZEC float64 `json:"XZEC,string"`
-	ZCAD float64 `json:"ZCAD,string"`
-	ZEUR float64 `json:"ZEUR,string"`
-	ZGBP float64 `json:"ZGBP,string"`
-	ZJPY float64 `json:"ZJPY,string"`
-	ZKRW float64 `json:"ZKRW,string"`
-	ZUSD float64 `json:"ZUSD,string"`
-	TRX  float64 `json:"TRX,string"`
+	ADA   float64 `json:"ADA,string"`
+	AAVE  float64 `json:"AAVE,string"`
+	BCH   float64 `json:"BCH,string"`
+	DASH  float64 `json:"DASH,string"`
+	EOS   float64 `json:"EOS,string"`
+	GNO   float64 `json:"GNO,string"`
+	QTUM  float64 `json:"QTUM,string"`
+	KFEE  float64 `json:"KFEE,string"`
+	REPV2 float64 `json:"REPV2,string"`
+	TRX   float64 `json:"TRX,string"`
+	UNI   float64 `json:"UNI,string"`
+	USDT  float64 `json:"USDT,string"`
+	XDAO  float64 `json:"XDAO,string"`
+	XETC  float64 `json:"XETC,string"`
+	XETH  float64 `json:"XETH,string"`
+	XICN  float64 `json:"XICN,string"`
+	XLTC  float64 `json:"XLTC,string"`
+	XMLN  float64 `json:"XMLN,string"`
+	XNMC  float64 `json:"XNMC,string"`
+	XREP  float64 `json:"XREP,string"`
+	XXBT  float64 `json:"XXBT,string"`
+	XXDG  float64 `json:"XXDG,string"`
+	XXLM  float64 `json:"XXLM,string"`
+	XXMR  float64 `json:"XXMR,string"`
+	XXRP  float64 `json:"XXRP,string"`
+	XTZ   float64 `json:"XTZ,string"`
+	XXVN  float64 `json:"XXVN,string"`
+	XZEC  float64 `json:"XZEC,string"`
+	ZCAD  float64 `json:"ZCAD,string"`
+	ZEUR  float64 `json:"ZEUR,string"`
+	ZGBP  float64 `json:"ZGBP,string"`
+	ZJPY  float64 `json:"ZJPY,string"`
+	ZKRW  float64 `json:"ZKRW,string"`
+	ZUSD  float64 `json:"ZUSD,string"`
 }
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
@@ -343,6 +354,9 @@ type Fees struct {
 	QTUMEUR  FeeInfo
 	QTUMUSD  FeeInfo
 	QTUMXBT  FeeInfo
+	REPV2    FeeInfo
+	TRX      FeeInfo
+	UNI      FeeInfo
 	USDTZUSD FeeInfo
 	XETCXETH FeeInfo
 	XETCXXBT FeeInfo
@@ -437,6 +451,9 @@ type TickerResponse struct {
 	QTUMEUR  PairTickerInfo
 	QTUMUSD  PairTickerInfo
 	QTUMXBT  PairTickerInfo
+	REPV2    PairTickerInfo
+	TRX      PairTickerInfo
+	UNI      PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XBTUSDT  PairTickerInfo
 	XETCXETH PairTickerInfo
