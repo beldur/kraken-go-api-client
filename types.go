@@ -354,9 +354,9 @@ type Fees struct {
 	QTUMEUR  FeeInfo
 	QTUMUSD  FeeInfo
 	QTUMXBT  FeeInfo
-	REPV2    FeeInfo
-	TRX      FeeInfo
-	UNI      FeeInfo
+	REPV2USD FeeInfo
+	TRXUSD   FeeInfo
+	UNIUSD   FeeInfo
 	USDTZUSD FeeInfo
 	XETCXETH FeeInfo
 	XETCXXBT FeeInfo
