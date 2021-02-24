@@ -211,7 +211,6 @@ func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCRespo
 }
 
 // OHLC returns a OHLCResponse struct based on the given pair
-// Backward compatible with previous version
 func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
 	ret, err := api.OHLCWithInterval(pair, "1")
 
