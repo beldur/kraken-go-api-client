@@ -73,6 +73,8 @@ var privateMethods = []string{
 // These represent the minimum order sizes for the respective coins
 // Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 const (
+	MinimumAAVE = 0.1
+	MinimumDOT  = 1
 	MinimumREP  = 0.3
 	MinimumXBT  = 0.002
 	MinimumBCH  = 0.002
@@ -358,6 +360,31 @@ func (api *KrakenAPI) OpenOrders(args map[string]string) (*OpenOrdersResponse, e
 	}
 
 	return resp.(*OpenOrdersResponse), nil
+}
+
+// OpenPositions returns all open orders
+func (api *KrakenAPI) OpenPositions(args map[string]string) (*OpenPositionsResponse, error) {
+	params := url.Values{}
+	if value, ok := args["txid"]; ok {
+		params.Add("txid", value)
+	}
+	if value, ok := args["docalcs"]; ok {
+		params.Add("docalcs", value)
+	}
+	if value, ok := args["consolidation"]; ok {
+		params.Add("consolidation", value)
+	}
+	if value, ok := args["market"]; ok {
+		params.Add("market", value)
+	}
+
+	resp, err := api.queryPrivate("OpenPositions", params, &OpenPositionsResponse{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.(*OpenPositionsResponse), nil
 }
 
 // ClosedOrders returns all closed orders

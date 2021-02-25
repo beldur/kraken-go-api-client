@@ -23,6 +23,7 @@ const (
 	DASHEUR  = "DASHEUR"
 	DASHUSD  = "DASHUSD"
 	DASHXBT  = "DASHXBT"
+	DOTUSD   = "DOTUSD"
 	EOSETH   = "EOSETH"
 	EOSEUR   = "EOSEUR"
 	EOSUSD   = "EOSUSD"
@@ -36,6 +37,7 @@ const (
 	QTUMEUR  = "QTUMEUR"
 	QTUMUSD  = "QTUMUSD"
 	QTUMXBT  = "QTUMXBT"
+	TBTCUSD  = "TBTCUSD"
 	USDTZUSD = "USDTZUSD"
 	XBTUSDT  = "XBTUSDT"
 	XETCXETH = "XETCXETH"
@@ -122,6 +124,7 @@ type AssetPairsResponse struct {
 	DASHEUR  AssetPairInfo
 	DASHUSD  AssetPairInfo
 	DASHXBT  AssetPairInfo
+	DOTUSD   AssetPairInfo
 	EOSETH   AssetPairInfo
 	EOSEUR   AssetPairInfo
 	EOSUSD   AssetPairInfo
@@ -135,6 +138,7 @@ type AssetPairsResponse struct {
 	QTUMEUR  AssetPairInfo
 	QTUMUSD  AssetPairInfo
 	QTUMXBT  AssetPairInfo
+	TBTCUSD  AssetPairInfo
 	USDTZUSD AssetPairInfo
 	XETCXETH AssetPairInfo
 	XETCXXBT AssetPairInfo
@@ -228,10 +232,12 @@ type AssetsResponse struct {
 	AAVE AssetInfo
 	BCH  AssetInfo
 	DASH AssetInfo
+	DOT  AssetInfo
 	EOS  AssetInfo
 	GNO  AssetInfo
 	KFEE AssetInfo
 	QTUM AssetInfo
+	TBTC AssetInfo
 	USDT AssetInfo
 	XDAO AssetInfo
 	XETC AssetInfo
@@ -275,10 +281,12 @@ type BalanceResponse struct {
 	AAVE float64 `json:"AAVE,string"`
 	BCH  float64 `json:"BCH,string"`
 	DASH float64 `json:"DASH,string"`
+	DOT  float64 `json:"DOT,string"`
 	EOS  float64 `json:"EOS,string"`
 	GNO  float64 `json:"GNO,string"`
 	QTUM float64 `json:"QTUM,string"`
 	KFEE float64 `json:"KFEE,string"`
+	TBTC float64 `json:"TBTC,string"`
 	USDT float64 `json:"USDT,string"`
 	XDAO float64 `json:"XDAO,string"`
 	XETC float64 `json:"XETC,string"`
@@ -332,6 +340,7 @@ type Fees struct {
 	DASHEUR  FeeInfo
 	DASHUSD  FeeInfo
 	DASHXBT  FeeInfo
+	DOTUSD   FeeInfo
 	EOSETH   FeeInfo
 	EOSEUR   FeeInfo
 	EOSUSD   FeeInfo
@@ -345,6 +354,7 @@ type Fees struct {
 	QTUMEUR  FeeInfo
 	QTUMUSD  FeeInfo
 	QTUMXBT  FeeInfo
+	TBTCUSD  FeeInfo
 	USDTZUSD FeeInfo
 	XETCXETH FeeInfo
 	XETCXXBT FeeInfo
@@ -426,6 +436,7 @@ type TickerResponse struct {
 	DASHEUR  PairTickerInfo
 	DASHUSD  PairTickerInfo
 	DASHXBT  PairTickerInfo
+	DOTUSD   PairTickerInfo
 	EOSETH   PairTickerInfo
 	EOSEUR   PairTickerInfo
 	EOSUSD   PairTickerInfo
@@ -439,6 +450,7 @@ type TickerResponse struct {
 	QTUMEUR  PairTickerInfo
 	QTUMUSD  PairTickerInfo
 	QTUMXBT  PairTickerInfo
+	TBTCUSD  PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XBTUSDT  PairTickerInfo
 	XETCXETH PairTickerInfo
@@ -649,6 +661,26 @@ type Order struct {
 	Reason         string           `json:"reason"`
 }
 
+// Position - Represents a single position
+type Position struct {
+	TransactionID      string  `json:"-"`
+	OrderTransactionID string  `json:"ordertxid"`
+	Pair               string  `json:"pair"`
+	TradeTime          float64 `json:"time"`
+	PositionType       string  `json:"type"`
+	OrderType          string  `json:"ordertype"`
+	Cost               float64 `json:"cost,string"`
+	Fee                float64 `json:"fee,string"`
+	Volume             float64 `json:"vol,string"`
+	VolumeClosed       float64 `json:"vol_closed,string"`
+	Margin             float64 `json:"margin,string"`
+	Value              float64 `json:"value,string"`
+	Net                float64 `json:"net,string"`
+	Misc               string  `json:"misc"`
+	OrderFlags         string  `json:"oflags"`
+	Status             string  `json:"posstatus"`
+}
+
 // ClosedOrdersResponse represents a list of closed orders, indexed by id
 type ClosedOrdersResponse struct {
 	Closed map[string]Order `json:"closed"`
@@ -701,6 +733,9 @@ type OpenOrdersResponse struct {
 	Open  map[string]Order `json:"open"`
 	Count int              `json:"count"`
 }
+
+// OpenPositionsResponse response when querying the open positions https://www.kraken.com/features/api#get-open-positions
+type OpenPositionsResponse map[string]Position
 
 // AddOrderResponse response when adding an order
 type AddOrderResponse struct {
