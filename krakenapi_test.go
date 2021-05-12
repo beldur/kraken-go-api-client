@@ -2,6 +2,7 @@ package krakenapi
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"net/url"
 	"reflect"
 	"testing"
@@ -169,4 +170,78 @@ func TestQueryDepth(t *testing.T) {
 	if len(result.Bids) > count {
 		t.Errorf("Bids length must be less than count , got %d > %d", len(result.Bids), count)
 	}
+}
+
+func TestUnmarshalClosedOrder(t *testing.T) {
+	body := []byte(`
+	{
+		"error": [],
+		"result": {
+			"closed": {
+				"AAAAAA-BBBBB-CCCCCC": {
+					"refid": null,
+					"userref": 1000000000,
+					"status": "closed",
+					"reason": null,
+					"opentm": 1000000000.5194,
+					"closetm": 1000000000.5288,
+					"starttm": 0,
+					"expiretm": 1200000000,
+					"descr": {
+						"pair": "ETHEUR",
+						"type": "sell",
+						"ordertype": "market",
+						"price": "0",
+						"price2": "0",
+						"leverage": "none",
+						"order": "sell 0.02000000 ETHEUR @ market",
+						"close": ""
+					},
+					"vol": "0.02000000",
+					"vol_exec": "0.02000000",
+					"cost": "2.95",
+					"fee": "0",
+					"price": "147.55",
+					"stopprice": "0.00000",
+					"limitprice": "0.00000",
+					"misc": "",
+					"oflags": "fciq",
+					"trades": [
+						"DDDDDD-EEEEE-FFFFFF"
+					]
+				}
+			},
+			"count": 1
+		}
+	}
+	`)
+
+	var jsonData KrakenResponse
+	if err := json.Unmarshal(body, &jsonData); err != nil {
+		t.Error(err)
+	}
+
+	result, err := json.Marshal(jsonData.Result)
+	if err != nil {
+		t.Error(err)
+	}
+
+	var closedOrders ClosedOrdersResponse
+	if err := json.Unmarshal(result, &closedOrders); err != nil {
+		t.Error(err)
+	}
+
+	if closedOrders.Count != 1 {
+		t.Error("count should be 1")
+	}
+
+	order, ok := closedOrders.Closed["AAAAAA-BBBBB-CCCCCC"]
+	if !ok {
+		t.Error("order id AAAAAA-BBBBB-CCCCCC should exist")
+	}
+
+	if order.TradesID[0] != "DDDDDD-EEEEE-FFFFFF" {
+		t.Error("trades[0] id should be DDDDDD-EEEEE-FFFFFF")
+	}
+
 }
