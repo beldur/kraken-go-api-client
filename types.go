@@ -31,6 +31,8 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
+	LINKUSD  = "LINKUSD"
+	LINKXBT  = "LINKXBT"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -133,6 +135,8 @@ type AssetPairsResponse struct {
 	GNOEUR   AssetPairInfo
 	GNOUSD   AssetPairInfo
 	GNOXBT   AssetPairInfo
+	LINKUSD  AssetPairInfo
+	LINKXBT  AssetPairInfo
 	QTUMCAD  AssetPairInfo
 	QTUMETH  AssetPairInfo
 	QTUMEUR  AssetPairInfo
@@ -224,6 +228,8 @@ type AssetPairInfo struct {
 	MarginCall int `json:"margin_call"`
 	// Stop-out/Liquidation margin level
 	MarginStop int `json:"margin_stop"`
+	// Order minimum
+	OrderMin float64 `json:"ordermin"`
 }
 
 // AssetsResponse includes asset informations
@@ -235,6 +241,7 @@ type AssetsResponse struct {
 	EOS   AssetInfo
 	GNO   AssetInfo
 	KFEE  AssetInfo
+	LINK  AssetInfo
 	QTUM  AssetInfo
 	REPV2 AssetInfo
 	TRX   AssetInfo
@@ -287,7 +294,7 @@ type BalanceResponse struct {
 	QTUM  float64 `json:"QTUM,string"`
 	KFEE  float64 `json:"KFEE,string"`
 	REPV2 float64 `json:"REPV2,string"`
-	TRX   float64 `json:"TRX,string"`
+	LINK  float64 `json:"LINK,string"`
 	UNI   float64 `json:"UNI,string"`
 	USDT  float64 `json:"USDT,string"`
 	XDAO  float64 `json:"XDAO,string"`
@@ -312,6 +319,7 @@ type BalanceResponse struct {
 	ZJPY  float64 `json:"ZJPY,string"`
 	ZKRW  float64 `json:"ZKRW,string"`
 	ZUSD  float64 `json:"ZUSD,string"`
+	TRX   float64 `json:"TRX,string"`
 }
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
@@ -349,6 +357,8 @@ type Fees struct {
 	GNOEUR   FeeInfo
 	GNOUSD   FeeInfo
 	GNOXBT   FeeInfo
+	LINKUSD  FeeInfo
+	LINKXBT  FeeInfo
 	QTUMCAD  FeeInfo
 	QTUMETH  FeeInfo
 	QTUMEUR  FeeInfo
@@ -446,6 +456,8 @@ type TickerResponse struct {
 	GNOEUR   PairTickerInfo
 	GNOUSD   PairTickerInfo
 	GNOXBT   PairTickerInfo
+	LINKUSD  PairTickerInfo
+	LINKXBT  PairTickerInfo
 	QTUMCAD  PairTickerInfo
 	QTUMETH  PairTickerInfo
 	QTUMEUR  PairTickerInfo
