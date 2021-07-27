@@ -118,6 +118,13 @@ func NewWithClient(key, secret string, httpClient *http.Client) *KrakenAPI {
 	return kraken.WithClient(httpClient)
 }
 
+// UpdateKeys updates API Keys so that key rotation is easy
+func (api *KrakenAPI) UpdateKeys(key, secret string) *KrakenAPI {
+	api.key = key
+	api.secret = secret
+	return api
+}
+
 // WithClient adds an HTTP client into the KrakenAPI
 func (api *KrakenAPI) WithClient(httpClient *http.Client) *KrakenAPI {
 	api.client = httpClient
