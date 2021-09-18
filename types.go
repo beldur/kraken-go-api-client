@@ -31,8 +31,8 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
-	LINKUSD   = "LINKUSD"
-	LINKXBT   = "LINKXBT"
+	LINKUSD  = "LINKUSD"
+	LINKXBT  = "LINKXBT"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -276,39 +276,39 @@ type AssetInfo struct {
 
 // BalanceResponse represents the account's balances (list of currencies)
 type BalanceResponse struct {
-	ADA  float64 `json:"ADA,string"`
-	AAVE float64 `json:"AAVE,string"`
-	BCH  float64 `json:"BCH,string"`
-	DASH float64 `json:"DASH,string"`
-	EOS  float64 `json:"EOS,string"`
-	GNO  float64 `json:"GNO,string"`
-	QTUM float64 `json:"QTUM,string"`
-	KFEE float64 `json:"KFEE,string"`
-	LINK float64 `json:"LINK,string"`
-	USDT float64 `json:"USDT,string"`
-	XDAO float64 `json:"XDAO,string"`
-	XETC float64 `json:"XETC,string"`
-	XETH float64 `json:"XETH,string"`
-	XICN float64 `json:"XICN,string"`
-	XLTC float64 `json:"XLTC,string"`
-	XMLN float64 `json:"XMLN,string"`
-	XNMC float64 `json:"XNMC,string"`
-	XREP float64 `json:"XREP,string"`
-	XXBT float64 `json:"XXBT,string"`
-	XXDG float64 `json:"XXDG,string"`
-	XXLM float64 `json:"XXLM,string"`
-	XXMR float64 `json:"XXMR,string"`
-	XXRP float64 `json:"XXRP,string"`
-	XTZ  float64 `json:"XTZ,string"`
-	XXVN float64 `json:"XXVN,string"`
-	XZEC float64 `json:"XZEC,string"`
-	ZCAD float64 `json:"ZCAD,string"`
-	ZEUR float64 `json:"ZEUR,string"`
-	ZGBP float64 `json:"ZGBP,string"`
-	ZJPY float64 `json:"ZJPY,string"`
-	ZKRW float64 `json:"ZKRW,string"`
-	ZUSD float64 `json:"ZUSD,string"`
-	TRX  float64 `json:"TRX,string"`
+	ADA  string `json:"ADA"`
+	AAVE string `json:"AAVE"`
+	BCH  string `json:"BCH"`
+	DASH string `json:"DASH"`
+	EOS  string `json:"EOS"`
+	GNO  string `json:"GNO"`
+	QTUM string `json:"QTUM"`
+	KFEE string `json:"KFEE"`
+	LINK string `json:"LINK"`
+	USDT string `json:"USDT"`
+	XDAO string `json:"XDAO"`
+	XETC string `json:"XETC"`
+	XETH string `json:"XETH"`
+	XICN string `json:"XICN"`
+	XLTC string `json:"XLTC"`
+	XMLN string `json:"XMLN"`
+	XNMC string `json:"XNMC"`
+	XREP string `json:"XREP"`
+	XXBT string `json:"XXBT"`
+	XXDG string `json:"XXDG"`
+	XXLM string `json:"XXLM"`
+	XXMR string `json:"XXMR"`
+	XXRP string `json:"XXRP"`
+	XTZ  string `json:"XTZ"`
+	XXVN string `json:"XXVN"`
+	XZEC string `json:"XZEC"`
+	ZCAD string `json:"ZCAD"`
+	ZEUR string `json:"ZEUR"`
+	ZGBP string `json:"ZGBP"`
+	ZJPY string `json:"ZJPY"`
+	ZKRW string `json:"ZKRW"`
+	ZUSD string `json:"ZUSD"`
+	TRX  string `json:"TRX"`
 }
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
