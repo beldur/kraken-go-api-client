@@ -17,6 +17,8 @@ const (
 	ADAUSD   = "ADAUSD"
 	ADAXBT   = "ADAXBT"
 	AAVEUSD  = "AAVEUSD"
+	ATOMUSD  = "ATOMUSD"
+	ATOMXBT  = "ATOMXBT"
 	BCHEUR   = "BCHEUR"
 	BCHUSD   = "BCHUSD"
 	BCHXBT   = "BCHXBT"
@@ -121,6 +123,8 @@ type AssetPairsResponse struct {
 	ADAEUR   AssetPairInfo
 	ADAUSD   AssetPairInfo
 	ADAXBT   AssetPairInfo
+	ATOMUSD  AssetPairInfo
+	ATOMXBT  AssetPairInfo
 	BCHEUR   AssetPairInfo
 	BCHUSD   AssetPairInfo
 	BCHXBT   AssetPairInfo
@@ -236,6 +240,7 @@ type AssetPairInfo struct {
 type AssetsResponse struct {
 	ADA   AssetInfo
 	AAVE  AssetInfo
+	ATOM  AssetInfo
 	BCH   AssetInfo
 	DASH  AssetInfo
 	EOS   AssetInfo
@@ -287,6 +292,7 @@ type AssetInfo struct {
 type BalanceResponse struct {
 	ADA   float64 `json:"ADA,string"`
 	AAVE  float64 `json:"AAVE,string"`
+	ATOM  float64 `json:"ATOM,string"`
 	BCH   float64 `json:"BCH,string"`
 	DASH  float64 `json:"DASH,string"`
 	EOS   float64 `json:"EOS,string"`
@@ -343,6 +349,8 @@ type Fees struct {
 	ADAUSD   FeeInfo
 	ADAXBT   FeeInfo
 	AAVEUSD  FeeInfo
+	ATOMUSD  FeeInfo
+	ATOMXBT  FeeInfo
 	BCHEUR   FeeInfo
 	BCHUSD   FeeInfo
 	BCHXBT   FeeInfo
@@ -441,6 +449,8 @@ type TickerResponse struct {
 	ADAEUR   PairTickerInfo
 	ADAUSD   PairTickerInfo
 	ADAXBT   PairTickerInfo
+	ATOMUSD  PairTickerInfo
+	ATOMXBT  PairTickerInfo
 	AAVEUSD  PairTickerInfo
 	BCHEUR   PairTickerInfo
 	BCHUSD   PairTickerInfo
