@@ -31,8 +31,8 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
-	LINKUSD   = "LINKUSD"
-	LINKXBT   = "LINKXBT"
+	LINKUSD  = "LINKUSD"
+	LINKXBT  = "LINKXBT"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -86,6 +86,7 @@ const (
 	XZECXXBT = "XZECXXBT"
 	XZECZEUR = "XZECZEUR"
 	XZECZUSD = "XZECZUSD"
+	ZEURZUSD = "ZEURZUSD"
 )
 
 // actions constants
@@ -186,6 +187,7 @@ type AssetPairsResponse struct {
 	XZECXXBT AssetPairInfo
 	XZECZEUR AssetPairInfo
 	XZECZUSD AssetPairInfo
+	ZEURZUSD AssetPairInfo
 }
 
 // AssetPairInfo represents asset pair information
@@ -223,7 +225,7 @@ type AssetPairInfo struct {
 	// Stop-out/Liquidation margin level
 	MarginStop int `json:"margin_stop"`
 	// Order minimum
-	OrderMin float64 `json:"ordermin"`
+	OrderMin string `json:"ordermin"`
 }
 
 // AssetsResponse includes asset informations
@@ -400,6 +402,7 @@ type Fees struct {
 	XZECXXBT FeeInfo
 	XZECZEUR FeeInfo
 	XZECZUSD FeeInfo
+	ZEURZUSD FeeInfo
 }
 
 // FeeInfo represents a fee information
@@ -497,6 +500,7 @@ type TickerResponse struct {
 	XZECXXBT PairTickerInfo
 	XZECZEUR PairTickerInfo
 	XZECZUSD PairTickerInfo
+	ZEURZUSD PairTickerInfo
 }
 
 // DepositAddressesResponse is the response type of a DepositAddresses query to the Kraken API.
