@@ -19,7 +19,6 @@ const (
 	AAVEUSD  = "AAVEUSD"
 	ATOMUSD  = "ATOMUSD"
 	ATOMXBT  = "ATOMXBT"
-	ADAXBT   = "ADAXBT"
 	BCHEUR   = "BCHEUR"
 	BCHUSD   = "BCHUSD"
 	BCHXBT   = "BCHXBT"
@@ -126,7 +125,6 @@ type AssetPairsResponse struct {
 	ADAXBT   AssetPairInfo
 	ATOMUSD  AssetPairInfo
 	ATOMXBT  AssetPairInfo
-	ADAXBT   AssetPairInfo
 	BCHEUR   AssetPairInfo
 	BCHUSD   AssetPairInfo
 	BCHXBT   AssetPairInfo
@@ -353,7 +351,6 @@ type Fees struct {
 	AAVEUSD  FeeInfo
 	ATOMUSD  FeeInfo
 	ATOMXBT  FeeInfo
-	ADAXBT   FeeInfo
 	BCHEUR   FeeInfo
 	BCHUSD   FeeInfo
 	BCHXBT   FeeInfo
@@ -454,7 +451,6 @@ type TickerResponse struct {
 	ADAXBT   PairTickerInfo
 	ATOMUSD  PairTickerInfo
 	ATOMXBT  PairTickerInfo
-	ADAXBT   PairTickerInfo
 	AAVEUSD  PairTickerInfo
 	BCHEUR   PairTickerInfo
 	BCHUSD   PairTickerInfo
