@@ -610,7 +610,7 @@ func (api *KrakenAPI) queryPrivate(method string, values url.Values, typ interfa
 func (api *KrakenAPI) doRequest(reqURL string, values url.Values, headers map[string]string, typ interface{}) (interface{}, error) {
 
 	// Create request
-	req, err := http.NewRequest("POST", reqURL, strings.NewReader(values.Encode()))
+	req, err := http.NewRequest(http.MethodGet, reqURL, strings.NewReader(values.Encode()))
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! #1 (%s)", err.Error())
 	}
