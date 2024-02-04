@@ -9,6 +9,18 @@ import (
 
 var publicAPI = New("", "")
 
+func TestKrakenApi(t *testing.T) {
+	var kk interface{} = KrakenApi{
+		key:    "key",
+		secret: "secret",
+	}
+
+	name := reflect.TypeOf(kk).Name()
+	if name != "KrakenAPI" {
+		t.Errorf("Unexpected struct, got %s want %s", name, "KrakenAPI")
+	}
+}
+
 func TestCreateSignature(t *testing.T) {
 	expectedSig := "Uog0MyIKZmXZ4/VFOh0g1u2U+A0ohuK8oCh0HFUiHLE2Csm23CuPCDaPquh/hpnAg/pSQLeXyBELpJejgOftCQ=="
 	urlPath := "/0/private/"
@@ -61,6 +73,28 @@ func TestTicker(t *testing.T) {
 
 	if resp.XXBTZEUR.OpeningPrice == 0 {
 		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp.XXBTZEUR.OpeningPrice)
+	}
+}
+
+func TestOHLCWithInterval(t *testing.T) {
+	resp, err := publicAPI.OHLCWithInterval(XXBTZEUR, "15")
+	if err != nil {
+		t.Errorf("OHLCWithInterval() should not return an error, got %s", err)
+	}
+
+	if resp.Pair == "" {
+		t.Errorf("OHLCWithInterval() should return valid Pair, got %+v", resp.Pair)
+	}
+}
+
+func TestOHLC(t *testing.T) {
+	resp, err := publicAPI.OHLC(XXBTZEUR)
+	if err != nil {
+		t.Errorf("OHLC() should not return an error, got %s", err)
+	}
+
+	if resp.Pair == "" {
+		t.Errorf("OHLC() should return valid Pair, got %+v", resp.Pair)
 	}
 }
 
