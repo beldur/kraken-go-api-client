@@ -40,10 +40,9 @@ func main() {
 ```
 
 ## Contributors
-
-- Piega
-- Glavic
-- MarinX
-- bjorand
-- [khezen](https://github.com/khezen)
+ - Piega
+ - Glavic
+ - MarinX
+ - bjorand
+ - [khezen](https://github.com/khezen)
  
