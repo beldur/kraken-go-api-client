@@ -620,7 +620,7 @@ func (api *KrakenAPI) doGet(reqURL string, values url.Values, headers map[string
 		return nil, fmt.Errorf("Could not execute request! #1 (%s)", err.Error())
 	}
 
-	return api.doAPIRequest(req, headers, err, typ)
+	return api.doAPIRequest(req, headers, typ)
 }
 
 // doPost executes a HTTP Request to the Kraken API and returns the result
@@ -632,10 +632,10 @@ func (api *KrakenAPI) doPost(reqURL string, values url.Values, headers map[strin
 		return nil, fmt.Errorf("Could not execute request! #1 (%s)", err.Error())
 	}
 
-	return api.doAPIRequest(req, headers, err, typ)
+	return api.doAPIRequest(req, headers, typ)
 }
 
-func (api *KrakenAPI) doAPIRequest(req *http.Request, headers map[string]string, err error, typ interface{}) (interface{}, error) {
+func (api *KrakenAPI) doAPIRequest(req *http.Request, headers map[string]string, typ interface{}) (interface{}, error) {
 	req.Header.Add("User-Agent", APIUserAgent)
 	for key, value := range headers {
 		req.Header.Add(key, value)
