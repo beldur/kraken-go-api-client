@@ -91,6 +91,9 @@ const (
 	XZECXXBT = "XZECXXBT"
 	XZECZEUR = "XZECZEUR"
 	XZECZUSD = "XZECZUSD"
+	DOTUSD   = "DOTUSD"
+	UNIETH   = "UNIETH"
+	SOLETH   = "SOLETH"
 )
 
 // actions constants
@@ -196,6 +199,9 @@ type AssetPairsResponse struct {
 	XZECXXBT AssetPairInfo
 	XZECZEUR AssetPairInfo
 	XZECZUSD AssetPairInfo
+	DOTUSD   AssetPairInfo
+	UNIETH   AssetPairInfo
+	SOLETH   AssetPairInfo
 }
 
 // AssetPairInfo represents asset pair information
@@ -274,6 +280,8 @@ type AssetsResponse struct {
 	ZJPY  AssetInfo
 	ZKRW  AssetInfo
 	ZUSD  AssetInfo
+	DOT   AssetInfo
+	SOL   AssetInfo
 }
 
 // AssetInfo represents an asset information
@@ -326,6 +334,8 @@ type BalanceResponse struct {
 	ZKRW  float64 `json:"ZKRW,string"`
 	ZUSD  float64 `json:"ZUSD,string"`
 	TRX   float64 `json:"TRX,string"`
+	DOT   float64 `json:"DOT,string"`
+	SOL   float64 `json:"SOL,string"`
 }
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
@@ -422,6 +432,9 @@ type Fees struct {
 	XZECXXBT FeeInfo
 	XZECZEUR FeeInfo
 	XZECZUSD FeeInfo
+	DOTUSD   FeeInfo
+	UNIETH   FeeInfo
+	SOLETH   FeeInfo
 }
 
 // FeeInfo represents a fee information
@@ -524,6 +537,9 @@ type TickerResponse struct {
 	XZECXXBT PairTickerInfo
 	XZECZEUR PairTickerInfo
 	XZECZUSD PairTickerInfo
+	DOTUSD   PairTickerInfo
+	UNIETH   PairTickerInfo
+	SOLETH   PairTickerInfo
 }
 
 // DepositAddressesResponse is the response type of a DepositAddresses query to the Kraken API.
