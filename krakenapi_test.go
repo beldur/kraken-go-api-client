@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"reflect"
 	"testing"
+	"time"
 )
 
 var publicAPI = New("", "")
@@ -85,6 +86,23 @@ func TestOHLCWithInterval(t *testing.T) {
 	if resp.Pair == "" {
 		t.Errorf("OHLCWithInterval() should return valid Pair, got %+v", resp.Pair)
 	}
+}
+
+func TestOHLCWithIntervalAndSince(t *testing.T) {
+	since := time.Now().Add(time.Duration(-30) * time.Minute).Unix()
+	resp, err := publicAPI.OHLCWithIntervalAndSince(XXBTZEUR, "30", since)
+	if err != nil {
+		t.Errorf("OHLCWithInterval() should not return an error, got %s", err)
+	}
+	print(resp.OHLC)
+	if resp.Pair == "" {
+		t.Errorf("OHLCWithInterval() should return valid Pair, got %+v", resp.Pair)
+	}
+
+	if len(resp.OHLC) > 1 {
+		t.Errorf("OHLCWithInterval() should return valid number of candles, got %+v", len(resp.OHLC))
+	}
+
 }
 
 func TestOHLC(t *testing.T) {

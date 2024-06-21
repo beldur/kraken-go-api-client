@@ -24,7 +24,7 @@ const (
 	// APIVersion is the official Kraken API Version Number
 	APIVersion = "0"
 	// APIUserAgent identifies this library with the Kraken API
-	APIUserAgent = "Kraken GO API Agent (https://github.com/beldur/kraken-go-api-client)"
+	APIUserAgent = "Kraken GO API Agent (https://github.com/massigerardi/kraken-go-api-client)"
 )
 
 // List of valid public methods
@@ -167,7 +167,14 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 // OHLCWithInterval returns a OHLCResponse struct based on the given pair
-func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCResponse, error) {
+func (api *KrakenAPI) OHLCWithInterval(pair string, interval string, since ...int64) (*OHLCResponse, error) {
+	ret, err := api.OHLCWithIntervalAndSince(pair, interval)
+
+	return ret, err
+}
+
+// OHLCWithIntervalAndSince OHLCWithInterval returns a OHLCResponse struct based on the given pair and interval with optional starting date
+func (api *KrakenAPI) OHLCWithIntervalAndSince(pair string, interval string, since ...int64) (*OHLCResponse, error) {
 	urlValue := url.Values{}
 	urlValue.Add("pair", pair)
 
@@ -181,6 +188,10 @@ func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCRespo
 		default:
 			return nil, fmt.Errorf("Unsupported value for Interval: " + interval)
 		}
+	}
+	if len(since) > 0 {
+		// TODO add checks
+		urlValue.Add("since", strconv.FormatInt(since[0], 10))
 	}
 
 	// Returns a map[string]interface{} as an interface{}
@@ -212,7 +223,7 @@ func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCRespo
 
 // OHLC returns a OHLCResponse struct based on the given pair
 func (api *KrakenAPI) OHLC(pair string) (*OHLCResponse, error) {
-	ret, err := api.OHLCWithInterval(pair, "1")
+	ret, err := api.OHLCWithIntervalAndSince(pair, "1")
 
 	return ret, err
 }
