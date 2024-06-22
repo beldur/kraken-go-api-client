@@ -2,6 +2,7 @@ package krakenapi
 
 import (
 	"encoding/base64"
+	"fmt"
 	"net/url"
 	"reflect"
 	"testing"
@@ -9,6 +10,7 @@ import (
 )
 
 var publicAPI = New("", "")
+var privateAPI = New("", "")
 
 func TestKrakenApi(t *testing.T) {
 	var kk interface{} = KrakenApi{
@@ -49,10 +51,12 @@ func TestTime(t *testing.T) {
 }
 
 func TestAssets(t *testing.T) {
-	_, err := publicAPI.Assets()
+	assets, err := publicAPI.Assets()
 	if err != nil {
 		t.Errorf("Assets() should not return an error, got %s", err)
 	}
+	asset := assets["ACA"]
+	fmt.Println("", asset)
 }
 
 func TestAssetPairs(t *testing.T) {
@@ -61,8 +65,8 @@ func TestAssetPairs(t *testing.T) {
 		t.Errorf("AssetPairs() should not return an error, got %s", err)
 	}
 
-	if resp.XXBTZEUR.Base+resp.XXBTZEUR.Quote != XXBTZEUR {
-		t.Errorf("AssetPairs() should return valid response, got %+v", resp.XXBTZEUR)
+	if resp["XXBTZEUR"].Base+resp["XXBTZEUR"].Quote != XXBTZEUR {
+		t.Errorf("AssetPairs() should return valid response, got %+v", resp["XXBTZEUR"])
 	}
 }
 
@@ -72,8 +76,8 @@ func TestTicker(t *testing.T) {
 		t.Errorf("Ticker() should not return an error, got %s", err)
 	}
 
-	if resp.XXBTZEUR.OpeningPrice == 0 {
-		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp.XXBTZEUR.OpeningPrice)
+	if resp["XXBTZEUR"].OpeningPrice == 0 {
+		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp["XXBTZEUR"].OpeningPrice)
 	}
 }
 
@@ -94,7 +98,6 @@ func TestOHLCWithIntervalAndSince(t *testing.T) {
 	if err != nil {
 		t.Errorf("OHLCWithInterval() should not return an error, got %s", err)
 	}
-	print(resp.OHLC)
 	if resp.Pair == "" {
 		t.Errorf("OHLCWithInterval() should return valid Pair, got %+v", resp.Pair)
 	}
@@ -186,5 +189,13 @@ func TestQueryDepth(t *testing.T) {
 
 	if len(result.Bids) > count {
 		t.Errorf("Bids length must be less than count , got %d > %d", len(result.Bids), count)
+	}
+}
+
+func TestKrakenAPI_Balance(t *testing.T) {
+	_, err := privateAPI.Balance()
+	if err == nil {
+		t.Errorf("Balance should return an error, got %s", err)
+		return
 	}
 }

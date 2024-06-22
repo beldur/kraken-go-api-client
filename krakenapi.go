@@ -135,27 +135,26 @@ func (api *KrakenAPI) Time() (*TimeResponse, error) {
 }
 
 // Assets returns the servers available assets
-func (api *KrakenAPI) Assets() (*AssetsResponse, error) {
+func (api *KrakenAPI) Assets() (AssetsResponse, error) {
 	resp, err := api.queryPublicGet("Assets", nil, &AssetsResponse{})
 	if err != nil {
 		return nil, err
 	}
-
-	return resp.(*AssetsResponse), nil
+	return *resp.(*AssetsResponse), nil
 }
 
 // AssetPairs returns the servers available asset pairs
-func (api *KrakenAPI) AssetPairs() (*AssetPairsResponse, error) {
+func (api *KrakenAPI) AssetPairs() (AssetPairsResponse, error) {
 	resp, err := api.queryPublicGet("AssetPairs", nil, &AssetPairsResponse{})
 	if err != nil {
 		return nil, err
 	}
 
-	return resp.(*AssetPairsResponse), nil
+	return *resp.(*AssetPairsResponse), nil
 }
 
 // Ticker returns the ticker for given comma separated pairs
-func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
+func (api *KrakenAPI) Ticker(pairs ...string) (TickerResponse, error) {
 	resp, err := api.queryPublicGet("Ticker", url.Values{
 		"pair": {strings.Join(pairs, ",")},
 	}, &TickerResponse{})
@@ -163,7 +162,7 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 		return nil, err
 	}
 
-	return resp.(*TickerResponse), nil
+	return *resp.(*TickerResponse), nil
 }
 
 // OHLCWithInterval returns a OHLCResponse struct based on the given pair
@@ -309,13 +308,13 @@ func (api *KrakenAPI) Trades(pair string, since int64) (*TradesResponse, error) 
 }
 
 // Balance returns all account asset balances
-func (api *KrakenAPI) Balance() (*BalanceResponse, error) {
+func (api *KrakenAPI) Balance() (BalanceResponse, error) {
 	resp, err := api.queryPrivate("Balance", url.Values{}, &BalanceResponse{})
 	if err != nil {
 		return nil, err
 	}
 
-	return resp.(*BalanceResponse), nil
+	return *resp.(*BalanceResponse), nil
 }
 
 // TradeBalance returns trade balance info
