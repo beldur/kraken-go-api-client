@@ -24,73 +24,53 @@ const (
 	// APIVersion is the official Kraken API Version Number
 	APIVersion = "0"
 	// APIUserAgent identifies this library with the Kraken API
-	APIUserAgent = "Kraken GO API Agent (https://github.com/beldur/kraken-go-api-client)"
+	APIUserAgent = "Kraken GO API Agent (https://github.com/henkvanramshorst/kraken-go-api-client)"
 )
 
-// List of valid public methods
-var publicMethods = []string{
-	"Assets",
-	"AssetPairs",
-	"Depth",
-	"OHLC",
-	"OHLCWithInterval",
-	"Spread",
-	"Ticker",
-	"Time",
-	"Trades",
-}
+type EndpointType int
 
-// List of valid private methods
-var privateMethods = []string{
-	"AddExport",
-	"AddOrder",
-	"Balance",
-	"CancelOrder",
-	"ClosedOrders",
-	"DepositAddresses",
-	"DepositMethods",
-	"DepositStatus",
-	"ExportStatus",
-	"GetWebSocketsToken",
-	"Ledgers",
-	"OpenOrders",
-	"OpenPositions",
-	"QueryLedgers",
-	"QueryOrders",
-	"QueryTrades",
-	"RemoveExport",
-	"RetrieveExport",
-	"TradeBalance",
-	"TradesHistory",
-	"TradeVolume",
-	"WalletTransfer",
-	"Withdraw",
-	"WithdrawCancel",
-	"WithdrawInfo",
-	"WithdrawStatus",
-}
-
-// These represent the minimum order sizes for the respective coins
-// Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 const (
-	MinimumREP  = 0.3
-	MinimumXBT  = 0.002
-	MinimumBCH  = 0.002
-	MinimumDASH = 0.03
-	MinimumDOGE = 3000.0
-	MinimumEOS  = 3.0
-	MinimumETH  = 0.02
-	MinimumETC  = 0.3
-	MinimumGNO  = 0.03
-	MinimumICN  = 2.0
-	MinimumLTC  = 0.1
-	MinimumMLN  = 0.1
-	MinimumXMR  = 0.1
-	MinimumXRP  = 30.0
-	MinimumXLM  = 300.0
-	MinimumZEC  = 0.02
-	MinimumUSDT = 5.0
+	EndpointTypePublic = iota + 1
+	EndpointTypePrivate
 )
+
+var endpoints = map[string]EndpointType{
+	"Assets":             EndpointTypePublic,
+	"AssetPairs":         EndpointTypePublic,
+	"Depth":              EndpointTypePublic,
+	"OHLC":               EndpointTypePublic,
+	"OHLCWithInterval":   EndpointTypePublic,
+	"Spread":             EndpointTypePublic,
+	"Ticker":             EndpointTypePublic,
+	"Time":               EndpointTypePublic,
+	"Trades":             EndpointTypePublic,
+	"AddExport":          EndpointTypePrivate,
+	"AddOrder":           EndpointTypePrivate,
+	"Balance":            EndpointTypePrivate,
+	"CancelOrder":        EndpointTypePrivate,
+	"ClosedOrders":       EndpointTypePrivate,
+	"DepositAddresses":   EndpointTypePrivate,
+	"DepositMethods":     EndpointTypePrivate,
+	"DepositStatus":      EndpointTypePrivate,
+	"ExportStatus":       EndpointTypePrivate,
+	"GetWebSocketsToken": EndpointTypePrivate,
+	"Ledgers":            EndpointTypePrivate,
+	"OpenOrders":         EndpointTypePrivate,
+	"OpenPositions":      EndpointTypePrivate,
+	"QueryLedgers":       EndpointTypePrivate,
+	"QueryOrders":        EndpointTypePrivate,
+	"QueryTrades":        EndpointTypePrivate,
+	"RemoveExport":       EndpointTypePrivate,
+	"RetrieveExport":     EndpointTypePrivate,
+	"TradeBalance":       EndpointTypePrivate,
+	"TradesHistory":      EndpointTypePrivate,
+	"TradeVolume":        EndpointTypePrivate,
+	"WalletTransfer":     EndpointTypePrivate,
+	"Withdraw":           EndpointTypePrivate,
+	"WithdrawCancel":     EndpointTypePrivate,
+	"WithdrawInfo":       EndpointTypePrivate,
+	"WithdrawStatus":     EndpointTypePrivate,
+}
 
 // KrakenApi represents a Kraken API Client connection
 type KrakenApi = KrakenAPI
@@ -135,27 +115,27 @@ func (api *KrakenAPI) Time() (*TimeResponse, error) {
 }
 
 // Assets returns the servers available assets
-func (api *KrakenAPI) Assets() (*AssetsResponse, error) {
+func (api *KrakenAPI) Assets() (AssetsResponse, error) {
 	resp, err := api.queryPublicGet("Assets", nil, &AssetsResponse{})
 	if err != nil {
 		return nil, err
 	}
 
-	return resp.(*AssetsResponse), nil
+	return *resp.(*AssetsResponse), nil
 }
 
 // AssetPairs returns the servers available asset pairs
-func (api *KrakenAPI) AssetPairs() (*AssetPairsResponse, error) {
+func (api *KrakenAPI) AssetPairs() (AssetPairsResponse, error) {
 	resp, err := api.queryPublicGet("AssetPairs", nil, &AssetPairsResponse{})
 	if err != nil {
 		return nil, err
 	}
 
-	return resp.(*AssetPairsResponse), nil
+	return *resp.(*AssetPairsResponse), nil
 }
 
 // Ticker returns the ticker for given comma separated pairs
-func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
+func (api *KrakenAPI) Ticker(pairs ...string) (TickerResponse, error) {
 	resp, err := api.queryPublicGet("Ticker", url.Values{
 		"pair": {strings.Join(pairs, ",")},
 	}, &TickerResponse{})
@@ -163,7 +143,7 @@ func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 		return nil, err
 	}
 
-	return resp.(*TickerResponse), nil
+	return *resp.(*TickerResponse), nil
 }
 
 // OHLCWithInterval returns a OHLCResponse struct based on the given pair
@@ -298,13 +278,13 @@ func (api *KrakenAPI) Trades(pair string, since int64) (*TradesResponse, error) 
 }
 
 // Balance returns all account asset balances
-func (api *KrakenAPI) Balance() (*BalanceResponse, error) {
+func (api *KrakenAPI) Balance() (BalanceResponse, error) {
 	resp, err := api.queryPrivate("Balance", url.Values{}, &BalanceResponse{})
 	if err != nil {
 		return nil, err
 	}
 
-	return resp.(*BalanceResponse), nil
+	return *resp.(*BalanceResponse), nil
 }
 
 // TradeBalance returns trade balance info
@@ -567,14 +547,14 @@ func (api *KrakenAPI) Query(method string, data map[string]string) (interface{},
 		values.Set(key, value)
 	}
 
-	// Check if method is public or private
-	if isStringInSlice(method, publicMethods) {
+	switch endpoints[method] {
+	case EndpointTypePublic:
 		return api.queryPublicPost(method, values, nil)
-	} else if isStringInSlice(method, privateMethods) {
+	case EndpointTypePrivate:
 		return api.queryPrivate(method, values, nil)
+	default:
+		return nil, fmt.Errorf("Method '%s' is not valid", method)
 	}
-
-	return nil, fmt.Errorf("Method '%s' is not valid", method)
 }
 
 // Execute a public method query
@@ -683,16 +663,6 @@ func (api *KrakenAPI) doAPIRequest(req *http.Request, headers map[string]string,
 	}
 
 	return jsonData.Result, nil
-}
-
-// isStringInSlice is a helper function to test if given term is in a list of strings
-func isStringInSlice(term string, list []string) bool {
-	for _, found := range list {
-		if term == found {
-			return true
-		}
-	}
-	return false
 }
 
 // getSha256 creates a sha256 hash for given []byte

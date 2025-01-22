@@ -7,6 +7,11 @@ import (
 	"testing"
 )
 
+const (
+	XXBTZEUR = "XXBTZEUR"
+	XXRPZEUR = "XXRPZEUR"
+)
+
 var publicAPI = New("", "")
 
 func TestKrakenApi(t *testing.T) {
@@ -60,8 +65,9 @@ func TestAssetPairs(t *testing.T) {
 		t.Errorf("AssetPairs() should not return an error, got %s", err)
 	}
 
-	if resp.XXBTZEUR.Base+resp.XXBTZEUR.Quote != XXBTZEUR {
-		t.Errorf("AssetPairs() should return valid response, got %+v", resp.XXBTZEUR)
+	pair := resp[XXBTZEUR]
+	if pair.Base+pair.Quote != XXBTZEUR {
+		t.Errorf("AssetPairs() should return valid response, got %+v", pair)
 	}
 }
 
@@ -71,8 +77,9 @@ func TestTicker(t *testing.T) {
 		t.Errorf("Ticker() should not return an error, got %s", err)
 	}
 
-	if resp.XXBTZEUR.OpeningPrice == 0 {
-		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", resp.XXBTZEUR.OpeningPrice)
+	pair := resp[XXBTZEUR]
+	if pair.OpeningPrice == 0 {
+		t.Errorf("Ticker() should return valid OpeningPrice, got %+v", pair.OpeningPrice)
 	}
 }
 
