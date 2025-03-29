@@ -31,8 +31,8 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
-	LINKUSD   = "LINKUSD"
-	LINKXBT   = "LINKXBT"
+	LINKUSD  = "LINKUSD"
+	LINKXBT  = "LINKXBT"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -41,6 +41,7 @@ const (
 	USDCUSD  = "USDCUSD"
 	USDTZUSD = "USDTZUSD"
 	XBTUSDT  = "XBTUSDT"
+	XBTUSDC  = "XBTUSDC"
 	XETCXETH = "XETCXETH"
 	XETCXXBT = "XETCXXBT"
 	XETCZEUR = "XETCZEUR"
@@ -84,6 +85,7 @@ const (
 	XXRPZEUR = "XXRPZEUR"
 	XXRPZJPY = "XXRPZJPY"
 	XXRPZUSD = "XXRPZUSD"
+	XRPUSDC  = "XRPUSDC"
 	XZECXXBT = "XZECXXBT"
 	XZECZEUR = "XZECZEUR"
 	XZECZUSD = "XZECZUSD"
@@ -185,6 +187,7 @@ type AssetPairsResponse struct {
 	XXRPZEUR AssetPairInfo
 	XXRPZJPY AssetPairInfo
 	XXRPZUSD AssetPairInfo
+	XRPUSDC  AssetPairInfo
 	XZECXXBT AssetPairInfo
 	XZECZEUR AssetPairInfo
 	XZECZUSD AssetPairInfo
@@ -402,6 +405,7 @@ type Fees struct {
 	XXRPZEUR FeeInfo
 	XXRPZJPY FeeInfo
 	XXRPZUSD FeeInfo
+	XRPUSDC  FeeInfo
 	XZECXXBT FeeInfo
 	XZECZEUR FeeInfo
 	XZECZUSD FeeInfo
@@ -457,6 +461,7 @@ type TickerResponse struct {
 	USDCUSD  PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XBTUSDT  PairTickerInfo
+	XBTUSDC  PairTickerInfo
 	XETCXETH PairTickerInfo
 	XETCXXBT PairTickerInfo
 	XETCZEUR PairTickerInfo
@@ -495,6 +500,7 @@ type TickerResponse struct {
 	XXRPZEUR PairTickerInfo
 	XXRPZJPY PairTickerInfo
 	XXRPZUSD PairTickerInfo
+	XRPUSDC  PairTickerInfo
 	XTZCAD   PairTickerInfo
 	XTZETH   PairTickerInfo
 	XTZEUR   PairTickerInfo
