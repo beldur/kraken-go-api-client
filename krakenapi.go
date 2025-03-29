@@ -74,7 +74,7 @@ var privateMethods = []string{
 // Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 const (
 	MinimumREP  = 0.3
-	MinimumXBT  = 0.002
+	MinimumXBT  = 0.00005
 	MinimumBCH  = 0.002
 	MinimumDASH = 0.03
 	MinimumDOGE = 3000.0
@@ -86,7 +86,7 @@ const (
 	MinimumLTC  = 0.1
 	MinimumMLN  = 0.1
 	MinimumXMR  = 0.1
-	MinimumXRP  = 30.0
+	MinimumXRP  = 2.0
 	MinimumXLM  = 300.0
 	MinimumZEC  = 0.02
 	MinimumUSDT = 5.0
