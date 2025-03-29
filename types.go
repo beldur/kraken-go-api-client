@@ -175,6 +175,7 @@ type AssetPairsResponse struct {
 	XXBTZGBP AssetPairInfo
 	XXBTZJPY AssetPairInfo
 	XXBTZUSD AssetPairInfo
+	XBTUSDC  AssetPairInfo
 	XXDGXXBT AssetPairInfo
 	XXLMXXBT AssetPairInfo
 	XXLMZEUR AssetPairInfo
@@ -393,6 +394,7 @@ type Fees struct {
 	XXBTZGBP FeeInfo
 	XXBTZJPY FeeInfo
 	XXBTZUSD FeeInfo
+	XBTUSDC  FeeInfo
 	XXDGXXBT FeeInfo
 	XXLMXXBT FeeInfo
 	XXLMZEUR FeeInfo
