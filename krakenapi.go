@@ -460,6 +460,9 @@ func (api *KrakenAPI) AddOrder(pair string, direction string, orderType string, 
 	if value, ok := args["oflags"]; ok {
 		params.Add("oflags", value)
 	}
+	if value, ok := args["timeinforce"]; ok {
+		params.Add("timeinforce", value)
+	}
 	if value, ok := args["starttm"]; ok {
 		params.Add("starttm", value)
 	}
