@@ -82,7 +82,7 @@ const (
 	XXMRZEUR = "XXMRZEUR"
 	XXMRZUSD = "XXMRZUSD"
 	XXRPXXBT = "XXRPXXBT"
-  XXRPZAUD = "XXRPZAUD"
+	XRPAUD   = "XRPAUD"
 	XXRPZCAD = "XXRPZCAD"
 	XXRPZEUR = "XXRPZEUR"
 	XXRPZJPY = "XXRPZJPY"
@@ -187,7 +187,7 @@ type AssetPairsResponse struct {
 	XXMRZEUR AssetPairInfo
 	XXMRZUSD AssetPairInfo
 	XXRPXXBT AssetPairInfo
-  XXRPZAUD AssetPairInfo
+	XRPAUD   AssetPairInfo
 	XXRPZCAD AssetPairInfo
 	XXRPZEUR AssetPairInfo
 	XXRPZJPY AssetPairInfo
@@ -410,7 +410,7 @@ type Fees struct {
 	XXMRZEUR FeeInfo
 	XXMRZUSD FeeInfo
 	XXRPXXBT FeeInfo
-	XXRPZAUD FeeInfo
+	XRPAUD   FeeInfo
 	XXRPZCAD FeeInfo
 	XXRPZEUR FeeInfo
 	XXRPZJPY FeeInfo
@@ -507,7 +507,7 @@ type TickerResponse struct {
 	XXMRZEUR PairTickerInfo
 	XXMRZUSD PairTickerInfo
 	XXRPXXBT PairTickerInfo
-	XXRPZAUD PairTickerInfo
+	XRPAUD   PairTickerInfo
 	XXRPZCAD PairTickerInfo
 	XXRPZEUR PairTickerInfo
 	XXRPZJPY PairTickerInfo
