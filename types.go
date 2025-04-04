@@ -68,6 +68,7 @@ const (
 	XTZEUR   = "XTZEUR"
 	XTZUSD   = "XTZUSD"
 	XTZXBT   = "XTZXBT"
+	XXBTZAUD = "XXBTZAUD"
 	XXBTZCAD = "XXBTZCAD"
 	XXBTZEUR = "XXBTZEUR"
 	XXBTZGBP = "XXBTZGBP"
@@ -81,6 +82,7 @@ const (
 	XXMRZEUR = "XXMRZEUR"
 	XXMRZUSD = "XXMRZUSD"
 	XXRPXXBT = "XXRPXXBT"
+  XXRPZAUD = "XXRPZAUD"
 	XXRPZCAD = "XXRPZCAD"
 	XXRPZEUR = "XXRPZEUR"
 	XXRPZJPY = "XXRPZJPY"
@@ -170,6 +172,7 @@ type AssetPairsResponse struct {
 	XTZEUR   AssetPairInfo
 	XTZUSD   AssetPairInfo
 	XTZXBT   AssetPairInfo
+	XXBTZAUD AssetPairInfo
 	XXBTZCAD AssetPairInfo
 	XXBTZEUR AssetPairInfo
 	XXBTZGBP AssetPairInfo
@@ -184,6 +187,7 @@ type AssetPairsResponse struct {
 	XXMRZEUR AssetPairInfo
 	XXMRZUSD AssetPairInfo
 	XXRPXXBT AssetPairInfo
+  XXRPZAUD AssetPairInfo
 	XXRPZCAD AssetPairInfo
 	XXRPZEUR AssetPairInfo
 	XXRPZJPY AssetPairInfo
@@ -261,6 +265,7 @@ type AssetsResponse struct {
 	XTZ  AssetInfo
 	XXVN AssetInfo
 	XZEC AssetInfo
+	ZAUD AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
 	ZGBP AssetInfo
@@ -310,6 +315,7 @@ type BalanceResponse struct {
 	XTZ  float64 `json:"XTZ,string"`
 	XXVN float64 `json:"XXVN,string"`
 	XZEC float64 `json:"XZEC,string"`
+	ZAUD float64 `json:"ZAUD,string"`
 	ZCAD float64 `json:"ZCAD,string"`
 	ZEUR float64 `json:"ZEUR,string"`
 	ZGBP float64 `json:"ZGBP,string"`
@@ -389,6 +395,7 @@ type Fees struct {
 	XTZEUR   FeeInfo
 	XTZUSD   FeeInfo
 	XTZXBT   FeeInfo
+	XXBTZAUD FeeInfo
 	XXBTZCAD FeeInfo
 	XXBTZEUR FeeInfo
 	XXBTZGBP FeeInfo
@@ -403,6 +410,7 @@ type Fees struct {
 	XXMRZEUR FeeInfo
 	XXMRZUSD FeeInfo
 	XXRPXXBT FeeInfo
+	XXRPZAUD FeeInfo
 	XXRPZCAD FeeInfo
 	XXRPZEUR FeeInfo
 	XXRPZJPY FeeInfo
@@ -485,6 +493,7 @@ type TickerResponse struct {
 	XREPXXBT PairTickerInfo
 	XREPZEUR PairTickerInfo
 	XREPZUSD PairTickerInfo
+	XXBTZAUD PairTickerInfo
 	XXBTZCAD PairTickerInfo
 	XXBTZEUR PairTickerInfo
 	XXBTZGBP PairTickerInfo
@@ -498,6 +507,7 @@ type TickerResponse struct {
 	XXMRZEUR PairTickerInfo
 	XXMRZUSD PairTickerInfo
 	XXRPXXBT PairTickerInfo
+	XXRPZAUD PairTickerInfo
 	XXRPZCAD PairTickerInfo
 	XXRPZEUR PairTickerInfo
 	XXRPZJPY PairTickerInfo
