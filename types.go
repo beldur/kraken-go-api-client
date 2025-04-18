@@ -33,6 +33,9 @@ const (
 	GNOXBT   = "GNOXBT"
 	LINKUSD  = "LINKUSD"
 	LINKXBT  = "LINKXBT"
+	SOLUSDC  = "SOLUSDC"
+	SOLAUD   = "SOLAUD"
+	SOLEUR   = "SOLEUR"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -68,7 +71,7 @@ const (
 	XTZEUR   = "XTZEUR"
 	XTZUSD   = "XTZUSD"
 	XTZXBT   = "XTZXBT"
-	XXBTZAUD = "XXBTZAUD"
+	XBTAUD   = "XBTAUD"
 	XXBTZCAD = "XXBTZCAD"
 	XXBTZEUR = "XXBTZEUR"
 	XXBTZGBP = "XXBTZGBP"
@@ -139,6 +142,9 @@ type AssetPairsResponse struct {
 	GNOXBT   AssetPairInfo
 	LINKUSD  AssetPairInfo
 	LINKXBT  AssetPairInfo
+	SOLUSDC  AssetPairInfo
+	SOLAUD   AssetPairInfo
+	SOLEUR   AssetPairInfo
 	QTUMCAD  AssetPairInfo
 	QTUMETH  AssetPairInfo
 	QTUMEUR  AssetPairInfo
@@ -172,7 +178,7 @@ type AssetPairsResponse struct {
 	XTZEUR   AssetPairInfo
 	XTZUSD   AssetPairInfo
 	XTZXBT   AssetPairInfo
-	XXBTZAUD AssetPairInfo
+	XBTAUD   AssetPairInfo
 	XXBTZCAD AssetPairInfo
 	XXBTZEUR AssetPairInfo
 	XXBTZGBP AssetPairInfo
@@ -362,6 +368,9 @@ type Fees struct {
 	GNOXBT   FeeInfo
 	LINKUSD  FeeInfo
 	LINKXBT  FeeInfo
+	SOLUSDC  FeeInfo
+	SOLAUD   FeeInfo
+	SOLEUR   FeeInfo
 	QTUMCAD  FeeInfo
 	QTUMETH  FeeInfo
 	QTUMEUR  FeeInfo
@@ -395,13 +404,14 @@ type Fees struct {
 	XTZEUR   FeeInfo
 	XTZUSD   FeeInfo
 	XTZXBT   FeeInfo
-	XXBTZAUD FeeInfo
+	XBTAUD   FeeInfo
+	XBTEUR   FeeInfo
+	XBTUSDC  FeeInfo
 	XXBTZCAD FeeInfo
 	XXBTZEUR FeeInfo
 	XXBTZGBP FeeInfo
 	XXBTZJPY FeeInfo
 	XXBTZUSD FeeInfo
-	XBTUSDC  FeeInfo
 	XXDGXXBT FeeInfo
 	XXLMXXBT FeeInfo
 	XXLMZEUR FeeInfo
@@ -463,6 +473,9 @@ type TickerResponse struct {
 	GNOXBT   PairTickerInfo
 	LINKUSD  PairTickerInfo
 	LINKXBT  PairTickerInfo
+	SOLUSDC  PairTickerInfo
+	SOLAUD   PairTickerInfo
+	SOLEUR   PairTickerInfo
 	QTUMCAD  PairTickerInfo
 	QTUMETH  PairTickerInfo
 	QTUMEUR  PairTickerInfo
@@ -493,7 +506,7 @@ type TickerResponse struct {
 	XREPXXBT PairTickerInfo
 	XREPZEUR PairTickerInfo
 	XREPZUSD PairTickerInfo
-	XXBTZAUD PairTickerInfo
+	XBTAUD   PairTickerInfo
 	XXBTZCAD PairTickerInfo
 	XXBTZEUR PairTickerInfo
 	XXBTZGBP PairTickerInfo
