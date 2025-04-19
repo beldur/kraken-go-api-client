@@ -590,7 +590,7 @@ func (api *KrakenAPI) queryPublicPost(method string, values url.Values, typ inte
 
 func (api *KrakenAPI) queryPublicGet(reqURL string, values url.Values, typ interface{}) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, reqURL)
-	return api.doGet(url, values, nil, typ)
+    return api.doGet(url, values, nil, typ)
 }
 
 // queryPrivate executes a private method query
