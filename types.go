@@ -31,8 +31,11 @@ const (
 	GNOEUR   = "GNOEUR"
 	GNOUSD   = "GNOUSD"
 	GNOXBT   = "GNOXBT"
-	LINKUSD   = "LINKUSD"
-	LINKXBT   = "LINKXBT"
+	LINKUSD  = "LINKUSD"
+	LINKXBT  = "LINKXBT"
+	SOLUSDC  = "SOLUSDC"
+	SOLAUD   = "SOLAUD"
+	SOLEUR   = "SOLEUR"
 	QTUMCAD  = "QTUMCAD"
 	QTUMETH  = "QTUMETH"
 	QTUMEUR  = "QTUMEUR"
@@ -41,6 +44,7 @@ const (
 	USDCUSD  = "USDCUSD"
 	USDTZUSD = "USDTZUSD"
 	XBTUSDT  = "XBTUSDT"
+	XBTUSDC  = "XBTUSDC"
 	XETCXETH = "XETCXETH"
 	XETCXXBT = "XETCXXBT"
 	XETCZEUR = "XETCZEUR"
@@ -67,6 +71,7 @@ const (
 	XTZEUR   = "XTZEUR"
 	XTZUSD   = "XTZUSD"
 	XTZXBT   = "XTZXBT"
+	XBTAUD   = "XBTAUD"
 	XXBTZCAD = "XXBTZCAD"
 	XXBTZEUR = "XXBTZEUR"
 	XXBTZGBP = "XXBTZGBP"
@@ -80,10 +85,12 @@ const (
 	XXMRZEUR = "XXMRZEUR"
 	XXMRZUSD = "XXMRZUSD"
 	XXRPXXBT = "XXRPXXBT"
+	XRPAUD   = "XRPAUD"
 	XXRPZCAD = "XXRPZCAD"
 	XXRPZEUR = "XXRPZEUR"
 	XXRPZJPY = "XXRPZJPY"
 	XXRPZUSD = "XXRPZUSD"
+	XRPUSDC  = "XRPUSDC"
 	XZECXXBT = "XZECXXBT"
 	XZECZEUR = "XZECZEUR"
 	XZECZUSD = "XZECZUSD"
@@ -135,6 +142,9 @@ type AssetPairsResponse struct {
 	GNOXBT   AssetPairInfo
 	LINKUSD  AssetPairInfo
 	LINKXBT  AssetPairInfo
+	SOLUSDC  AssetPairInfo
+	SOLAUD   AssetPairInfo
+	SOLEUR   AssetPairInfo
 	QTUMCAD  AssetPairInfo
 	QTUMETH  AssetPairInfo
 	QTUMEUR  AssetPairInfo
@@ -168,11 +178,13 @@ type AssetPairsResponse struct {
 	XTZEUR   AssetPairInfo
 	XTZUSD   AssetPairInfo
 	XTZXBT   AssetPairInfo
+	XBTAUD   AssetPairInfo
 	XXBTZCAD AssetPairInfo
 	XXBTZEUR AssetPairInfo
 	XXBTZGBP AssetPairInfo
 	XXBTZJPY AssetPairInfo
 	XXBTZUSD AssetPairInfo
+	XBTUSDC  AssetPairInfo
 	XXDGXXBT AssetPairInfo
 	XXLMXXBT AssetPairInfo
 	XXLMZEUR AssetPairInfo
@@ -181,10 +193,12 @@ type AssetPairsResponse struct {
 	XXMRZEUR AssetPairInfo
 	XXMRZUSD AssetPairInfo
 	XXRPXXBT AssetPairInfo
+	XRPAUD   AssetPairInfo
 	XXRPZCAD AssetPairInfo
 	XXRPZEUR AssetPairInfo
 	XXRPZJPY AssetPairInfo
 	XXRPZUSD AssetPairInfo
+	XRPUSDC  AssetPairInfo
 	XZECXXBT AssetPairInfo
 	XZECZEUR AssetPairInfo
 	XZECZUSD AssetPairInfo
@@ -257,6 +271,7 @@ type AssetsResponse struct {
 	XTZ  AssetInfo
 	XXVN AssetInfo
 	XZEC AssetInfo
+	ZAUD AssetInfo
 	ZCAD AssetInfo
 	ZEUR AssetInfo
 	ZGBP AssetInfo
@@ -306,6 +321,7 @@ type BalanceResponse struct {
 	XTZ  float64 `json:"XTZ,string"`
 	XXVN float64 `json:"XXVN,string"`
 	XZEC float64 `json:"XZEC,string"`
+	ZAUD float64 `json:"ZAUD,string"`
 	ZCAD float64 `json:"ZCAD,string"`
 	ZEUR float64 `json:"ZEUR,string"`
 	ZGBP float64 `json:"ZGBP,string"`
@@ -352,6 +368,9 @@ type Fees struct {
 	GNOXBT   FeeInfo
 	LINKUSD  FeeInfo
 	LINKXBT  FeeInfo
+	SOLUSDC  FeeInfo
+	SOLAUD   FeeInfo
+	SOLEUR   FeeInfo
 	QTUMCAD  FeeInfo
 	QTUMETH  FeeInfo
 	QTUMEUR  FeeInfo
@@ -385,6 +404,9 @@ type Fees struct {
 	XTZEUR   FeeInfo
 	XTZUSD   FeeInfo
 	XTZXBT   FeeInfo
+	XBTAUD   FeeInfo
+	XBTEUR   FeeInfo
+	XBTUSDC  FeeInfo
 	XXBTZCAD FeeInfo
 	XXBTZEUR FeeInfo
 	XXBTZGBP FeeInfo
@@ -398,10 +420,12 @@ type Fees struct {
 	XXMRZEUR FeeInfo
 	XXMRZUSD FeeInfo
 	XXRPXXBT FeeInfo
+	XRPAUD   FeeInfo
 	XXRPZCAD FeeInfo
 	XXRPZEUR FeeInfo
 	XXRPZJPY FeeInfo
 	XXRPZUSD FeeInfo
+	XRPUSDC  FeeInfo
 	XZECXXBT FeeInfo
 	XZECZEUR FeeInfo
 	XZECZUSD FeeInfo
@@ -449,6 +473,9 @@ type TickerResponse struct {
 	GNOXBT   PairTickerInfo
 	LINKUSD  PairTickerInfo
 	LINKXBT  PairTickerInfo
+	SOLUSDC  PairTickerInfo
+	SOLAUD   PairTickerInfo
+	SOLEUR   PairTickerInfo
 	QTUMCAD  PairTickerInfo
 	QTUMETH  PairTickerInfo
 	QTUMEUR  PairTickerInfo
@@ -457,6 +484,7 @@ type TickerResponse struct {
 	USDCUSD  PairTickerInfo
 	USDTZUSD PairTickerInfo
 	XBTUSDT  PairTickerInfo
+	XBTUSDC  PairTickerInfo
 	XETCXETH PairTickerInfo
 	XETCXXBT PairTickerInfo
 	XETCZEUR PairTickerInfo
@@ -478,6 +506,7 @@ type TickerResponse struct {
 	XREPXXBT PairTickerInfo
 	XREPZEUR PairTickerInfo
 	XREPZUSD PairTickerInfo
+	XBTAUD   PairTickerInfo
 	XXBTZCAD PairTickerInfo
 	XXBTZEUR PairTickerInfo
 	XXBTZGBP PairTickerInfo
@@ -491,10 +520,12 @@ type TickerResponse struct {
 	XXMRZEUR PairTickerInfo
 	XXMRZUSD PairTickerInfo
 	XXRPXXBT PairTickerInfo
+	XRPAUD   PairTickerInfo
 	XXRPZCAD PairTickerInfo
 	XXRPZEUR PairTickerInfo
 	XXRPZJPY PairTickerInfo
 	XXRPZUSD PairTickerInfo
+	XRPUSDC  PairTickerInfo
 	XTZCAD   PairTickerInfo
 	XTZETH   PairTickerInfo
 	XTZEUR   PairTickerInfo

@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math/big"
 	"mime"
 	"net/http"
@@ -74,7 +74,7 @@ var privateMethods = []string{
 // Should be monitored through here: https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 const (
 	MinimumREP  = 0.3
-	MinimumXBT  = 0.002
+	MinimumXBT  = 0.00005
 	MinimumBCH  = 0.002
 	MinimumDASH = 0.03
 	MinimumDOGE = 3000.0
@@ -86,7 +86,7 @@ const (
 	MinimumLTC  = 0.1
 	MinimumMLN  = 0.1
 	MinimumXMR  = 0.1
-	MinimumXRP  = 30.0
+	MinimumXRP  = 2.0
 	MinimumXLM  = 300.0
 	MinimumZEC  = 0.02
 	MinimumUSDT = 5.0
@@ -460,6 +460,9 @@ func (api *KrakenAPI) AddOrder(pair string, direction string, orderType string, 
 	if value, ok := args["oflags"]; ok {
 		params.Add("oflags", value)
 	}
+	if value, ok := args["timeinforce"]; ok {
+		params.Add("timeinforce", value)
+	}
 	if value, ok := args["starttm"]; ok {
 		params.Add("starttm", value)
 	}
@@ -587,7 +590,7 @@ func (api *KrakenAPI) queryPublicPost(method string, values url.Values, typ inte
 
 func (api *KrakenAPI) queryPublicGet(reqURL string, values url.Values, typ interface{}) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, reqURL)
-	return api.doGet(url, values, nil, typ)
+    return api.doGet(url, values, nil, typ)
 }
 
 // queryPrivate executes a private method query
@@ -649,7 +652,7 @@ func (api *KrakenAPI) doAPIRequest(req *http.Request, headers map[string]string,
 	defer resp.Body.Close()
 
 	// Read request
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! #3 (%s)", err.Error())
 	}
