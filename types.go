@@ -3032,6 +3032,7 @@ type TradeBalanceResponse struct {
 	Equity                    float64 `json:"e,string"`
 	FreeMargin                float64 `json:"mf,string"`
 	MarginLevel               float64 `json:"ml,string"`
+	UnexecutedValue           float64 `json:"uv,string"`
 }
 
 // Fees includes fees information for different currencies
