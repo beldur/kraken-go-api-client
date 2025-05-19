@@ -2115,6 +2115,8 @@ type AssetPairsResponse struct {
 type AssetPairInfo struct {
 	// Alternate pair name
 	Altname string `json:"altname"`
+	// WebSocket pair name (if available)
+	Wsname string `json:"wsname"`
 	// Asset class of base component
 	AssetClassBase string `json:"aclass_base"`
 	// Asset id of base component
@@ -2127,6 +2129,8 @@ type AssetPairInfo struct {
 	Lot string `json:"lot"`
 	// Scaling decimal places for pair
 	PairDecimals int `json:"pair_decimals"`
+	// Number of decimal places for cost of trades in pair (quote asset terms)
+	CostDecimals int `json:"cost_decimals"`
 	// Scaling decimal places for volume
 	LotDecimals int `json:"lot_decimals"`
 	// Amount to multiply lot volume by to get currency volume
@@ -2147,6 +2151,16 @@ type AssetPairInfo struct {
 	MarginStop int `json:"margin_stop"`
 	// Order minimum
 	OrderMin float64 `json:"ordermin"`
+	// Minimum order cost (in terms of quote currency)
+	CostMin float64 `json:"costmin"`
+	// Minimum increment between valid price levels
+	TickSize float64 `json:"tick_size"`
+	// Status of asset. Possible values: online, cancel_only, post_only, limit_only, reduce_only.
+	Status string `json:"status"`
+	// Maximum long margin position size (in terms of base currency)
+	LongPositionLimit int `json:"long_position_limit"`
+	// Maximum short margin position size (in terms of base currency)
+	ShortPositionLimit int `json:"short_position_limit"`
 }
 
 // AssetsResponse includes asset informations
